@@ -1,13 +1,13 @@
-![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/mclemente/fvtt-condition-lab-triggler)
-![GitHub release (latest by SemVer and asset)](https://img.shields.io/github/downloads/mclemente/fvtt-condition-lab-triggler/latest/module.zip)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/jendave/ironsworn-impacts)
+![GitHub release (latest by SemVer and asset)](https://img.shields.io/github/downloads/jendave/ironsworn-impacts/latest/module.zip)
 
-# Condition Lab & Triggler
+# Ironsworn Impacts
 
 ---
 
-**[📚Wiki/How-To](https://github.com/mclemente/fvtt-condition-lab-triggler/wiki)**
-**[🐛Issues/Bugs](https://github.com/mclemente/fvtt-condition-lab-triggler/issues)**
-**[📜Changelog](https://github.com/mclemente/fvtt-condition-lab-triggler/blob/master/CHANGELOG.md)**
+**[📚Wiki/How-To](https://github.com/jendave/ironsworn-impacts/wiki)**
+**[🐛Issues/Bugs](https://github.com/jendave/ironsworn-impacts/issues)**
+**[📜Changelog](https://github.com/jendave/ironsworn-impacts/blob/master/CHANGELOG.md)**
 **[🛠 Features](#features)**
 **[👏Thanks](#thanks)**
 **[❗Attribution](#attribution)**
@@ -18,7 +18,7 @@
 
 # Features
 
-## Condition Lab
+## Ironsworn Impacts
 
 <details>
   <summary>Click to show</summary>

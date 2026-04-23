@@ -14,7 +14,7 @@ export default class EnhancedConditionTriggerConfig extends FormApplication {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			id: "cub-enhanced-condition-trigger-config",
 			title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.TriggerConfig.Title"),
-			template: "modules/condition-lab-triggler/templates/enhanced-condition-trigger-config.hbs",
+			template: "modules/ironsworn-impacts/templates/enhanced-condition-trigger-config.hbs",
 			classes: ["sheet"],
 			closeOnSubmit: false,
 			width: 500
@@ -26,7 +26,7 @@ export default class EnhancedConditionTriggerConfig extends FormApplication {
 			condition: this.object,
 			applyTriggerId: this.object.applyTrigger,
 			removeTriggerId: this.object.removeTrigger,
-			triggerChoices: game.settings.get("condition-lab-triggler", "storedTriggers") ?? []
+			triggerChoices: game.settings.get("ironsworn-impacts", "storedTriggers") ?? []
 		};
 	}
 
@@ -49,7 +49,7 @@ export default class EnhancedConditionTriggerConfig extends FormApplication {
 
 		let conditionIndex = newMap.findIndex((c) => c.id === this.object.id);
 		newMap[conditionIndex] = this.object;
-		game.settings.set("condition-lab-triggler", "activeConditionMap", newMap);
+		game.settings.set("ironsworn-impacts", "activeConditionMap", newMap);
 		this.close();
 	}
 }

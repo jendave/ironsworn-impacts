@@ -16,7 +16,7 @@ import rollupConfig from "./rollup.config.mjs";
 /*  CONFIGURATION   */
 /********************/
 
-const packageId = "condition-lab-triggler";
+const packageId = "ironsworn-impacts";
 const sourceDirectory = "./src";
 const distDirectory = "./dist";
 const stylesDirectory = `${sourceDirectory}/styles`;

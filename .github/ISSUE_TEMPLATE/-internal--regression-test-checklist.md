@@ -35,7 +35,7 @@ assignees: eclarke12
 (Pass/Fail notes)
 
 ## Enhanced Conditions
-### Condition Lab loads
+### Ironsworn Impacts loads
 - [ ] Pass
 (Pass/Fail notes)
 

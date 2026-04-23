@@ -41,7 +41,7 @@ export default class EnhancedEffectConfig extends ActiveEffectConfig {
 	 */
 	async _processSubmitData(_event, form, data) {
 		const conditionIdFlag = this.document.getFlag(
-			"condition-lab-triggler", "conditionId"
+			"ironsworn-impacts", "conditionId"
 		);
 		if (!conditionIdFlag) return;
 
@@ -50,7 +50,7 @@ export default class EnhancedEffectConfig extends ActiveEffectConfig {
 
 		if (!map && !map.length) return;
 
-		const conditionId = conditionIdFlag.replace("condition-lab-triggler.", "");
+		const conditionId = conditionIdFlag.replace("ironsworn-impacts.", "");
 		const condition = map.find((c) => c.id === conditionId);
 
 		if (!condition) return;

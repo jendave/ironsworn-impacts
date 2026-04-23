@@ -53,7 +53,7 @@ export class Triggler {
 			return false;
 		}
 
-		const triggers = game.settings.get("condition-lab-triggler", "storedTriggers");
+		const triggers = game.settings.get("ironsworn-impacts", "storedTriggers");
 		const text = triggerType === "simple" ? Triggler._constructString(trigger) : trigger.advancedName;
 
 		if (!text) return false;
@@ -106,11 +106,11 @@ export class Triggler {
 					? target.actor
 					: null;
 		const token = target instanceof TokenDocument ? target : target instanceof Token ? target.document : null;
-		const conditionMap = game.settings.get("condition-lab-triggler", "activeConditionMap");
+		const conditionMap = game.settings.get("ironsworn-impacts", "activeConditionMap");
 		const matchedApplyConditions = conditionMap.filter((m) => m.applyTrigger === trigger.id);
 		const matchedRemoveConditions = conditionMap.filter((m) => m.removeTrigger === trigger.id);
 		const matchedMacros = game.macros.contents.filter(
-			(m) => m.getFlag("condition-lab-triggler", "macroTrigger") === trigger.id
+			(m) => m.getFlag("ironsworn-impacts", "macroTrigger") === trigger.id
 		);
 		const applyConditionNames = matchedApplyConditions.map((c) => c.name);
 		const removeConditionNames = matchedRemoveConditions.map((c) => c.name);
@@ -136,7 +136,7 @@ export class Triggler {
 	static async _processUpdate(entity, update, entryPoint1) {
 		if (!entity || !update) return;
 
-		const triggers = game.settings.get("condition-lab-triggler", "storedTriggers");
+		const triggers = game.settings.get("ironsworn-impacts", "storedTriggers");
 
 		/**
 		 * Avoid issues with Multi-Level Tokens by ignoring clone tokens

@@ -141,7 +141,7 @@ Take the new map and write it back to settings, overwriting existing
 <a name="ConditionLab+_processFormUpdate"></a>
 
 ### conditionLab.\_processFormUpdate(formData)
-Process Condition Lab formdata and then save changes
+Process Ironsworn Impacts formdata and then save changes
 
 **Kind**: instance method of [<code>ConditionLab</code>](#ConditionLab)
 
@@ -446,7 +446,7 @@ Get options for the form
 <a name="ConditionLab._onRender"></a>
 
 ### ConditionLab.\_onRender(app, html, data)
-Condition Lab Render handler
+Ironsworn Impacts Render handler
 
 **Kind**: static method of [<code>ConditionLab</code>](#ConditionLab)
 

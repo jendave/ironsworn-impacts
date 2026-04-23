@@ -67,7 +67,7 @@ a.add-temporary {
 }
 
 /* -------------------------------------------- */
-/*                 CONDITION LAB                */
+/*                 Ironsworn Impacts                */
 /* -------------------------------------------- */
 
 #cub-condition-lab,
@@ -360,36 +360,36 @@ a.add-temporary {
 	flex: 0;
 }
 
-#settings div#condition-lab-triggler {
+#settings div#ironsworn-impacts {
 	margin: 0;
 }
 
 /* ABOUT */
-#condition-lab-triggler-about img {
+#ironsworn-impacts-about img {
 	border: none;
 }
 
-#condition-lab-triggler-about .logo {
+#ironsworn-impacts-about .logo {
 	width: 600px;
 }
 
-#condition-lab-triggler-about .version {
+#ironsworn-impacts-about .version {
 	flex-grow: 0;
 }
 
-#condition-lab-triggler-about .readme {
+#ironsworn-impacts-about .readme {
 	text-align: center;
 }
 
-#condition-lab-triggler-about a {
+#ironsworn-impacts-about a {
 	text-shadow: 1px 1px black;
 }
 
-#condition-lab-triggler-about div.patrons {
+#ironsworn-impacts-about div.patrons {
 	width: 100%;
 }
 
-#condition-lab-triggler-about .patrons ol {
+#ironsworn-impacts-about .patrons ol {
 	height: 175px;
 	border: 1px inset white;
 	list-style: none;
@@ -398,27 +398,27 @@ a.add-temporary {
 	padding: 2px;
 }
 
-#condition-lab-triggler-about .patrons li:nth-child(odd) {
+#ironsworn-impacts-about .patrons li:nth-child(odd) {
 	background: rgba(0, 0, 0, 0.2);
 }
 
-#condition-lab-triggler-about .patrons li {
+#ironsworn-impacts-about .patrons li {
 	font-size: x-large;
 }
 
-#condition-lab-triggler-about footer div {
+#ironsworn-impacts-about footer div {
 	justify-content: center;
 	text-align: center;
 }
 
-#condition-lab-triggler-about .death-save {
+#ironsworn-impacts-about .death-save {
 	flex: 0 0 120px;
 }
 
-#condition-lab-triggler-about .heart {
+#ironsworn-impacts-about .heart {
 	color: tomato;
 }
 
-#condition-lab-triggler-about .patreon img {
+#ironsworn-impacts-about .patreon img {
 	flex: 0 0 100px;
 }

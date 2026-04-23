@@ -14,7 +14,7 @@ export default class EnhancedConditionOptionConfig extends FormApplication {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			id: "cub-enhanced-condition-option-config",
 			title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.OptionConfig.Title"),
-			template: "modules/condition-lab-triggler/templates/enhanced-condition-option-config.hbs",
+			template: "modules/ironsworn-impacts/templates/enhanced-condition-option-config.hbs",
 			classes: ["sheet"],
 			closeOnSubmit: false,
 			width: 500
@@ -100,7 +100,7 @@ export default class EnhancedConditionOptionConfig extends FormApplication {
 
 	async _updateObject(event, formData) {
 		this.object.options = {};
-		const specialStatusEffectMapping = game.settings.get("condition-lab-triggler",
+		const specialStatusEffectMapping = game.settings.get("ironsworn-impacts",
 			"specialStatusEffectMapping"
 		);
 		const map = game.clt.conditionLab.map;
@@ -119,7 +119,7 @@ export default class EnhancedConditionOptionConfig extends FormApplication {
 				} else if (existingMapping !== this.object.id && value === true) {
 					this.setSpecialStatusEffectMapping(specialStatusEffect, this.object.id);
 					if (existingMapping) {
-						const existingId = existingMapping.replace("condition-lab-triggler.", "");
+						const existingId = existingMapping.replace("ironsworn-impacts.", "");
 						const existingConditionIndex = newMap.findIndex((c) => c.id === existingId);
 						if (existingConditionIndex !== -1) {
 							const existingCondition = newMap[existingConditionIndex];
@@ -166,7 +166,7 @@ export default class EnhancedConditionOptionConfig extends FormApplication {
 		if (!Object.prototype.hasOwnProperty.call(CONFIG.specialStatusEffects, effect)) return;
 
 		CONFIG.specialStatusEffects[effect] = conditionId;
-		game.settings.set("condition-lab-triggler",
+		game.settings.set("ironsworn-impacts",
 			"specialStatusEffectMapping",
 			CONFIG.specialStatusEffects
 		);

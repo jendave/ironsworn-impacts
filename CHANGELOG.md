@@ -3,7 +3,7 @@
 ## [Known Issues]
 
 1. Overlay Effects added to a token will trigger the matching non-Overlay Condition to output to chat. The reverse is also true.
-2. The Default/Inferred Condition Lab Mappings for game systems may not correctly import all data. Importing the map from the CUB Condition Maps folder imports correctly.
+2. The Default/Inferred Ironsworn Impacts Mappings for game systems may not correctly import all data. Importing the map from the CUB Condition Maps folder imports correctly.
 3. PF2e is not currently supported by Enhanced Conditions due to the customisation of the effects framework implemented by the system.
 
 ## [1.3.1] - 2023-06-01

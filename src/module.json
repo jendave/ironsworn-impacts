@@ -1,18 +1,23 @@
 {
-	"id": "condition-lab-triggler",
-	"name": "condition-lab-triggler",
-	"title": "Condition Lab & Triggler",
+	"id": "ironsworn-impacts",
+	"name": "ironsworn-impacts",
+	"title": "Ironsworn Impacts",
 	"description": "Adds various combat-focused features",
 	"authors": [
 		{
 			"name": "Matheus Clemente",
 			"url": "https://github.com/mclemente",
 			"discord": "mclemente"
+		},
+		{
+			"name": "David Y. Hudson",
+			"url": "https://github.com/jendave",
+			"discord": "jendave"
 		}
 	],
-	"bugs": "https://github.com/mclemente/fvtt-condition-lab-triggler/issues",
-	"readme": "https://github.com/mclemente/fvtt-condition-lab-triggler/wiki",
-	"esmodules": ["module/condition-lab-triggler.js"],
+	"bugs": "https://github.com/jendave/ironsworn-impacts/issues",
+	"readme": "https://github.com/jendave/ironsworn-impacts/wiki",
+	"esmodules": ["module/ironsworn-impacts.js"],
 	"languages": [
 		{
 			"lang": "en",
@@ -70,12 +75,12 @@
 	],
 	"packFolders": [
 		{
-			"name": "Condition Lab & Triggler",
+			"name": "Ironsworn Impacts",
 			"sorting": "a",
 			"packs": ["conditionsarchmage"]
 		}
 	],
-	"styles": ["styles/condition-lab-triggler.css"],
+	"styles": ["styles/ironsworn-impacts.css"],
 	"compatibility": {
 		"minimum": "13",
 		"verified": "13"

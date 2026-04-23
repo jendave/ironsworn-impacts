@@ -15,12 +15,12 @@ export class ConditionLab extends FormApplication {
 		game.clt.conditionLab = this;
 		this.data = (game.clt.conditionLab ? game.clt.conditionLab.data : object) ?? null;
 		this.system = game.system.id;
-		this.initialMapType = game.settings.get("condition-lab-triggler", "conditionMapType");
+		this.initialMapType = game.settings.get("ironsworn-impacts", "conditionMapType");
 		this.mapType = null;
-		this.initialMap = game.settings.get("condition-lab-triggler", "activeConditionMap");
+		this.initialMap = game.settings.get("ironsworn-impacts", "activeConditionMap");
 		this.map = null;
 		this.displayedMap = null;
-		this.maps = game.settings.get("condition-lab-triggler", "defaultConditionMaps");
+		this.maps = game.settings.get("ironsworn-impacts", "defaultConditionMaps");
 		this.filterValue = "";
 		this.sortDirection = "";
 	}
@@ -29,7 +29,7 @@ export class ConditionLab extends FormApplication {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			id: "cub-condition-lab",
 			title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.Title"),
-			template: "modules/condition-lab-triggler/templates/condition-lab.hbs",
+			template: "modules/ironsworn-impacts/templates/condition-lab.hbs",
 			classes: ["sheet", "condition-lab-form"],
 			width: 780,
 			height: 680,
@@ -62,10 +62,10 @@ export class ConditionLab extends FormApplication {
 		const filterTitle = game.i18n.localize("CLT.ENHANCED_CONDITIONS.ConditionLab.FilterInputTitle");
 		const filterValue = this.filterValue;
 
-		const defaultMaps = game.settings.get("condition-lab-triggler", "defaultConditionMaps");
+		const defaultMaps = game.settings.get("ironsworn-impacts", "defaultConditionMaps");
 		// const mappedSystems = Object.keys(defaultMaps) || [];
 		const mappedSystems = [];
-		const mapTypeChoices = game.settings.settings.get("condition-lab-triggler.conditionMapType").choices;
+		const mapTypeChoices = game.settings.settings.get("ironsworn-impacts.conditionMapType").choices;
 
 		// If there's no default map for this system don't provide the "default" choice
 		if (!mappedSystems.includes(game.system.id)) {
@@ -78,12 +78,12 @@ export class ConditionLab extends FormApplication {
 
 		this.mapType ||= this.initialMapType || "other";
 		const conditionMap = (this.map ||= foundry.utils.duplicate(this.initialMap));
-		const triggers = game.settings.get("condition-lab-triggler", "storedTriggers").map((t) => {
+		const triggers = game.settings.get("ironsworn-impacts", "storedTriggers").map((t) => {
 			return [t.id, t.text];
 		});
 
 		const isDefault = this.mapType === "default";
-		const outputChatSetting = game.settings.get("condition-lab-triggler", "conditionsOutputToChat");
+		const outputChatSetting = game.settings.get("ironsworn-impacts", "conditionsOutputToChat");
 		const disableChatOutput = isDefault || !outputChatSetting;
 
 		for (const condition of conditionMap) {
@@ -173,7 +173,7 @@ export class ConditionLab extends FormApplication {
 		let references = [];
 		let newMap = [];
 		const rows = [];
-		const existingMap = this.map ?? game.settings.get("condition-lab-triggler", "activeConditionMap");
+		const existingMap = this.map ?? game.settings.get("ironsworn-impacts", "activeConditionMap");
 
 		// need to tighten these up to check for the existence of digits after the word
 		const conditionRegex = /condition/i;
@@ -259,11 +259,11 @@ export class ConditionLab extends FormApplication {
 	 */
 	async _restoreDefaults({ clearCache = false } = {}) {
 		const system = this.system;
-		let defaultMaps = game.settings.get("condition-lab-triggler", "defaultConditionMaps");
+		let defaultMaps = game.settings.get("ironsworn-impacts", "defaultConditionMaps");
 
 		if (clearCache) {
 			defaultMaps = await EnhancedConditions._loadDefaultMaps();
-			game.settings.set("condition-lab-triggler", "defaultConditionMaps", defaultMaps);
+			game.settings.set("ironsworn-impacts", "defaultConditionMaps", defaultMaps);
 		}
 		const tempMap = this.mapType !== "other" && defaultMaps && defaultMaps[system] ? defaultMaps[system] : [];
 
@@ -278,7 +278,7 @@ export class ConditionLab extends FormApplication {
 	 * @param {object} formData
 	 */
 	async _updateObject(event, formData) {
-		const showDialogSetting = game.settings.get("condition-lab-triggler", "showSortDirectionDialog");
+		const showDialogSetting = game.settings.get("ironsworn-impacts", "showSortDirectionDialog");
 
 		if (this.sortDirection && showDialogSetting) {
 			await Dialog.confirm({
@@ -287,7 +287,7 @@ export class ConditionLab extends FormApplication {
 				yes: ($html) => {
 					const checkbox = $html[0].querySelector("input[name='dont-show-again']");
 					if (checkbox.checked) {
-						game.settings.set("condition-lab-triggler", "showSortDirectionDialog", false);
+						game.settings.set("ironsworn-impacts", "showSortDirectionDialog", false);
 					}
 					this._processFormUpdate(formData);
 				},
@@ -299,7 +299,7 @@ export class ConditionLab extends FormApplication {
 	}
 
 	/**
-	 * Process Condition Lab formdata and then save changes
+	 * Process Ironsworn Impacts formdata and then save changes
 	 * @param {*} formData
 	 */
 	async _processFormUpdate(formData) {
@@ -323,8 +323,8 @@ export class ConditionLab extends FormApplication {
 		this.mapType = this.initialMapType = mapType;
 		const preparedMap = EnhancedConditions._prepareMap(newMap);
 
-		await game.settings.set("condition-lab-triggler", "conditionMapType", mapType);
-		await game.settings.set("condition-lab-triggler", "activeConditionMap", preparedMap);
+		await game.settings.set("ironsworn-impacts", "conditionMapType", mapType);
+		await game.settings.set("ironsworn-impacts", "activeConditionMap", preparedMap);
 
 		this._finaliseSave(preparedMap);
 	}
@@ -364,7 +364,7 @@ export class ConditionLab extends FormApplication {
 	async _importFromJSONDialog() {
 		new Dialog({
 			title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ImportTitle"),
-			content: await renderTemplate("modules/condition-lab-triggler/templates/import-conditions.html", {}),
+			content: await renderTemplate("modules/ironsworn-impacts/templates/import-conditions.html", {}),
 			buttons: {
 				import: {
 					icon: '<i class="fas fa-file-import"></i>',
@@ -438,7 +438,7 @@ export class ConditionLab extends FormApplication {
 	/* -------------------------------------------- */
 
 	/**
-	 * Condition Lab Render handler
+	 * Ironsworn Impacts Render handler
 	 * @param {*} app
 	 * @param {*} html
 	 * @param {*} data
@@ -612,7 +612,7 @@ export class ConditionLab extends FormApplication {
 
 		if (!conditionId) return;
 
-		const conditions = this.map ?? game.settings.get("condition-lab-triggler", "activeConditionMap");
+		const conditions = this.map ?? game.settings.get("ironsworn-impacts", "activeConditionMap");
 		const condition = conditions.length ? conditions.find((c) => c.id === conditionId) : null;
 
 		if (!condition) return;
@@ -621,10 +621,10 @@ export class ConditionLab extends FormApplication {
 
 		if (!conditionEffect) return;
 
-		if (!foundry.utils.hasProperty(conditionEffect, "flags.condition-lab-triggler.conditionId")) {
+		if (!foundry.utils.hasProperty(conditionEffect, "flags.ironsworn-impacts.conditionId")) {
 			setProperty(
 				conditionEffect,
-				"flags.condition-lab-triggler.conditionId",
+				"flags.ironsworn-impacts.conditionId",
 				conditionId
 			);
 		}
@@ -698,7 +698,7 @@ export class ConditionLab extends FormApplication {
 
 		const newMap = foundry.utils.duplicate(this.map);
 		const exisitingIds = this.map.filter((c) => c.id).map((c) => c.id);
-		const outputChatSetting = game.settings.get("condition-lab-triggler", "conditionsOutputToChat");
+		const outputChatSetting = game.settings.get("ironsworn-impacts", "conditionsOutputToChat");
 
 		newMap.push({
 			id: Sidekick.createId(exisitingIds),

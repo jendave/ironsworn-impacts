@@ -12,7 +12,7 @@ export class TrigglerForm extends FormApplication {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			id: "cub-triggler-form",
 			title: "Triggler",
-			template: "modules/condition-lab-triggler/templates/triggler-form.html",
+			template: "modules/ironsworn-impacts/templates/triggler-form.html",
 			classes: ["sheet", "triggler-form"],
 			width: 780,
 			height: "auto",
@@ -23,7 +23,7 @@ export class TrigglerForm extends FormApplication {
 
 	getData() {
 		const id = this.data.id;
-		const triggers = game.settings.get("condition-lab-triggler", "storedTriggers");
+		const triggers = game.settings.get("ironsworn-impacts", "storedTriggers");
 
 		if (this.noMerge) {
 			this.noMerge = false;
@@ -167,7 +167,7 @@ export class TrigglerForm extends FormApplication {
 			this.render();
 		});
 		deleteTrigger.on("click", async (event) => {
-			const triggers = game.settings.get("condition-lab-triggler", "storedTriggers");
+			const triggers = game.settings.get("ironsworn-impacts", "storedTriggers");
 			const triggerIndex = triggers.findIndex((t) => t.id === this.data.id);
 			if (triggerIndex === undefined) {
 				return;
@@ -176,7 +176,7 @@ export class TrigglerForm extends FormApplication {
 
 			updatedTriggers.splice(triggerIndex, 1);
 
-			await game.settings.set("condition-lab-triggler", "storedTriggers", updatedTriggers);
+			await game.settings.set("ironsworn-impacts", "storedTriggers", updatedTriggers);
 			this.data = {};
 			this.render();
 		});
@@ -290,7 +290,7 @@ export class TrigglerForm extends FormApplication {
 			return false;
 		}
 
-		const triggers = game.settings.get("condition-lab-triggler", "storedTriggers");
+		const triggers = game.settings.get("ironsworn-impacts", "storedTriggers");
 		const existingIds = triggers ? triggers.map((t) => t.id) : null;
 		const text = triggerType === "simple" ? Triggler._constructString(formData) : formData.advancedName;
 
@@ -319,7 +319,7 @@ export class TrigglerForm extends FormApplication {
 			this.data = newTrigger;
 		}
 
-		const setting = await game.settings.set("condition-lab-triggler", "storedTriggers", updatedTriggers);
+		const setting = await game.settings.set("ironsworn-impacts", "storedTriggers", updatedTriggers);
 		if (!setting) ui.notifications.info(game.i18n.localize("CLT.TRIGGLER.App.SaveSuccessful"));
 
 		this.render();
@@ -329,7 +329,7 @@ export class TrigglerForm extends FormApplication {
 	 * Exports the current map to JSON
 	 */
 	_exportToJSON() {
-		const triggers = foundry.utils.duplicate(game.settings.get("condition-lab-triggler", "storedTriggers"));
+		const triggers = foundry.utils.duplicate(game.settings.get("ironsworn-impacts", "storedTriggers"));
 		const data = {
 			system: game.system.id,
 			triggers
@@ -348,7 +348,7 @@ export class TrigglerForm extends FormApplication {
 		new Dialog({
 			title: game.i18n.localize("CLT.TRIGGLER.ImportTitle"),
 			// TODO change
-			content: await renderTemplate("modules/condition-lab-triggler/templates/import-conditions.html", {}),
+			content: await renderTemplate("modules/ironsworn-impacts/templates/import-conditions.html", {}),
 			buttons: {
 				import: {
 					icon: '<i class="fas fa-file-import"></i>',
@@ -386,8 +386,8 @@ export class TrigglerForm extends FormApplication {
 			return;
 		}
 
-		const originalTriggers = game.settings.get("condition-lab-triggler", "storedTriggers");
-		await game.settings.set("condition-lab-triggler", "storedTriggers", originalTriggers.concat(triggers));
+		const originalTriggers = game.settings.get("ironsworn-impacts", "storedTriggers");
+		await game.settings.set("ironsworn-impacts", "storedTriggers", originalTriggers.concat(triggers));
 		this.render();
 	}
 

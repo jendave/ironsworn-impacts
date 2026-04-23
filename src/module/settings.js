@@ -10,7 +10,7 @@ export function registerSettings() {
 	/*            Setting Configuration             */
 	/* -------------------------------------------- */
 
-	game.settings.register("condition-lab-triggler", "conditionsOutputToChat", {
+	game.settings.register("ironsworn-impacts", "conditionsOutputToChat", {
 		name: "CLT.SETTINGS.EnhancedConditions.OutputChatN",
 		hint: "CLT.SETTINGS.EnhancedConditions.OutputChatH",
 		scope: "world",
@@ -26,7 +26,7 @@ export function registerSettings() {
 						const newMap = foundry.utils.deepClone(game.clt.conditions);
 						if (!newMap.length) return;
 						newMap.forEach((c) => (c.options.outputChat = true));
-						game.settings.set("condition-lab-triggler", "activeConditionMap", newMap);
+						game.settings.set("ironsworn-impacts", "activeConditionMap", newMap);
 					},
 					no: () => { }
 				});
@@ -34,7 +34,7 @@ export function registerSettings() {
 		}
 	});
 
-	game.settings.register("condition-lab-triggler", "conditionsOutputDuringCombat", {
+	game.settings.register("ironsworn-impacts", "conditionsOutputDuringCombat", {
 		name: "CLT.SETTINGS.EnhancedConditions.OutputCombatN",
 		hint: "CLT.SETTINGS.EnhancedConditions.OutputCombatH",
 		scope: "world",
@@ -43,7 +43,7 @@ export function registerSettings() {
 		default: false
 	});
 
-	game.settings.register("condition-lab-triggler", "removeDefaultEffects", {
+	game.settings.register("ironsworn-impacts", "removeDefaultEffects", {
 		name: "CLT.SETTINGS.EnhancedConditions.RemoveDefaultEffectsN",
 		hint: "CLT.SETTINGS.EnhancedConditions.RemoveDefaultEffectsH",
 		scope: "world",
@@ -55,7 +55,7 @@ export function registerSettings() {
 		}
 	});
 
-	game.settings.register("condition-lab-triggler", "defaultConditionsOutputToChat", {
+	game.settings.register("ironsworn-impacts", "defaultConditionsOutputToChat", {
 		name: "CLT.SETTINGS.EnhancedConditions.DefaultOutputChatN",
 		hint: "CLT.SETTINGS.EnhancedConditions.DefaultOutputChatH",
 		scope: "world",
@@ -64,7 +64,7 @@ export function registerSettings() {
 		default: false
 	});
 
-	game.settings.register("condition-lab-triggler", "enhancedConditionsMigrationVersion", {
+	game.settings.register("ironsworn-impacts", "enhancedConditionsMigrationVersion", {
 		name: "CLT.SETTINGS.EnhancedConditions.MigrationVersionN",
 		hint: "CLT.SETTINGS.EnhancedConditions.MigrationVersionH",
 		scope: "world",
@@ -74,7 +74,7 @@ export function registerSettings() {
 		default: ""
 	});
 
-	game.settings.register("condition-lab-triggler", "showSortDirectionDialog", {
+	game.settings.register("ironsworn-impacts", "showSortDirectionDialog", {
 		name: "CLT.SETTINGS.EnhancedConditions.ShowSortDirectionDialogN",
 		hint: "CLT.SETTINGS.EnhancedConditions.ShowSortDirectionDialogH",
 		scope: "world",
@@ -83,7 +83,7 @@ export function registerSettings() {
 		default: true
 	});
 
-	game.settings.register("condition-lab-triggler", "defaultSpecialStatusEffects", {
+	game.settings.register("ironsworn-impacts", "defaultSpecialStatusEffects", {
 		name: "CLT.SETTINGS.EnhancedConditions.DefaultSpecialStatusEffectsN",
 		hint: "CLT.SETTINGS.EnhancedConditions.DefaultSpecialStatusEffectsH",
 		scope: "world",
@@ -92,7 +92,7 @@ export function registerSettings() {
 		config: false
 	});
 
-	game.settings.register("condition-lab-triggler", "specialStatusEffectMapping", {
+	game.settings.register("ironsworn-impacts", "specialStatusEffectMapping", {
 		name: "CLT.SETTINGS.EnhancedConditions.SpecialStatusEffectMappingN",
 		hint: "CLT.SETTINGS.EnhancedConditions.SpecialStatusEffectMappingH",
 		scope: "world",
@@ -105,7 +105,7 @@ export function registerSettings() {
 	/*              EnhancedConditions              */
 	/* -------------------------------------------- */
 
-	game.settings.registerMenu("condition-lab-triggler", "enchantedConditionsMenu", {
+	game.settings.registerMenu("ironsworn-impacts", "enchantedConditionsMenu", {
 		name: "CLT.ENHANCED_CONDITIONS.Lab.Title",
 		label: "CLT.ENHANCED_CONDITIONS.Lab.Title",
 		hint: "CLT.ENHANCED_CONDITIONS.Lab.Hint",
@@ -114,7 +114,7 @@ export function registerSettings() {
 		restricted: true
 	});
 
-	game.settings.register("condition-lab-triggler", "coreStatusIcons", {
+	game.settings.register("ironsworn-impacts", "coreStatusIcons", {
 		name: "CLT.SETTINGS.EnhancedConditions.CoreIconsN",
 		hint: "CLT.SETTINGS.EnhancedConditions.CoreIconsH",
 		scope: "world",
@@ -123,7 +123,7 @@ export function registerSettings() {
 		config: false
 	});
 
-	game.settings.register("condition-lab-triggler", "conditionMapType", {
+	game.settings.register("ironsworn-impacts", "conditionMapType", {
 		name: "CLT.SETTINGS.EnhancedConditions.MapTypeN",
 		hint: "CLT.SETTINGS.EnhancedConditions.MapTypeH",
 		scope: "world",
@@ -138,7 +138,7 @@ export function registerSettings() {
 		apiOnly: true
 	});
 
-	game.settings.register("condition-lab-triggler", "defaultConditionMaps", {
+	game.settings.register("ironsworn-impacts", "defaultConditionMaps", {
 		name: "CLT.SETTINGS.EnhancedConditions.DefaultMapsN",
 		hint: "CLT.SETTINGS.EnhancedConditions.DefaultMapsH",
 		scope: "world",
@@ -146,7 +146,7 @@ export function registerSettings() {
 		default: {}
 	});
 
-	game.settings.register("condition-lab-triggler", "activeConditionMap", {
+	game.settings.register("ironsworn-impacts", "activeConditionMap", {
 		name: "CLT.SETTINGS.EnhancedConditions.ActiveConditionMapN",
 		hint: "CLT.SETTINGS.EnhancedConditions.ActiveConditionMapH",
 		scope: "world",
@@ -165,7 +165,7 @@ export function registerSettings() {
 	/* -------------------------------------------- */
 
 	if (!game.modules.get("status-halo")?.active && !game.modules.get("illandril-token-hud-scale")?.active) {
-		game.settings.register("condition-lab-triggler", "effectSize", {
+		game.settings.register("ironsworn-impacts", "effectSize", {
 			name: "CLT.SETTINGS.TokenUtility.TokenEffectSizeN",
 			hint: "CLT.SETTINGS.TokenUtility.TokenEffectSizeH",
 			default: "small",
@@ -188,7 +188,7 @@ export function registerSettings() {
 	/*                    Triggler                  */
 	/* -------------------------------------------- */
 
-	game.settings.registerMenu("condition-lab-triggler", "trigglerMenu", {
+	game.settings.registerMenu("ironsworn-impacts", "trigglerMenu", {
 		name: "CLT.SETTINGS.Triggler.TriggersN",
 		label: "CLT.SETTINGS.Triggler.TriggersN",
 		hint: "CLT.SETTINGS.Triggler.TriggersH",
@@ -197,7 +197,7 @@ export function registerSettings() {
 		restricted: true
 	});
 
-	game.settings.register("condition-lab-triggler", "storedTriggers", {
+	game.settings.register("ironsworn-impacts", "storedTriggers", {
 		name: "CLT.SETTINGS.Triggler.TriggersN",
 		hint: "CLT.SETTINGS.Triggler.TriggersH",
 		scope: "world",
@@ -206,7 +206,7 @@ export function registerSettings() {
 		onChange: () => { }
 	});
 
-	game.settings.register("condition-lab-triggler", "hasRunMigration", {
+	game.settings.register("ironsworn-impacts", "hasRunMigration", {
 		scope: "world",
 		type: Boolean,
 		default: false
@@ -214,7 +214,7 @@ export function registerSettings() {
 
 	/* -------------------------------------------- */
 
-	game.settings.register("condition-lab-triggler", "sceneControls", {
+	game.settings.register("ironsworn-impacts", "sceneControls", {
 		name: "CLT.SETTINGS.SceneControls.Name",
 		hint: "CLT.SETTINGS.SceneControls.Hint",
 		scope: "world",

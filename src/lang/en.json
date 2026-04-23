@@ -17,7 +17,7 @@
 				},
 				"SortDirectionSave": {
 					"Title": "Save Mapping with Sort Direction?",
-					"Content": "<p>Click 'Yes' to save the Condition Lab map with the current sort direction. Click 'No' to cancel Saving.</p>",
+					"Content": "<p>Click 'Yes' to save the Ironsworn Impacts map with the current sort direction. Click 'No' to cancel Saving.</p>",
 					"CheckboxText": "Don't show this again"
 				},
 				"BadReference": "Could not build a link to the dropped content (actor, item, journal etc)",
@@ -78,7 +78,7 @@
 					"Title": "Override Existing Condition for this Status Effect?",
 					"Content": "Another Condition ({existingCondition}) is already setup to apply this special Status Effect: {statusEffect}. <p>If you click 'Yes' and Save this Condition's Options you will override that existing mapping.</p>"
 				},
-				"SaveNote": "Note: Clicking Save will Save Condition Lab Mapping"
+				"SaveNote": "Note: Clicking Save will Save Ironsworn Impacts Mapping"
 			},
 			"Warnings": {
 				"ApplyCondition": "applyCondition was replaced with addCondition. Please update your code."
@@ -114,7 +114,7 @@
 				}
 			},
 			"Lab": {
-				"Title": "Condition Lab",
+				"Title": "Ironsworn Impacts",
 				"Hint": "Provides the ability to map Conditions to Status Effect icons",
 				"MappingType": {
 					"Label": "Mapping Type",
@@ -134,8 +134,8 @@
 				"RestoreDefaultsContent": "<p>Are you sure you want to restore this mapping to defaults?</p><strong>If you save, this change will be permanent.</strong>",
 				"ResetFormTitle": "Reset Form?",
 				"ResetFormContent": "<p>Are you sure you want to reset the form?</p><p><strong>You will lose any unsaved changes.</strong></p>",
-				"SaveFailed": "Condition Lab failed to Save and Close",
-				"SaveSuccess": "Condition Lab mapping saved!",
+				"SaveFailed": "Ironsworn Impacts failed to Save and Close",
+				"SaveSuccess": "Ironsworn Impacts mapping saved!",
 				"ImportTitle": "Import Condition Map",
 				"ExportTitle": "Export Condition Map",
 				"Options": {
@@ -158,14 +158,14 @@
 		},
 		"KEYBINDINGS": {
 			"openConditionLab": {
-				"name": "Open Condition Lab"
+				"name": "Open Ironsworn Impacts"
 			},
 			"openTriggler": {
 				"name": "Open Triggler"
 			}
 		},
 		"MIGRATION": {
-			"Title": "Condition Lab & Triggler: CUB Settings Migration",
+			"Title": "Ironsworn Impacts: CUB Settings Migration",
 			"Content": "CUB settings have been detected, would you like to import these settings? This choice will overwrite CLT's settings. Your CUB settings won't be affected."
 		},
 		"SETTINGS": {
@@ -197,7 +197,7 @@
 				"ActiveConditionMapN": "Active Condition Map",
 				"ActiveConditionMapH": "Stores the active condition map",
 				"SuppressPreventativeSaveReminderN": "Suppress Preventative Save Reminder",
-				"SuppressPreventativeSaveReminderH": "Suppress the reminder to save the Condition Lab to prevent issues (eg. if user has already done so)",
+				"SuppressPreventativeSaveReminderH": "Suppress the reminder to save the Ironsworn Impacts to prevent issues (eg. if user has already done so)",
 				"MigrationVersionN": "Migration Version",
 				"MigrationVersionH": "Version of CUB for which migration was last performed",
 				"ShowSortDirectionDialogN": "Prompt Saving Sort Direction",
@@ -221,7 +221,7 @@
 			},
 			"SceneControls": {
 				"Name": "Scene Controls Shortcuts",
-				"Hint": "Adds two buttons to the Token Controls to open the Condition Lab or Triggler windows. Note that you can also open those by setting keybindings instead of using this setting."
+				"Hint": "Adds two buttons to the Token Controls to open the Ironsworn Impacts or Triggler windows. Note that you can also open those by setting keybindings instead of using this setting."
 			}
 		},
 		"TRIGGLER": {

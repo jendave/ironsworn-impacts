@@ -24,7 +24,7 @@ export class EnhancedConditions {
 	static _processActiveEffectChange(effect, type = "create") {
 		if (!(effect instanceof ActiveEffect)) return;
 
-		const conditionId = effect.getFlag("condition-lab-triggler", "conditionId");
+		const conditionId = effect.getFlag("ironsworn-impacts", "conditionId");
 		const isDefault = !conditionId;
 		const effectIds = conditionId ? [conditionId] : Array.from(effect.statuses);
 
@@ -33,8 +33,8 @@ export class EnhancedConditions {
 			effectId
 		}));
 
-		const toOutput = conditions.filter((condition) => (isDefault && game.settings.get("condition-lab-triggler", "defaultConditionsOutputToChat"))
-			|| (game.settings.get("condition-lab-triggler", "conditionsOutputToChat") && condition?.options?.outputChat));
+		const toOutput = conditions.filter((condition) => (isDefault && game.settings.get("ironsworn-impacts", "defaultConditionsOutputToChat"))
+			|| (game.settings.get("ironsworn-impacts", "conditionsOutputToChat") && condition?.options?.outputChat));
 		const actor = effect.parent;
 
 		if (toOutput.length) {
@@ -165,7 +165,7 @@ export class EnhancedConditions {
 			for (const condition of conditions) {
 				condition.name = game.i18n.localize(condition.name);
 				const newRow = await renderTemplate(
-					"modules/condition-lab-triggler/templates/partials/chat-card-condition-list.hbs",
+					"modules/ironsworn-impacts/templates/partials/chat-card-condition-list.hbs",
 					{ condition, type, timestamp }
 				);
 				newContent += newRow;
@@ -193,7 +193,7 @@ export class EnhancedConditions {
 			};
 
 			const content = await renderTemplate(
-				"modules/condition-lab-triggler/templates/chat-conditions.hbs",
+				"modules/ironsworn-impacts/templates/chat-conditions.hbs",
 				templateData
 			);
 
@@ -324,7 +324,7 @@ export class EnhancedConditions {
 	 * @returns {Promise<object[]>}
 	 */
 	static async _loadDefaultMaps() {
-		const path = "modules/condition-lab-triggler/condition-maps";
+		const path = "modules/ironsworn-impacts/condition-maps";
 		const jsons = await Sidekick.fetchJsons("data", path);
 
 		const defaultMaps = jsons
@@ -349,7 +349,7 @@ export class EnhancedConditions {
 			return preparedMap;
 		}
 
-		const outputChatSetting = game.settings.get("condition-lab-triggler", "conditionsOutputToChat");
+		const outputChatSetting = game.settings.get("ironsworn-impacts", "conditionsOutputToChat");
 		conditionMap = conditionMap.filter((c) => c.name && c.id);
 
 		// Iterate through the map validating/preparing the data
@@ -382,8 +382,8 @@ export class EnhancedConditions {
 	}
 
 	static getConditionsMap() {
-		let conditions = game.settings.get("condition-lab-triggler", "activeConditionMap");
-		if (!game.settings.get("condition-lab-triggler", "removeDefaultEffects")) {
+		let conditions = game.settings.get("ironsworn-impacts", "activeConditionMap");
+		if (!game.settings.get("ironsworn-impacts", "removeDefaultEffects")) {
 			conditions = conditions.concat(game.clt.CoreStatusEffects);
 		}
 		return conditions;
@@ -410,8 +410,8 @@ export class EnhancedConditions {
 	 * @param {*} conditionMap
 	 */
 	static _updateStatusEffects(conditionMap) {
-		const removeDefaultEffects = game.settings.get("condition-lab-triggler", "removeDefaultEffects");
-		const activeConditionMap = conditionMap || game.settings.get("condition-lab-triggler", "activeConditionMap");
+		const removeDefaultEffects = game.settings.get("ironsworn-impacts", "removeDefaultEffects");
+		const activeConditionMap = conditionMap || game.settings.get("ironsworn-impacts", "activeConditionMap");
 
 		if (!removeDefaultEffects && !activeConditionMap) {
 			return;
@@ -459,7 +459,7 @@ export class EnhancedConditions {
 					core: {
 						overlay: options?.overlay ?? false
 					},
-					"condition-lab-triggler": {
+					"ironsworn-impacts": {
 						conditionId: id
 					}
 				},
@@ -488,7 +488,7 @@ export class EnhancedConditions {
 		if (!effects) return [];
 
 		for (const effect of effects) {
-			const overlay = foundry.utils.getProperty(effect, "flags.condition-lab-triggler.core.overlay");
+			const overlay = foundry.utils.getProperty(effect, "flags.ironsworn-impacts.core.overlay");
 			// If the parent Condition for the ActiveEffect defines it as an overlay, mark the ActiveEffect as an overlay
 			if (overlay) {
 				effect.flags.core.overlay = overlay;
@@ -504,7 +504,7 @@ export class EnhancedConditions {
 	 * @returns {string[]}
 	 */
 	static getConditionsByIcon(icon) {
-		const conditionMap = game.settings.get("condition-lab-triggler", "activeConditionMap");
+		const conditionMap = game.settings.get("ironsworn-impacts", "activeConditionMap");
 
 		if (!conditionMap || !icon) {
 			return [];
@@ -546,7 +546,7 @@ export class EnhancedConditions {
 		defaultMaps =
 			defaultMaps instanceof Object
 				? defaultMaps
-				: game.settings.get("condition-lab-triggler", "defaultConditionMaps");
+				: game.settings.get("ironsworn-impacts", "defaultConditionMaps");
 		let defaultMap = defaultMaps[system] || [];
 
 		if (!defaultMap.length) {
@@ -647,7 +647,7 @@ export class EnhancedConditions {
 				`${game.i18n.localize("CLT.ENHANCED_CONDTIONS.ApplyCondition.Failed.NoEffect")} ${conditions}`
 			);
 			console.log(
-				`Condition Lab & Triggler | ${game.i18n.localize(
+				`Ironsworn Impacts | ${game.i18n.localize(
 					"CLT.ENHANCED_CONDTIONS.ApplyCondition.Failed.NoEffect"
 				)}`,
 				conditions
@@ -698,9 +698,9 @@ export class EnhancedConditions {
 						continue;
 					}
 
-					const conditionId = foundry.utils.getProperty(effect, `flags.condition-lab-triggler.${"conditionId"}`);
+					const conditionId = foundry.utils.getProperty(effect, `flags.ironsworn-impacts.${"conditionId"}`);
 					const matchedConditionEffects = existingConditionEffects.filter(
-						(e) => e.getFlag("condition-lab-triggler", "conditionId") === conditionId
+						(e) => e.getFlag("ironsworn-impacts", "conditionId") === conditionId
 					);
 
 					// Scenario 2: if duplicates are allowed, and existing conditions should be replaced, add any existing conditions to update
@@ -779,7 +779,7 @@ export class EnhancedConditions {
 			return;
 		}
 
-		const map = game.settings.get("condition-lab-triggler", "activeConditionMap");
+		const map = game.settings.get("ironsworn-impacts", "activeConditionMap");
 
 		if (!map || !map.length) {
 			if (warn) ui.notifications.error(game.i18n.localize("CLT.ENHANCED_CONDITIONS.GetConditions.Failed.NoCondition"));
@@ -811,8 +811,8 @@ export class EnhancedConditions {
 
 			const effectIds =
 				effects instanceof Array
-					? effects.map((e) => e.getFlag("condition-lab-triggler", "conditionId"))
-					: effects.getFlag("condition-lab-triggler", "conditionId");
+					? effects.map((e) => e.getFlag("ironsworn-impacts", "conditionId"))
+					: effects.getFlag("ironsworn-impacts", "conditionId");
 
 			if (!effectIds.length) continue;
 
@@ -874,7 +874,7 @@ export class EnhancedConditions {
 
 		entities = entities instanceof Array ? entities : [entities];
 
-		if (!map) map = game.settings.get("condition-lab-triggler", "activeConditionMap");
+		if (!map) map = game.settings.get("ironsworn-impacts", "activeConditionMap");
 
 		let results = new Collection();
 
@@ -889,7 +889,7 @@ export class EnhancedConditions {
 
 			if (!activeEffects.length) continue;
 
-			const conditionEffects = activeEffects.filter((ae) => ae.getFlag("condition-lab-triggler", "conditionId"));
+			const conditionEffects = activeEffects.filter((ae) => ae.getFlag("ironsworn-impacts", "conditionId"));
 
 			if (!conditionEffects.length) continue;
 
@@ -973,8 +973,8 @@ export class EnhancedConditions {
 			const conditionEffect = actor.effects.contents.some((ae) => {
 				return conditions.some(
 					(e) =>
-						e?.flags["condition-lab-triggler"].conditionId
-						=== ae.getFlag("condition-lab-triggler", "conditionId")
+						e?.flags["ironsworn-impacts"].conditionId
+						=== ae.getFlag("ironsworn-impacts", "conditionId")
 				);
 			});
 

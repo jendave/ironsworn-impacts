@@ -4,31 +4,31 @@
 		{
 			"name": "Confused",
 			"icon": "icons/svg/stoned.svg",
-			"referenceId": "@Compendium[condition-lab-triggler.conditionsarchmage.CZB4vtGqkxYBmQ7P]",
+			"referenceId": "@Compendium[ironsworn-impacts.conditionsarchmage.CZB4vtGqkxYBmQ7P]",
 			"referenceType": "compendium.journalEntry"
 		},
 		{
 			"name": "Dazed",
 			"icon": "icons/svg/daze.svg",
-			"referenceId": "@Compendium[condition-lab-triggler.conditionsarchmage.zwyeIeroFh6Yze5x]",
+			"referenceId": "@Compendium[ironsworn-impacts.conditionsarchmage.zwyeIeroFh6Yze5x]",
 			"referenceType": "compendium.journalEntry"
 		},
 		{
 			"name": "Fear",
 			"icon": "icons/svg/terror.svg",
-			"referenceId": "@Compendium[condition-lab-triggler.conditionsarchmage.I3Kjr3YC8ViNbseA]",
+			"referenceId": "@Compendium[ironsworn-impacts.conditionsarchmage.I3Kjr3YC8ViNbseA]",
 			"referenceType": "compendium.journalEntry"
 		},
 		{
 			"name": "Hampered",
-			"icon": "modules/condition-lab-triggler/icons/paralyzed.svg",
-			"referenceId": "@Compendium[condition-lab-triggler.conditionsarchmage.Np1orhugJRd5dYOH]",
+			"icon": "modules/ironsworn-impacts/icons/paralyzed.svg",
+			"referenceId": "@Compendium[ironsworn-impacts.conditionsarchmage.Np1orhugJRd5dYOH]",
 			"referenceType": "compendium.journalEntry"
 		},
 		{
 			"name": "Helpless",
 			"icon": "icons/svg/falling.svg",
-			"referenceId": "@Compendium[condition-lab-triggler.conditionsarchmage.KYTRu85eQw1DZKEp]",
+			"referenceId": "@Compendium[ironsworn-impacts.conditionsarchmage.KYTRu85eQw1DZKEp]",
 			"referenceType": "compendium.journalEntry",
 			"options": {
 				"overlay": true
@@ -37,25 +37,25 @@
 		{
 			"name": "Stuck",
 			"icon": "icons/svg/net.svg",
-			"referenceId": "@Compendium[condition-lab-triggler.conditionsarchmage.2Bv4szjE4dk8Rmqx]",
+			"referenceId": "@Compendium[ironsworn-impacts.conditionsarchmage.2Bv4szjE4dk8Rmqx]",
 			"referenceType": "compendium.journalEntry"
 		},
 		{
 			"name": "Stunned",
 			"icon": "icons/svg/lightning.svg",
-			"referenceId": "@Compendium[condition-lab-triggler.conditionsarchmage.COrwSqgQcw46Athr]",
+			"referenceId": "@Compendium[ironsworn-impacts.conditionsarchmage.COrwSqgQcw46Athr]",
 			"referenceType": "compendium.journalEntry"
 		},
 		{
 			"name": "Vulnerable",
-			"icon": "modules/condition-lab-triggler/icons/incapacitated.svg",
-			"referenceId": "@Compendium[condition-lab-triggler.conditionsarchmage.OHt8sh5UnEJF635R]",
+			"icon": "modules/ironsworn-impacts/icons/incapacitated.svg",
+			"referenceId": "@Compendium[ironsworn-impacts.conditionsarchmage.OHt8sh5UnEJF635R]",
 			"referenceType": "compendium.journalEntry"
 		},
 		{
 			"name": "Weakened",
 			"icon": "icons/svg/blood.svg",
-			"referenceId": "@Compendium[condition-lab-triggler.conditionsarchmage.OdPEQ7tKjzFybU0K",
+			"referenceId": "@Compendium[ironsworn-impacts.conditionsarchmage.OdPEQ7tKjzFybU0K",
 			"referenceType": "compendium.journalEntry"
 		}
 	]
