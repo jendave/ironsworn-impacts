@@ -77,20 +77,21 @@
 	],
 	"styles": ["styles/condition-lab-triggler.css"],
 	"compatibility": {
-		"minimum": "12",
-		"verified": "12"
+		"minimum": "13",
+		"verified": "13"
 	},
 	"relationships": {
-		"conflicts": [
+		"systems": [
 			{
-				"id": "dnd5e",
-				"type": "system"
-			},
-			{
-				"id": "succ",
-				"type": "module"
+			  "id": "foundry-ironsworn",
+			  "type": "system",
+			  "manifest": "https://github.com/ben/foundry-ironsworn/releases/latest/download/system.json",
+			  "compatibility": {
+				"minimum": "1.27.0",
+				"verified": "1.27"
+			  }
 			}
-		]
+		  ]
 	},
 	"url": "This is auto replaced",
 	"version": "This is auto replaced",
