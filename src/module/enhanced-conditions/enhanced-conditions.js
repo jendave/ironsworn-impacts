@@ -324,7 +324,7 @@ export class EnhancedConditions {
 	 * @returns {Promise<object[]>}
 	 */
 	static async _loadDefaultMaps() {
-		const path = "modules/ironsworn-impacts/condition-maps";
+		const path = "modules/ironsworn-impacts/config";
 		const jsons = await Sidekick.fetchJsons("data", path);
 
 		const defaultMaps = jsons

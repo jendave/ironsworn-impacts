@@ -49,7 +49,7 @@ export function registerSettings() {
 		scope: "world",
 		type: Boolean,
 		config: true,
-		default: false,
+		default: true,
 		onChange: () => {
 			EnhancedConditions._updateStatusEffects();
 		}
