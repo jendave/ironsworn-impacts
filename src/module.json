@@ -1,6 +1,5 @@
 {
 	"id": "ironsworn-impacts",
-	"name": "ironsworn-impacts",
 	"title": "Ironsworn Impacts",
 	"description": "Adds various combat-focused features",
 	"authors": [
@@ -23,41 +22,6 @@
 			"lang": "en",
 			"name": "English",
 			"path": "lang/en.json"
-		},
-		{
-			"lang": "ja",
-			"name": "日本語",
-			"path": "lang/ja.json"
-		},
-		{
-			"lang": "ko",
-			"name": "한국어",
-			"path": "lang/ko.json"
-		},
-		{
-			"lang": "pt-BR",
-			"name": "Português (Brasil)",
-			"path": "lang/pt-BR.json"
-		},
-		{
-			"lang": "es",
-			"name": "Español",
-			"path": "lang/es.json"
-		},
-		{
-			"lang": "cn",
-			"name": "中文",
-			"path": "lang/cn.json"
-		},
-		{
-			"lang": "de",
-			"name": "Deutsch",
-			"path": "lang/de.json"
-		},
-		{
-			"lang": "pl",
-			"name": "Polski",
-			"path": "lang/pl.json"
 		}
 	],
 	"packs": [
@@ -83,7 +47,8 @@
 	"styles": ["styles/ironsworn-impacts.css"],
 	"compatibility": {
 		"minimum": "13",
-		"verified": "13"
+		"verified": "13",
+		"maximum": "13"
 	},
 	"relationships": {
 		"systems": [
