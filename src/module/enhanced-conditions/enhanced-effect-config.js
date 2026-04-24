@@ -1,4 +1,4 @@
-export default class EnhancedEffectConfig extends ActiveEffectConfig {
+export default class EnhancedEffectConfig extends foundry.applications.sheets.ActiveEffectConfig {
 	get title() {
 		const reference = this.document.name ? ` ${game.i18n.localize(this.document.name)}` : "";
 		return `${game.i18n.localize(this.document.constructor.metadata.label)}${reference}`;

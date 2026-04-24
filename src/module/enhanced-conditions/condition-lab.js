@@ -1006,7 +1006,7 @@ export class ConditionLab extends FormApplication {
 
 	_onEditImage(event) {
 		const current = event.target.getAttribute("src");
-		const fp = new FilePicker({
+		const fp = new foundry.applications.apps.FilePicker.implementation({
 			current,
 			type: "image",
 			callback: (path) => {

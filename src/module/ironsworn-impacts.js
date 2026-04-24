@@ -71,7 +71,7 @@ Hooks.on("i18nInit", () => {
 		};
 		libWrapper.register(
 			"ironsworn-impacts",
-			"Token.prototype._refreshEffects",
+			"foundry.canvas.placeables.Token.prototype._refreshEffects",
 			function () {
 				const effectSize = game.settings.get("ironsworn-impacts", "effectSize");
 				// Use the default values if no setting found
@@ -327,7 +327,7 @@ Hooks.on("renderChatLog", (app, html, data) => {
 	EnhancedConditions.updateConditionTimestamps();
 });
 
-Hooks.on("renderChatMessage", (app, html, data) => {
+Hooks.on("renderChatMessageHTML", (app, html, data) => {
 	if (data.message.content && !data.message.content.match("enhanced-conditions")) {
 		return;
 	}

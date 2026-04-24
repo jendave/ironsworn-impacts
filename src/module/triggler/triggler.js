@@ -102,10 +102,10 @@ export class Triggler {
 		const actor =
 			target instanceof Actor
 				? target
-				: target instanceof TokenDocument || target instanceof Token
+				: target instanceof TokenDocument || target instanceof foundry.canvas.placeables.Token
 					? target.actor
 					: null;
-		const token = target instanceof TokenDocument ? target : target instanceof Token ? target.document : null;
+		const token = target instanceof TokenDocument ? target : target instanceof foundry.canvas.placeables.Token ? target.document : null;
 		const conditionMap = game.settings.get("ironsworn-impacts", "activeConditionMap");
 		const matchedApplyConditions = conditionMap.filter((m) => m.applyTrigger === trigger.id);
 		const matchedRemoveConditions = conditionMap.filter((m) => m.removeTrigger === trigger.id);
