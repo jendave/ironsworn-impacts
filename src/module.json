@@ -29,7 +29,8 @@
 		  "name": "ironswornimpactsentries",
 		  "label": "Ironsworn Impacts Entries",
 		  "path": "./packs/ironsworn-impacts-entries",
-		  "type": "RollTable"
+		  "type": "JournalEntry",
+		  "system": "foundry-ironsworn"
 		},
 		{
 		  "name": "ironswornimpactsmacros",

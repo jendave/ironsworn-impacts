@@ -1,3 +1,7 @@
 2026/04/24-14:22:40.333091 16eccf000 Recovering log #8
 2026/04/24-14:22:40.333678 16eccf000 Delete type=3 #7
 2026/04/24-14:22:40.333909 16eccf000 Delete type=0 #8
+2026/04/24-14:46:11.867712 16ddd3000 Manual compaction at level-0 from '!folders!QVtryfkq0VQpJqtW' @ 72057594037927935 : 1 .. '!journal.pages!on709YZYei7QBKsR.MKYRHoIumcjzzozN' @ 0 : 0; will stop at '!journal.pages!on709YZYei7QBKsR.MKYRHoIumcjzzozN' @ 33 : 1
+2026/04/24-14:46:11.867740 16ddd3000 Compacting 1@0 + 0@1 files
+2026/04/24-14:46:11.867782 16ddd3000 compacted to: files[ 1 0 0 0 0 0 0 ]
+2026/04/24-14:46:11.867800 16ddd3000 Compaction error: IO error: /Users/david.hudson/mygit/foundrydata-13/Data/worlds/starforged-development/packs/ironsworn-impacts-entries/000011.ldb: No such file or directory
