@@ -22,7 +22,7 @@ const distDirectory = "./dist";
 const stylesDirectory = `${sourceDirectory}/styles`;
 const stylesExtension = "css";
 const sourceFileExtension = "js";
-const staticFiles = ["condition-maps", "icons", "lang", "packs", "templates", "module.json"];
+const staticFiles = ["config", "icons", "lang", "packs", "templates", "module.json"];
 
 /********************/
 /*      BUILD       */
