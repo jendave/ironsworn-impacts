@@ -26,24 +26,28 @@
 	],
 	"packs": [
 		{
-			"name": "conditionsarchmage",
-			"label": "Conditions",
-			"system": "archmage",
-			"path": "packs/conditionsarchmage.db",
-			"type": "JournalEntry",
-			"ownership": {
-				"PLAYER": "LIMITED",
-				"GAMEMASTER": "OWNER"
-			}
-		}
-	],
-	"packFolders": [
+		  "name": "ironswornimpactsentries",
+		  "label": "Ironsworn Impacts Entries",
+		  "path": "./packs/ironsworn-impacts-entries",
+		  "type": "RollTable"
+		},
 		{
-			"name": "Ironsworn Impacts",
-			"sorting": "a",
-			"packs": ["conditionsarchmage"]
+		  "name": "ironswornimpactsmacros",
+		  "label": "Ironsworn Impacts Macros",
+		  "path": "./packs/ironsworn-impacts-macros",
+		  "type": "Macro",
+		  "system": "foundry-ironsworn"
 		}
-	],
+	  ],
+	  "packFolders": [
+		{
+		  "name": "Ironsworn Impacts",
+		  "packs": [
+			"ironswornimpactsentries",
+			"ironswornimpactsmacros"
+		  ]
+		}
+	  ],
 	"styles": ["styles/ironsworn-impacts.css"],
 	"compatibility": {
 		"minimum": "13",
