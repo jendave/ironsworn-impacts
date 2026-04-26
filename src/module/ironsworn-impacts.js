@@ -108,26 +108,7 @@ Hooks.on("i18nInit", () => {
 });
 
 Hooks.on("ready", async () => {
-	game.clt.CoreStatusEffects = foundry.utils.deepClone(CONFIG.statusEffects)
-		.map((status) => {
-			/** @deprecated since v12 */
-			for (const [oldKey, newKey] of Object.entries({ label: "name", icon: "img" })) {
-				const msg = `StatusEffectConfig#${oldKey} has been deprecated in favor of StatusEffectConfig#${newKey}`;
-				Object.defineProperty(status, oldKey, {
-					get() {
-						foundry.utils.logCompatibilityWarning(msg, { since: 12, until: 14, once: true });
-						return this[newKey];
-					},
-					set(value) {
-						foundry.utils.logCompatibilityWarning(msg, { since: 12, until: 14, once: true });
-						this[newKey] = value;
-					},
-					enumerable: false,
-					configurable: true
-				});
-			}
-			return status;
-		});
+	game.clt.CoreStatusEffects = foundry.utils.deepClone(CONFIG.statusEffects);
 	game.clt.CoreSpecialStatusEffects = foundry.utils.deepClone(CONFIG.specialStatusEffects);
 	game.clt.supported = false;
 	let defaultMaps = game.settings.get("ironsworn-impacts", "defaultConditionMaps");
@@ -244,7 +225,7 @@ Hooks.on("updateCombat", (combat, update, options, userId) => {
 /* -------------- Scene Controls -------------- */
 Hooks.on("getSceneControlButtons", function (hudButtons) {
 	if (game.user.isGM && game.settings.get("ironsworn-impacts", "sceneControls")) {
-		const hud = $(hudButtons).find((val) => val.name === "token");
+		const hud = hudButtons.find((val) => val.name === "token");
 		if (hud) {
 			hud.tools.push({
 				name: "CLT.ENHANCED_CONDITIONS.Lab.Title",
@@ -265,7 +246,8 @@ Hooks.on("getSceneControlButtons", function (hudButtons) {
 });
 
 Hooks.on("renderSceneControls", (app, html, data) => {
-	const trigglerButton = $(html).find('li[data-tool="Triggler"]')[0];
+	const htmlEl = html instanceof HTMLElement ? html : html[0];
+	const trigglerButton = htmlEl.querySelector('li[data-tool="Triggler"]');
 	if (trigglerButton) {
 		trigglerButton.style.display = "inline-block";
 		const exclamationMark = trigglerButton.children[0];
@@ -283,7 +265,8 @@ Hooks.on("renderSceneControls", (app, html, data) => {
 /* ------------------- Misc ------------------- */
 
 Hooks.on("renderSettingsConfig", (app, html, data, ...others) => {
-	const trigglerMenu = $(html).find("button[data-key=\"ironsworn-impacts.trigglerMenu\"]")[0];
+	const htmlEl = html instanceof HTMLElement ? html : html[0];
+	const trigglerMenu = htmlEl.querySelector("button[data-key=\"ironsworn-impacts.trigglerMenu\"]");
 	if (trigglerMenu) {
 		const exclamationMark = trigglerMenu.children[0];
 		exclamationMark.style.margin = "0 -6px";
@@ -297,8 +280,9 @@ Hooks.on("renderSettingsConfig", (app, html, data, ...others) => {
 });
 
 Hooks.on("renderMacroConfig", (app, html, data) => {
-	const typeSelect = $(html).find("select[name='type']");
-	const typeSelectDiv = typeSelect.closest("div");
+	const htmlEl = html instanceof HTMLElement ? html : html[0];
+	const typeSelect = htmlEl.querySelector("select[name='type']");
+	const typeSelectDiv = typeSelect?.closest("div");
 	const flag = app.object.getFlag("ironsworn-impacts", "macroTrigger");
 	const triggers = game.settings.get("ironsworn-impacts", "storedTriggers");
 
@@ -313,12 +297,11 @@ Hooks.on("renderMacroConfig", (app, html, data) => {
 		labelAttr: "text"
 	});
 
-	typeSelectDiv.after($(`
-		<div class="form-group">
-			<label>${game.i18n.localize("CLT.Trigger")}</label>
-			${select.outerHTML}
-		</div>
-	`));
+	const wrapper = document.createElement("div");
+	wrapper.classList.add("form-group");
+	wrapper.innerHTML = `<label>${game.i18n.localize("CLT.Trigger")}</label>`;
+	wrapper.appendChild(select);
+	typeSelectDiv?.after(wrapper);
 });
 
 /* ------------------- Chat ------------------- */
@@ -336,13 +319,14 @@ Hooks.on("renderChatMessageHTML", (app, html, data) => {
 
 	if (!speaker) return;
 
-	const removeConditionAnchor = $(html).find("a[name='remove-row']");
-	const undoRemoveAnchor = $(html).find("a[name='undo-remove']");
+	const htmlEl = html instanceof HTMLElement ? html : html[0];
+	const removeConditionAnchor = htmlEl.querySelector("a[name='remove-row']");
+	const undoRemoveAnchor = htmlEl.querySelector("a[name='undo-remove']");
 
 	/**
 	 * @todo #284 move to chatlog listener instead
 	 */
-	removeConditionAnchor.on("click", (event) => {
+	removeConditionAnchor?.addEventListener("click", (event) => {
 		const conditionListItem = event.target.closest("li");
 		const conditionName = conditionListItem.dataset.conditionName;
 		const messageListItem = conditionListItem?.parentElement?.closest("li");
@@ -360,7 +344,7 @@ Hooks.on("renderChatMessageHTML", (app, html, data) => {
 		EnhancedConditions.removeCondition(conditionName, entity, { warn: false });
 	});
 
-	undoRemoveAnchor.on("click", (event) => {
+	undoRemoveAnchor?.addEventListener("click", (event) => {
 		const conditionListItem = event.target.closest("li");
 		const conditionName = conditionListItem.dataset.conditionName;
 		const messageListItem = conditionListItem?.parentElement?.closest("li");
@@ -401,23 +385,24 @@ Hooks.on("renderDialog", (app, html, data) => {
 /* -------------- Combat Tracker -------------- */
 
 Hooks.on("renderCombatTracker", (app, html, data) => {
-	$(html).find("img[class='token-effect']")
-		.each((index, element) => {
-			const url = new URL(element.src);
-			const path = url?.pathname?.substring(1);
-			const conditions = EnhancedConditions.getConditionsByIcon(path);
-			const statusEffect = CONFIG.statusEffects.find((e) => e.img === path);
+	const htmlEl = html instanceof HTMLElement ? html : html[0];
+	htmlEl.querySelectorAll("img[class='token-effect']").forEach((element) => {
+		const url = new URL(element.src);
+		const path = url?.pathname?.substring(1);
+		const conditions = EnhancedConditions.getConditionsByIcon(path);
+		const statusEffect = CONFIG.statusEffects.find((e) => e.img === path);
 
-			if (conditions?.length) {
-				element.title = conditions[0];
-			} else if (statusEffect?.name) {
-				element.title = game.i18n.localize(statusEffect.name);
-			}
-		});
+		if (conditions?.length) {
+			element.title = conditions[0];
+		} else if (statusEffect?.name) {
+			element.title = game.i18n.localize(statusEffect.name);
+		}
+	});
 });
 
 /* ---------------- Custom Apps --------------- */
 
 Hooks.on("renderConditionLab", (app, html, data) => {
-	ConditionLab._onRender(app, $(html), data);
+	const htmlEl = html instanceof HTMLElement ? html : html[0];
+	ConditionLab._onRender(app, htmlEl, data);
 });

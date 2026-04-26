@@ -281,17 +281,19 @@ export class ConditionLab extends FormApplication {
 		const showDialogSetting = game.settings.get("ironsworn-impacts", "showSortDirectionDialog");
 
 		if (this.sortDirection && showDialogSetting) {
-			await Dialog.confirm({
-				title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.ConditionLab.SortDirectionSave.Title"),
+			await foundry.applications.api.DialogV2.confirm({
+				window: { title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.ConditionLab.SortDirectionSave.Title") },
 				content: game.i18n.localize("CLT.ENHANCED_CONDITIONS.ConditionLab.SortDirectionSave.Content"),
-				yes: ($html) => {
-					const checkbox = $html[0].querySelector("input[name='dont-show-again']");
-					if (checkbox.checked) {
-						game.settings.set("ironsworn-impacts", "showSortDirectionDialog", false);
+				yes: {
+					callback: (_event, _button, dialog) => {
+						const checkbox = dialog.element.querySelector("input[name='dont-show-again']");
+						if (checkbox?.checked) {
+							game.settings.set("ironsworn-impacts", "showSortDirectionDialog", false);
+						}
+						this._processFormUpdate(formData);
 					}
-					this._processFormUpdate(formData);
 				},
-				no: () => { }
+				no: { callback: () => {} }
 			});
 		} else {
 			this._processFormUpdate(formData);
@@ -353,7 +355,7 @@ export class ConditionLab extends FormApplication {
 		};
 
 		// Trigger file save procedure
-		const filename = `cub-${game.system.id}-condition-map.json`;
+		const filename = `${game.system.id}-impacts.json`;
 		saveDataToFile(JSON.stringify(data, null, 2), "text/json", filename);
 	}
 
@@ -362,24 +364,26 @@ export class ConditionLab extends FormApplication {
 	 * Borrowed from foundry.js Entity class
 	 */
 	async _importFromJSONDialog() {
-		new Dialog({
-			title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ImportTitle"),
+		foundry.applications.api.DialogV2.wait({
+			window: { title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ImportTitle") },
 			content: await renderTemplate("modules/ironsworn-impacts/templates/import-conditions.html", {}),
-			buttons: {
-				import: {
-					icon: '<i class="fas fa-file-import"></i>',
+			buttons: [
+				{
+					action: "import",
+					icon: "fas fa-file-import",
 					label: game.i18n.localize("CLT.WORDS.Import"),
-					callback: (html) => {
-						this._processImport(html);
+					callback: (_event, _button, dialog) => {
+						this._processImport(dialog.element);
 					}
 				},
-				no: {
-					icon: '<i class="fas fa-times"></i>',
+				{
+					action: "cancel",
+					icon: "fas fa-times",
 					label: game.i18n.localize("Cancel")
 				}
-			},
+			],
 			default: "import"
-		}).render(true);
+		});
 	}
 
 	/**
@@ -622,7 +626,7 @@ export class ConditionLab extends FormApplication {
 		if (!conditionEffect) return;
 
 		if (!foundry.utils.hasProperty(conditionEffect, "flags.ironsworn-impacts.conditionId")) {
-			setProperty(
+			foundry.utils.setProperty(
 				conditionEffect,
 				"flags.ironsworn-impacts.conditionId",
 				conditionId
@@ -731,30 +735,21 @@ export class ConditionLab extends FormApplication {
 
 		const row = event.currentTarget.name.match(/\d+$/)[0];
 
-		const dialog = new Dialog({
-			title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ConfirmDeleteTitle"),
+		foundry.applications.api.DialogV2.confirm({
+			window: { title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ConfirmDeleteTitle") },
 			content: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ConfirmDeleteContent"),
-			buttons: {
-				yes: {
-					icon: '<i class="fa fa-check"></i>',
-					label: game.i18n.localize("Yes"),
-					callback: async (event) => {
-						const newMap = foundry.utils.duplicate(this.map);
-						newMap.splice(row, 1);
-						this.map = newMap;
-						this.render();
-					}
-				},
-				no: {
-					icon: '<i class="fa fa-times"></i>',
-					label: game.i18n.localize("No"),
-					callback: (event) => { }
+			yes: {
+				icon: "fa fa-check",
+				callback: async () => {
+					const newMap = foundry.utils.deepClone(this.map);
+					newMap.splice(row, 1);
+					this.map = newMap;
+					this.render();
 				}
 			},
-			default: "no"
+			no: { icon: "fa fa-times" },
+			defaultYes: false
 		});
-
-		dialog.render(true);
 	}
 
 	/**
@@ -841,30 +836,20 @@ export class ConditionLab extends FormApplication {
 		event.preventDefault();
 		const content = game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.RestoreDefaultsContent");
 
-		const confirmationDialog = new Dialog({
-			title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.RestoreDefaultsTitle"),
+		foundry.applications.api.DialogV2.confirm({
+			window: { title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.RestoreDefaultsTitle") },
 			content,
-			buttons: {
-				yes: {
-					icon: '<i class="fas fa-check"></i>',
-					label: game.i18n.localize("Yes"),
-					callback: ($html) => {
-						const checkbox = $html[0].querySelector("input[name='clear-cache']");
-						const clearCache = checkbox?.checked;
-						this._restoreDefaults({ clearCache });
-					}
-				},
-				no: {
-					icon: '<i class="fas fa-times"></i>',
-					label: game.i18n.localize("No"),
-					callback: () => { }
+			yes: {
+				icon: "fas fa-check",
+				callback: (_event, _button, dialog) => {
+					const checkbox = dialog.element.querySelector("input[name='clear-cache']");
+					const clearCache = checkbox?.checked;
+					this._restoreDefaults({ clearCache });
 				}
 			},
-			default: "no",
-			close: () => { }
+			no: { icon: "fas fa-times" },
+			defaultYes: false
 		});
-
-		confirmationDialog.render(true);
 	}
 
 	/**
@@ -872,27 +857,19 @@ export class ConditionLab extends FormApplication {
 	 * @param {*} event
 	 */
 	_onResetForm(event) {
-		const dialog = new Dialog({
-			title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ResetFormTitle"),
+		foundry.applications.api.DialogV2.confirm({
+			window: { title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ResetFormTitle") },
 			content: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ResetFormContent"),
-			buttons: {
-				yes: {
-					icon: '<i class="fa fa-check"></i>',
-					label: game.i18n.localize("Yes"),
-					callback: (event) => {
-						this.map = this.initialMap;
-						this.render();
-					}
-				},
-				no: {
-					icon: '<i class="fa fa-times"></i>',
-					label: game.i18n.localize("No"),
-					callback: (event) => { }
+			yes: {
+				icon: "fa fa-check",
+				callback: () => {
+					this.map = this.initialMap;
+					this.render();
 				}
 			},
-			default: "no"
+			no: { icon: "fa fa-times" },
+			defaultYes: false
 		});
-		dialog.render(true);
 	}
 
 	async _onDrop(event) {

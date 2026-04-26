@@ -172,7 +172,7 @@ export class TrigglerForm extends FormApplication {
 			if (triggerIndex === undefined) {
 				return;
 			}
-			const updatedTriggers = foundry.utils.duplicate(triggers);
+			const updatedTriggers = foundry.utils.deepClone(triggers);
 
 			updatedTriggers.splice(triggerIndex, 1);
 
@@ -297,10 +297,10 @@ export class TrigglerForm extends FormApplication {
 		if (!text) return false;
 
 		const id = this.data.id;
-		const newData = foundry.utils.duplicate(formData);
+		const newData = foundry.utils.deepClone(formData);
 		delete newData.triggers;
 
-		const updatedTriggers = foundry.utils.duplicate(triggers);
+		const updatedTriggers = foundry.utils.deepClone(triggers);
 		const existingTrigger = triggers.find((t) => t.id === id);
 		const isNew = existingTrigger ? triggerType === "simple" || existingTrigger.advancedName !== text : true;
 
@@ -329,14 +329,14 @@ export class TrigglerForm extends FormApplication {
 	 * Exports the current map to JSON
 	 */
 	_exportToJSON() {
-		const triggers = foundry.utils.duplicate(game.settings.get("ironsworn-impacts", "storedTriggers"));
+		const triggers = foundry.utils.deepClone(game.settings.get("ironsworn-impacts", "storedTriggers"));
 		const data = {
 			system: game.system.id,
 			triggers
 		};
 
 		// Trigger file save procedure
-		const filename = `cub-${game.world.id}-triggers.json`;
+		const filename = `${game.world.id}-triggers.json`;
 		saveDataToFile(JSON.stringify(data, null, 2), "text/json", filename);
 	}
 
@@ -345,25 +345,26 @@ export class TrigglerForm extends FormApplication {
 	 * Borrowed from foundry.js Entity class
 	 */
 	async _importFromJSONDialog() {
-		new Dialog({
-			title: game.i18n.localize("CLT.TRIGGLER.ImportTitle"),
-			// TODO change
+		foundry.applications.api.DialogV2.wait({
+			window: { title: game.i18n.localize("CLT.TRIGGLER.ImportTitle") },
 			content: await renderTemplate("modules/ironsworn-impacts/templates/import-conditions.html", {}),
-			buttons: {
-				import: {
-					icon: '<i class="fas fa-file-import"></i>',
+			buttons: [
+				{
+					action: "import",
+					icon: "fas fa-file-import",
 					label: game.i18n.localize("CLT.WORDS.Import"),
-					callback: (html) => {
-						this._processImport(html);
+					callback: (_event, _button, dialog) => {
+						this._processImport(dialog.element);
 					}
 				},
-				no: {
-					icon: '<i class="fas fa-times"></i>',
+				{
+					action: "cancel",
+					icon: "fas fa-times",
 					label: game.i18n.localize("Cancel")
 				}
-			},
+			],
 			default: "import"
-		}).render(true);
+		});
 	}
 
 	/**

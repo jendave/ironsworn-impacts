@@ -917,7 +917,7 @@ Update condition added/removed timestamps
 <a name="EnhancedConditions._toggleLabButtonVisibility"></a>
 
 ### EnhancedConditions.\_toggleLabButtonVisibility(display)
-Determines whether to display the combat utility belt div in the settings sidebar
+Determines whether to display the ironsworn impacts div in the settings sidebar
 
 **Kind**: static method of [<code>EnhancedConditions</code>](#EnhancedConditions)
 **Todo:**: extract to helper in sidekick class?

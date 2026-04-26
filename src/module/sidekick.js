@@ -77,7 +77,7 @@ export class Sidekick {
 		}
 
 		throw new Error(
-			`Combat Utility Belt - Sidekick | Tried to create a unique id over ${iterations} iterations and failed.`
+			`Ironsworn Impacts - Sidekick | Tried to create a unique id over ${iterations} iterations and failed.`
 		);
 	}
 

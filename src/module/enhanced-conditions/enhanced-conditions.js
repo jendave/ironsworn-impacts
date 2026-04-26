@@ -283,7 +283,7 @@ export class EnhancedConditions {
 	 */
 	static async _processMacros(macroIds, entity = null) {
 		const scope = {};
-		if (entity instanceof Token || entity instanceof TokenDocument) {
+		if (entity instanceof foundry.canvas.placeables.Token || entity instanceof TokenDocument) {
 			scope.token = entity;
 		} else if (entity instanceof Actor) {
 			scope.actor = entity;
@@ -615,7 +615,7 @@ export class EnhancedConditions {
 		if (!entities) {
 			ui.notifications.error(game.i18n.localize("CLT.ENHANCED_CONDITIONS.ApplyCondition.Failed.NoToken"));
 			console.log(
-				`Combat Utility Belt - Enhanced Conditions | ${game.i18n.localize(
+				`Ironsworn Impacts - Enhanced Conditions | ${game.i18n.localize(
 					"CLT.ENHANCED_CONDITIONS.ApplyCondition.Failed.NoToken"
 				)}`
 			);
@@ -629,7 +629,7 @@ export class EnhancedConditions {
 				`${game.i18n.localize("CLT.ENHANCED_CONDITIONS.ApplyCondition.Failed.NoCondition")} ${conditionName}`
 			);
 			console.log(
-				`Combat Utility Belt - Enhanced Conditions | ${game.i18n.localize(
+				`Ironsworn Impacts - Enhanced Conditions | ${game.i18n.localize(
 					"CLT.ENHANCED_CONDITIONS.ApplyCondition.Failed.NoCondition"
 				)}`,
 				conditionName
@@ -681,7 +681,7 @@ export class EnhancedConditions {
 				/*
 				if (warn) {
 					ui.notifications.warn(`${entity.name}: ${conditionName} ${game.i18n.localize("CLT.ENHANCED_CONDITIONS.ApplyCondition.Failed.AlreadyActive")}`);
-					console.log(`Combat Utility Belt - Enhanced Conditions | ${entity.name}: ${conditionName} ${game.i18n.localize("CLT.ENHANCED_CONDITIONS.ApplyCondition.Failed.AlreadyActive")}`);
+					console.log(`Ironsworn Impacts - Enhanced Conditions | ${entity.name}: ${conditionName} ${game.i18n.localize("CLT.ENHANCED_CONDITIONS.ApplyCondition.Failed.AlreadyActive")}`);
 				}
 				*/
 
@@ -772,7 +772,7 @@ export class EnhancedConditions {
 		if (!entities) {
 			if (warn) ui.notifications.error(game.i18n.localize("CLT.ENHANCED_CONDITIONS.GetConditions.Failed.NoToken"));
 			console.log(
-				`Combat Utility Belt - Enhanced Conditions | ${game.i18n.localize(
+				`Ironsworn Impacts - Enhanced Conditions | ${game.i18n.localize(
 					"CLT.ENHANCED_CONDITIONS.GetConditions.Failed.NoToken"
 				)}`
 			);
@@ -784,7 +784,7 @@ export class EnhancedConditions {
 		if (!map || !map.length) {
 			if (warn) ui.notifications.error(game.i18n.localize("CLT.ENHANCED_CONDITIONS.GetConditions.Failed.NoCondition"));
 			console.log(
-				`Combat Utility Belt - Enhanced Conditions | ${game.i18n.localize(
+				`Ironsworn Impacts - Enhanced Conditions | ${game.i18n.localize(
 					"CLT.ENHANCED_CONDITIONS.GetConditions.Failed.NoCondition"
 				)}`
 			);
@@ -827,7 +827,7 @@ export class EnhancedConditions {
 		if (!results.length) {
 			if (warn) ui.notifications.notify(game.i18n.localize("CLT.ENHANCED_CONDITIONS.GetConditions.Failed.NoResults"));
 			console.log(
-				`Combat Utility Belt - Enhanced Conditions | ${game.i18n.localize(
+				`Ironsworn Impacts - Enhanced Conditions | ${game.i18n.localize(
 					"CLT.ENHANCED_CONDITIONS.GetConditions.Failed.NoResults"
 				)}`
 			);
@@ -865,7 +865,7 @@ export class EnhancedConditions {
 				game.i18n.localize("CLT.ENHANCED_CONDITIONS.GetConditionEffects.Failed.NoEntity")
 			);
 			console.log(
-				`Combat Utility Belt - Enhanced Conditions | ${game.i18n.localize(
+				`Ironsworn Impacts - Enhanced Conditions | ${game.i18n.localize(
 					"CLT.ENHANCED_CONDITIONS.RemoveCondition.Failed.NoToken"
 				)}`
 			);
@@ -919,7 +919,7 @@ export class EnhancedConditions {
 		if (!conditionName) {
 			if (warn) ui.notifications.error(game.i18n.localize("CLT.ENHANCED_CONDITIONS.HasCondition.Failed.NoCondition"));
 			console.log(
-				`Combat Utility Belt - Enhanced Conditions | ${game.i18n.localize(
+				`Ironsworn Impacts - Enhanced Conditions | ${game.i18n.localize(
 					"CLT.ENHANCED_CONDITIONS.HasCondition.Failed.NoCondition"
 				)}`
 			);
@@ -936,7 +936,7 @@ export class EnhancedConditions {
 		if (!entities) {
 			if (warn) ui.notifications.error(game.i18n.localize("CLT.ENHANCED_CONDITIONS.HasCondition.Failed.NoToken"));
 			console.log(
-				`Combat Utility Belt - Enhanced Conditions | ${game.i18n.localize(
+				`Ironsworn Impacts - Enhanced Conditions | ${game.i18n.localize(
 					"CLT.ENHANCED_CONDITIONS.HasCondition.Failed.NoToken"
 				)}`
 			);
@@ -950,7 +950,7 @@ export class EnhancedConditions {
 		if (!conditions) {
 			if (warn) ui.notifications.error(game.i18n.localize("CLT.ENHANCED_CONDITIONS.HasCondition.Failed.NoMapping"));
 			console.log(
-				`Combat Utility Belt - Enhanced Conditions | ${game.i18n.localize(
+				`Ironsworn Impacts - Enhanced Conditions | ${game.i18n.localize(
 					"CLT.ENHANCED_CONDITIONS.RemoveCondition.Failed.NoMapping"
 				)}`
 			);
@@ -1008,7 +1008,7 @@ export class EnhancedConditions {
 		if (!entities) {
 			if (warn) ui.notifications.error(game.i18n.localize("CLT.ENHANCED_CONDITIONS.RemoveCondition.Failed.NoToken"));
 			console.log(
-				`Combat Utility Belt - Enhanced Conditions | ${game.i18n.localize(
+				`Ironsworn Impacts - Enhanced Conditions | ${game.i18n.localize(
 					"CLT.ENHANCED_CONDITIONS.RemoveCondition.Failed.NoToken"
 				)}`
 			);
@@ -1026,7 +1026,7 @@ export class EnhancedConditions {
 				)} ${conditionName}`
 			);
 			console.log(
-				`Combat Utility Belt - Enhanced Conditions | ${game.i18n.localize(
+				`Ironsworn Impacts - Enhanced Conditions | ${game.i18n.localize(
 					"CLT.ENHANCED_CONDITIONS.RemoveCondition.Failed.NoCondition"
 				)}`,
 				conditionName
@@ -1039,7 +1039,7 @@ export class EnhancedConditions {
 		if (!effects) {
 			if (warn) ui.notifications.error(game.i18n.localize("ENHANCED_CONDTIONS.RemoveCondition.Failed.NoEffect"));
 			console.log(
-				`Combat Utility Belt - Enhanced Condition | ${game.i18n.localize(
+				`Ironsworn Impacts - Enhanced Condition | ${game.i18n.localize(
 					"ENHANCED_CONDTIONS.RemoveCondition.Failed.NoEffect"
 				)}`,
 				conditionName
@@ -1067,7 +1067,7 @@ export class EnhancedConditions {
 					)}`
 				);
 				console.log(
-					`Combat Utility Belt - Enhanced Conditions | ${conditionName} ${game.i18n.localize(
+					`Ironsworn Impacts - Enhanced Conditions | ${conditionName} ${game.i18n.localize(
 						"CLT.ENHANCED_CONDITIONS.RemoveCondition.Failed.NotActive"
 					)}")`
 				);
@@ -1100,7 +1100,7 @@ export class EnhancedConditions {
 		if (!entities) {
 			if (warn) ui.notifications.error(game.i18n.localize("CLT.ENHANCED_CONDITIONS.RemoveCondition.Failed.NoToken"));
 			console.log(
-				`Combat Utility Belt - Enhanced Conditions | ${game.i18n.localize(
+				`Ironsworn Impacts - Enhanced Conditions | ${game.i18n.localize(
 					"CLT.ENHANCED_CONDITIONS.RemoveCondition.Failed.NoToken"
 				)}`
 			);

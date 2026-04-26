@@ -65,7 +65,7 @@ export class Triggler {
 		}
 		return {
 			id,
-			...foundry.utils.duplicate(trigger),
+			...foundry.utils.deepClone(trigger),
 			text
 		};
 	}
