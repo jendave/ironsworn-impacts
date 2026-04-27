@@ -81,17 +81,21 @@ Hooks.on("i18nInit", () => {
 				const size = Math.round(canvas.dimensions.size / 2 / 5) * multiplier;
 				const rows = Math.floor(this.document.height * divisor);
 
-				// Unchanged
 				const bg = this.effects.bg.clear().beginFill(0x000000, 0.4)
 					.lineStyle(1.0, 0x000000);
 				for (const effect of this.effects.children) {
 					if (effect === bg) continue;
 
 					if (effect === this.effects.overlay) {
-						const { width, height } = this.getSize();
+						const fallbackSize = {
+							width: this.document.width * canvas.dimensions.size,
+							height: this.document.height * canvas.dimensions.size
+						};
+						const { width, height } = this.document.getSize?.() ?? this.getSize?.() ?? fallbackSize;
 						const size = Math.min(width * 0.6, height * 0.6);
 						effect.width = effect.height = size;
-						effect.position = this.getCenterPoint({ x: 0, y: 0 });
+						effect.position = this.document.getCenterPoint?.({ x: 0, y: 0 })
+							?? this.getCenterPoint?.({ x: 0, y: 0 });
 						effect.anchor.set(0.5, 0.5);
 					} else {
 						effect.width = effect.height = size;
@@ -134,11 +138,17 @@ Hooks.on("ready", async () => {
 		game.settings.set("ironsworn-impacts", "conditionMapType", "default");
 	}
 
-	// If there's no condition map, get the default one
-	if (!conditionMap.length) {
-		// Pass over defaultMaps since the storage version is still empty
+	// When mapType is "default", always reload from the config file rather than trusting the stored map,
+	// which can become corrupted (e.g. populated with engine defaults instead of system conditions).
+	const systemDefault = defaultMaps instanceof Object ? defaultMaps[game.system.id] : null;
+	if (mapType === "default" && systemDefault?.length) {
+		conditionMap = systemDefault;
+		if (game.user.isGM) {
+			game.settings.set("ironsworn-impacts", "activeConditionMap", conditionMap);
+		}
+	} else if (!conditionMap.length) {
+		// No stored map — load from defaults
 		conditionMap = EnhancedConditions.getDefaultMap(defaultMaps);
-
 		if (game.user.isGM && conditionMap.length) {
 			game.settings.set("ironsworn-impacts", "activeConditionMap", conditionMap);
 		}
@@ -162,6 +172,16 @@ Hooks.on("ready", async () => {
 	game.clt.conditions = conditionMap;
 
 	game.clt.supported = true;
+
+	// v14+: update existing ironsworn-impacts effects to show icons (they default to CONDITIONAL, only shown when temporary)
+	if (game.user.isGM && CONST.ACTIVE_EFFECT_SHOW_ICON !== undefined) {
+		for (const actor of game.actors) {
+			const toUpdate = actor.effects
+				.filter(e => e.getFlag("ironsworn-impacts", "conditionId") && e.showIcon !== CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS)
+				.map(e => ({ _id: e.id, showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS }));
+			if (toUpdate.length) await actor.updateEmbeddedDocuments("ActiveEffect", toUpdate);
+		}
+	}
 });
 
 /* -------------------------------------------- */
@@ -283,7 +303,9 @@ Hooks.on("renderMacroConfig", (app, html, data) => {
 	const htmlEl = html instanceof HTMLElement ? html : html[0];
 	const typeSelect = htmlEl.querySelector("select[name='type']");
 	const typeSelectDiv = typeSelect?.closest("div");
-	const flag = app.object.getFlag("ironsworn-impacts", "macroTrigger");
+	const macro = app.document ?? app.object;
+	if (!macro) return;
+	const flag = macro.getFlag("ironsworn-impacts", "macroTrigger");
 	const triggers = game.settings.get("ironsworn-impacts", "storedTriggers");
 
 	const select = foundry.applications.fields.createSelectInput({

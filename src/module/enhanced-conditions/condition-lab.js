@@ -366,7 +366,7 @@ export class ConditionLab extends FormApplication {
 	async _importFromJSONDialog() {
 		foundry.applications.api.DialogV2.wait({
 			window: { title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ImportTitle") },
-			content: await renderTemplate("modules/ironsworn-impacts/templates/import-conditions.html", {}),
+			content: await foundry.applications.handlebars.renderTemplate("modules/ironsworn-impacts/templates/import-conditions.html", {}),
 			buttons: [
 				{
 					action: "import",
@@ -392,13 +392,14 @@ export class ConditionLab extends FormApplication {
 	 * @returns {*}
 	 */
 	async _processImport(html) {
-		const form = html.find("form")[0];
+		const form = html.querySelector ? html.querySelector("form") : html.find("form")[0];
+		const fileInput = form.elements["data"] ?? form.data;
 
-		if (!form.data.files.length) {
+		if (!fileInput.files.length) {
 			return ui.notifications.error(game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.Import.NoFile"));
 		}
 
-		const jsonFile = await readTextFromFile(form.data.files[0]);
+		const jsonFile = await foundry.utils.readTextFromFile(fileInput.files[0]);
 		const json = JSON.parse(jsonFile);
 		const map = EnhancedConditions.mapFromJson(json);
 

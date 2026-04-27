@@ -164,7 +164,7 @@ export class EnhancedConditions {
 			let newContent = "";
 			for (const condition of conditions) {
 				condition.name = game.i18n.localize(condition.name);
-				const newRow = await renderTemplate(
+				const newRow = await foundry.applications.handlebars.renderTemplate(
 					"modules/ironsworn-impacts/templates/partials/chat-card-condition-list.hbs",
 					{ condition, type, timestamp }
 				);
@@ -192,7 +192,7 @@ export class EnhancedConditions {
 				isOwner: entity.isOwner || game.user.isGM
 			};
 
-			const content = await renderTemplate(
+			const content = await foundry.applications.handlebars.renderTemplate(
 				"modules/ironsworn-impacts/templates/chat-conditions.hbs",
 				templateData
 			);
@@ -420,14 +420,18 @@ export class EnhancedConditions {
 		const activeConditionEffects = EnhancedConditions._prepareStatusEffects(activeConditionMap);
 
 		if (removeDefaultEffects) {
-			CONFIG.statusEffects = activeConditionEffects ?? [];
+			// Deduplicate by ID (v14 Proxy requires unique IDs in ownKeys)
+			const seen = new Set();
+			const deduped = activeConditionEffects.filter(e => e.id && !seen.has(e.id) && seen.add(e.id));
+			CONFIG.statusEffects = deduped;
 		} else if (activeConditionMap instanceof Array) {
-			// add the icons from the condition map to the status effects array
-			const coreEffects =
-				CONFIG.defaultStatusEffects || game.clt.CoreStatusEffects;
+			const coreEffects = CONFIG.defaultStatusEffects || game.clt.CoreStatusEffects;
 
-			// Create a Set based on the core status effects and the Enhanced Condition effects. Using a Set ensures unique icons only
-			CONFIG.statusEffects = coreEffects.concat(activeConditionEffects);
+			// Ironsworn conditions take precedence over core effects with the same ID.
+			// Deduplication is required because v14's statusEffects Proxy throws if ownKeys returns duplicate IDs.
+			const activeIds = new Set(activeConditionEffects.map(e => e.id).filter(Boolean));
+			const filteredCore = coreEffects.filter(e => e.id && !activeIds.has(e.id));
+			CONFIG.statusEffects = filteredCore.concat(activeConditionEffects);
 		}
 	}
 
@@ -442,7 +446,7 @@ export class EnhancedConditions {
 
 		const existingIds = conditionMap.filter((c) => c.id).map((c) => c.id);
 
-		const statusEffects = conditionMap.map((c) => {
+		const statusEffects = conditionMap.map((c, index) => {
 			const id = c.id || Sidekick.createId(existingIds);
 			const { activeEffect, duration, img, name, options } = c;
 
@@ -451,6 +455,7 @@ export class EnhancedConditions {
 				statuses: [id],
 				name,
 				img,
+				order: index,
 				changes: activeEffect?.changes || [],
 				description: activeEffect?.description || "",
 				duration: duration || activeEffect?.duration || {},
@@ -492,6 +497,10 @@ export class EnhancedConditions {
 			// If the parent Condition for the ActiveEffect defines it as an overlay, mark the ActiveEffect as an overlay
 			if (overlay) {
 				effect.flags.core.overlay = overlay;
+			}
+			// v14+: effects default to CONDITIONAL (only shown when temporary); force ALWAYS so icons appear on tokens
+			if (CONST.ACTIVE_EFFECT_SHOW_ICON !== undefined) {
+				effect.showIcon = CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS;
 			}
 		}
 
