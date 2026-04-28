@@ -328,7 +328,7 @@ export class EnhancedConditions {
 		const jsons = await Sidekick.fetchJsons("data", path);
 
 		const defaultMaps = jsons
-			.filter((j) => !j.system.includes("example"))
+			.filter((j) => !j.system.includes("example") && j.map?.length)
 			.reduce((obj, current) => {
 				obj[current.system] = current.map;
 				return obj;
