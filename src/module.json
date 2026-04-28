@@ -1,7 +1,7 @@
 {
 	"id": "ironsworn-impacts",
 	"title": "Ironsworn Impacts",
-	"description": "Adds various combat-focused features",
+	"description": "Adds Ironsworn and Starforged Impacts to tokens",
 	"authors": [
 		{
 			"name": "Matheus Clemente",
@@ -14,8 +14,6 @@
 			"discord": "jendave"
 		}
 	],
-	"bugs": "https://github.com/jendave/ironsworn-impacts/issues",
-	"readme": "https://github.com/jendave/ironsworn-impacts/wiki",
 	"esmodules": ["module/ironsworn-impacts.js"],
 	"languages": [
 		{
@@ -68,8 +66,12 @@
 			}
 		  ]
 	},
-	"url": "This is auto replaced",
-	"version": "This is auto replaced",
-	"manifest": "This is auto replaced",
-	"download": "This is auto replaced"
+	"version": "#{VERSION}#",
+	"manifest": "#{MANIFEST}#",
+	"url": "#{URL}#",
+	"download": "#{DOWNLOAD}#",
+	"license": "https://raw.githubusercontent.com/jendave/ironsworn-impacts/main/LICENSE",
+	"readme": "https://raw.githubusercontent.com/jendave/ironsworn-impacts/main/README.md",
+	"bugs": "https://github.com/jendave/ironsworn-impacts/issues",
+	"changelog": "https://raw.githubusercontent.com/jendave/ironsworn-impacts/main/CHANGELOG.md",
 }
