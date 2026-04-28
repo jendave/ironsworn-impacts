@@ -97,7 +97,7 @@ export class ConditionLab extends FormApplication {
 			// Set the Output to Chat checkbox
 			condition.options = condition.options ?? {};
 			condition.enrichedReference = condition.reference
-				? await TextEditor.enrichHTML(`@UUID[${condition.reference}]`, { documents: true })
+				? await foundry.applications.ux.TextEditor.implementation.enrichHTML(`@UUID[${condition.reference}]`, { documents: true })
 				: "";
 
 			// Default all entries to show
@@ -658,7 +658,7 @@ export class ConditionLab extends FormApplication {
 	async _onChangeReferenceId(event) {
 		event.preventDefault();
 		const input = event.currentTarget ?? event.target;
-		input.nextElementSibling.innerHTML = await TextEditor.enrichHTML(input.value, { documents: true });
+		input.nextElementSibling.innerHTML = await foundry.applications.ux.TextEditor.implementation.enrichHTML(input.value, { documents: true });
 	}
 
 	/**
@@ -875,8 +875,8 @@ export class ConditionLab extends FormApplication {
 
 	async _onDrop(event) {
 		event.preventDefault();
-		const eventData = TextEditor.getDragEventData(event);
-		const link = await TextEditor.getContentLink(eventData);
+		const eventData = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
+		const link = await foundry.applications.ux.TextEditor.implementation.getContentLink(eventData);
 		if (link) {
 			const targetInput = event.currentTarget.querySelector("input");
 			targetInput.value = eventData.uuid;

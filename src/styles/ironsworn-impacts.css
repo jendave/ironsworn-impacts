@@ -364,6 +364,19 @@ a.add-temporary {
 	margin: 0;
 }
 
+/* TOKEN HUD STATUS EFFECTS PALETTE */
+#token-hud .status-effects {
+	grid-auto-rows: var(--effect-size, 24px);
+	height: fit-content;
+}
+
+#token-hud .status-effects .effect-control {
+	object-fit: contain;
+	width: var(--effect-size, 24px);
+	height: var(--effect-size, 24px);
+	overflow: hidden;
+}
+
 /* ABOUT */
 #ironsworn-impacts-about img {
 	border: none;

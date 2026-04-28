@@ -7,7 +7,7 @@ export default class EnhancedEffectConfig extends foundry.applications.sheets.Ac
 	/** @override */
 	async getData(options = {}) {
 		const context = await DocumentSheet.prototype.getData.call(this, options);
-		context.descriptionHTML = await TextEditor.enrichHTML(this.object.description, {
+		context.descriptionHTML = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.object.description, {
 			async: true,
 			secrets: this.object.isOwner
 		});
