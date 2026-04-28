@@ -170,7 +170,7 @@ export function registerSettings() {
 		game.settings.register("ironsworn-impacts", "effectSize", {
 			name: "CLT.SETTINGS.TokenUtility.TokenEffectSizeN",
 			hint: "CLT.SETTINGS.TokenUtility.TokenEffectSizeH",
-			default: "small",
+			default: "medium",
 			scope: "client",
 			type: String,
 			choices: {

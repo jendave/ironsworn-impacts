@@ -208,7 +208,7 @@
 				"TokenEffectSizeH": "Sets the size for token effect icons on the token. Numbers represent the amount of effect icons to show (X * Y). Default: Small - 5x5",
 				"TokenEffectSize": {
 					"choices": {
-						"small": "Small (Default) - 5x5",
+						"small": "Small - 5x5",
 						"medium": "Medium - 4x4",
 						"large": "Large - 3x3",
 						"xLarge": "Extra Large - 2x2"
