@@ -348,15 +348,14 @@ export class ConditionLab extends FormApplication {
 	 * Exports the current map to JSON
 	 */
 	_exportToJSON() {
-		const map = foundry.utils.duplicate(this.map);
+		const map = foundry.utils.duplicate(this.map ?? game.settings.get("ironsworn-impacts", "activeConditionMap"));
 		const data = {
 			system: game.system.id,
 			map
 		};
 
-		// Trigger file save procedure
 		const filename = `${game.system.id}-impacts.json`;
-		saveDataToFile(JSON.stringify(data, null, 2), "text/json", filename);
+		foundry.utils.saveDataToFile(JSON.stringify(data, null, 2), "text/json", filename);
 	}
 
 	/**

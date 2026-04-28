@@ -277,7 +277,7 @@ export class TrigglerForm extends HandlebarsApplicationMixin(ApplicationV2) {
 	_exportToJSON() {
 		const triggers = foundry.utils.deepClone(game.settings.get("ironsworn-impacts", "storedTriggers"));
 		const data = { system: game.system.id, triggers };
-		const filename = `${game.world.id}-triggers.json`;
+		const filename = `${game.system.id}-triggers.json`;
 		foundry.utils.saveDataToFile(JSON.stringify(data, null, 2), "text/json", filename);
 	}
 
