@@ -159,6 +159,26 @@ Hooks.on("ready", async () => {
 		game.settings.set("ironsworn-impacts", "conditionMapType", "default");
 	}
 
+	// Auto-load default triggers on first use if none are stored
+	if (game.user.isGM) {
+		const storedTriggers = game.settings.get("ironsworn-impacts", "storedTriggers");
+		if (!storedTriggers?.length) {
+			try {
+				const triggersPath = `modules/ironsworn-impacts/config/${game.system.id}-triggers.json`;
+				const response = await fetch(triggersPath);
+				if (response.ok) {
+					const json = await response.json();
+					const triggers = Triggler.triggersFromJson(json);
+					if (triggers?.length) {
+						await game.settings.set("ironsworn-impacts", "storedTriggers", triggers);
+					}
+				}
+			} catch(e) {
+				// No default triggers file for this system — that's fine
+			}
+		}
+	}
+
 	// Update status icons accordingly
 	if (game.user.isGM) {
 		// CONFIG.statusEffects
