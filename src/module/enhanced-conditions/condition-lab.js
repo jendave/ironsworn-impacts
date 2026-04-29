@@ -257,14 +257,10 @@ export class ConditionLab extends FormApplication {
 	 * @param {object} options
 	 * @param {boolean} options.clearCache
 	 */
-	async _restoreDefaults({ clearCache = false } = {}) {
+	async _restoreDefaults() {
 		const system = this.system;
-		let defaultMaps = game.settings.get("ironsworn-impacts", "defaultConditionMaps");
-
-		if (clearCache) {
-			defaultMaps = await EnhancedConditions._loadDefaultMaps();
-			game.settings.set("ironsworn-impacts", "defaultConditionMaps", defaultMaps);
-		}
+		const defaultMaps = await EnhancedConditions._loadDefaultMaps();
+		game.settings.set("ironsworn-impacts", "defaultConditionMaps", defaultMaps);
 		const tempMap = this.mapType !== "other" && defaultMaps && defaultMaps[system] ? defaultMaps[system] : [];
 
 		// If the mapType is other then the map should be empty, otherwise it's the default map for the system
@@ -841,10 +837,8 @@ export class ConditionLab extends FormApplication {
 			content,
 			yes: {
 				icon: "fas fa-check",
-				callback: (_event, _button, dialog) => {
-					const checkbox = dialog.element.querySelector("input[name='clear-cache']");
-					const clearCache = checkbox?.checked;
-					this._restoreDefaults({ clearCache });
+				callback: () => {
+					this._restoreDefaults();
 				}
 			},
 			no: { icon: "fas fa-times" },
