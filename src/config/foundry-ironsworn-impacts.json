@@ -57,7 +57,7 @@
 		{
 			"id": "unprepared",
 			"name": "Unprepared",
-			"img": "modules/ironsworn-impacts/assets/malnutrition.svg",
+			"img": "modules/ironsworn-impacts/assets/bowl-of-rice.svg",
 			"reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.uwt8LKEMiy5psvIZ",
 			"applyTrigger": "OQcu1SYjS6bo8tUe",
 			"removeTrigger": "GiUIoa9xw7Wlkvyf",
