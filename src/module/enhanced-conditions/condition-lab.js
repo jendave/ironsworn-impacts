@@ -98,10 +98,19 @@ export class ConditionLab extends FormApplication {
 			condition.options = condition.options ?? {};
 			const uuids = condition.reference ? condition.reference.split(" ").filter(Boolean) : [];
 			condition.enrichedReferences = await Promise.all(
-				uuids.map(async (uuid) => ({
-					uuid,
-					html: await foundry.applications.ux.TextEditor.implementation.enrichHTML(`@UUID[${uuid}]`, { documents: true })
-				}))
+				uuids.map(async (uuid) => {
+					// UUID format: Compendium.{scope}.{pack}.DocumentType.{id}
+					const parts = uuid.split(".");
+					if (parts[0] === "Compendium" && parts.length >= 4) {
+						const packId = `${parts[1]}.${parts[2]}`;
+						const pack = game.packs.get(packId);
+						if (pack && !pack.indexed) await pack.getIndex();
+					}
+					return {
+						uuid,
+						html: await foundry.applications.ux.TextEditor.implementation.enrichHTML(`@UUID[${uuid}]`, { documents: true })
+					};
+				})
 			);
 
 			// Default all entries to show
