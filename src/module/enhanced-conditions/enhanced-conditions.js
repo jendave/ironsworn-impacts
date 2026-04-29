@@ -134,9 +134,9 @@ export class EnhancedConditions {
 		const conditions = entries.map(({ reference, referenceId: rId, ...e }) => {
 			let referenceId = rId;
 			if (!rId && reference) {
-				referenceId = `@UUID[${reference}]`;
-			}
-			if (referenceId && !referenceId.match(/\{.+\}/)) {
+				const uuids = reference.split(" ").filter(Boolean);
+				referenceId = uuids.map((uuid) => `@UUID[${uuid}]{${e.name}}`).join(", ");
+			} else if (referenceId && !referenceId.match(/\{.+\}/)) {
 				referenceId = `${referenceId}{${e.name}}`;
 			}
 			const isDefault = !e.options;

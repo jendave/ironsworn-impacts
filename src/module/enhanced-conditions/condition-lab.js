@@ -96,9 +96,13 @@ export class ConditionLab extends FormApplication {
 
 			// Set the Output to Chat checkbox
 			condition.options = condition.options ?? {};
-			condition.enrichedReference = condition.reference
-				? await foundry.applications.ux.TextEditor.implementation.enrichHTML(`@UUID[${condition.reference}]`, { documents: true })
-				: "";
+			const uuids = condition.reference ? condition.reference.split(" ").filter(Boolean) : [];
+			condition.enrichedReferences = await Promise.all(
+				uuids.map(async (uuid) => ({
+					uuid,
+					html: await foundry.applications.ux.TextEditor.implementation.enrichHTML(`@UUID[${uuid}]`, { documents: true })
+				}))
+			);
 
 			// Default all entries to show
 			condition.hidden = condition.hidden ?? false;
@@ -515,6 +519,7 @@ export class ConditionLab extends FormApplication {
 		macroConfigButton.on("click", (event) => this._onClickMacroConfig(event));
 		triggerConfigButton.on("click", (event) => this._onClickTriggerConfig(event));
 		optionConfigButton.on("click", (event) => this._onClickOptionConfig(event));
+		html.find("a.remove-reference").on("click", (event) => this._onRemoveReference(event));
 
 		super.activateListeners(html);
 	}
@@ -652,8 +657,20 @@ export class ConditionLab extends FormApplication {
 	 */
 	async _onChangeReferenceId(event) {
 		event.preventDefault();
-		const input = event.currentTarget ?? event.target;
-		input.nextElementSibling.innerHTML = await foundry.applications.ux.TextEditor.implementation.enrichHTML(input.value, { documents: true });
+		this.map = this.updatedMap;
+		this.render();
+	}
+
+	_onRemoveReference(event) {
+		event.preventDefault();
+		const anchor = event.currentTarget;
+		const uuid = anchor.dataset.uuid;
+		const row = anchor.dataset.row;
+		const input = this.element.find(`input[name="reference-item-${row}"]`)[0];
+		if (!input) return;
+		const existing = input.value.split(" ").filter((u) => u && u !== uuid);
+		input.value = existing.join(" ");
+		input.dispatchEvent(new Event("change"));
 	}
 
 	/**
@@ -872,7 +889,11 @@ export class ConditionLab extends FormApplication {
 		const link = await foundry.applications.ux.TextEditor.implementation.getContentLink(eventData);
 		if (link) {
 			const targetInput = event.currentTarget.querySelector("input");
-			targetInput.value = eventData.uuid;
+			const existing = targetInput.value ? targetInput.value.split(" ").filter(Boolean) : [];
+			if (!existing.includes(eventData.uuid)) {
+				existing.push(eventData.uuid);
+				targetInput.value = existing.join(" ");
+			}
 			return targetInput.dispatchEvent(new Event("change"));
 		}
 		return ui.notifications.error(game.i18n.localize("CLT.ENHANCED_CONDITIONS.ConditionLab.BadReference"));

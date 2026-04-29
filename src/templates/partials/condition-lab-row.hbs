@@ -20,8 +20,13 @@
                         <div class="flexrow condition-lab text-entry reference">
                             <div class="wrapper-rel">
                                 <input type="text" name="reference-item-{{@index}}" value="{{condition.reference}}" hidden>
-                                {{#if condition.enrichedReference}}
-                                <div class="enriched-link">{{{condition.enrichedReference}}}</div>
+                                {{#if condition.enrichedReferences.length}}
+                                    {{#each condition.enrichedReferences}}
+                                    <div class="enriched-link flexrow">
+                                        <span class="enriched-link-content">{{{this.html}}}</span>
+                                        <a class="remove-reference" data-uuid="{{this.uuid}}" data-row="{{@../index}}"><i class="fas fa-times"></i></a>
+                                    </div>
+                                    {{/each}}
                                 {{else}}
                                 <div>{{localize "CLT.ENHANCED_CONDITIONS.ConditionLab.NoReference"}}</div>
                                 {{/if}}
