@@ -46,7 +46,8 @@ function buildCode() {
 }
 
 /**
- * Build style sheets
+ * Build style sheets.
+ * @returns {import("stream").Stream} Gulp stream that writes CSS into `dist/styles`.
  */
 function buildStyles() {
 	return gulp.src(`${stylesDirectory}/${packageId}.${stylesExtension}`).pipe(gulp.dest(`${distDirectory}/styles`));
