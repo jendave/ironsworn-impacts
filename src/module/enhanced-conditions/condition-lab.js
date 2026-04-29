@@ -348,7 +348,12 @@ export class ConditionLab extends FormApplication {
 	 * Exports the current map to JSON
 	 */
 	_exportToJSON() {
-		const map = foundry.utils.duplicate(this.map ?? game.settings.get("ironsworn-impacts", "activeConditionMap"));
+		const transient = new Set(["enrichedReference", "enrichedReferences", "isNew", "isChanged", "hidden"]);
+		const raw = this.map ?? game.settings.get("ironsworn-impacts", "activeConditionMap");
+		const map = foundry.utils.duplicate(raw).map((entry) => {
+			for (const key of transient) delete entry[key];
+			return entry;
+		});
 		const data = {
 			system: game.system.id,
 			map
