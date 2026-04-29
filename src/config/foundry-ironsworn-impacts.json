@@ -212,7 +212,7 @@
             "id": "cursed",
             "name": "Cursed",
             "img": "modules/ironsworn-impacts/assets/ubisoft-sun.svg",
-            "reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.dx8S0jsyiqqyYOju",
+            "reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.dx8S0jsyiqqyYOju, Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.nODMcdJYLFIE07Zc",
             "applyTrigger": "pjMv95q7XSsRJbJ6",
             "removeTrigger": "6MibPWsFRJDSvSdW",
             "activeEffect": null,
