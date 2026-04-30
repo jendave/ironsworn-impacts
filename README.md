@@ -9,14 +9,6 @@
 
 * The `Ironsworn Impacts` module enables [Ironsworn and Ironsworn: Starforged](https://tomkinpress.com/) impacts and combat positions to be displayed on the character's token.
 
-## Contact
-
-* [Ironsworn/Starforged Discord Server - FoundryVTT Channel](https://discord.com/channels/437120373436186625/867434336201605160) (jendave)
-* [FoundryVTT Discord Server - Module Discussion Channel](https://discord.com/channels/170995199584108546/513918036919713802) (jendave)
-* [VOID Affiliate Network Discord Server - Game Hacks Channel](https://discord.com/channels/1222986351272787990/1222986351792619687) (jendave)
-* [GitHub Repository](https://github.com/jendave/ironsworn-impacts)
-* [Itch.io](https://jendave.itch.io/)
-
 ## Features
 
 ### Impacts and Triggers
@@ -24,7 +16,8 @@
 ![Screenshot](https://github.com/jendave/ironsworn-impacts/blob/main/docs/impacts-screenshot.jpg?raw=true)
 
 * The `Ironsworn Impacts` module enables [Ironsworn and Ironsworn: Starforged](https://tomkinpress.com/) impacts and combat positions to be displayed on the character's token.
-* Impacts and combat positions can be applied automatically via a set of triggers.
+* Impacts and Combat Positions only are displayed on the Status Effects palette by default.
+* Impacts and Combat Positions can be applied automatically via a set of triggers.
 * Run a macro when they are applied/removed.
 * Create your own impacts and link them to Journal entries with further info.
 * The `Ironsworn Impacts` module is compatible with [Token Action HUD Ironsworn](https://foundryvtt.com/packages/token-action-hud-ironsworn). Impacts and combat positions will be displayed in the HUD itself.
@@ -34,6 +27,14 @@
 For questions, feature requests or bug reports, please open an [issue](https://github.com/jendave/ironsworn-impacts/issues).
 
 [Pull requests](https://github.com/jendave/ironsworn-impacts/pulls) are welcome. Please include a reason for the request or create an issue before starting one.
+
+## Contact
+
+* [Ironsworn/Starforged Discord Server - FoundryVTT Channel](https://discord.com/channels/437120373436186625/867434336201605160) (jendave)
+* [FoundryVTT Discord Server - Module Discussion Channel](https://discord.com/channels/170995199584108546/513918036919713802) (jendave)
+* [VOID Affiliate Network Discord Server - Game Hacks Channel](https://discord.com/channels/1222986351272787990/1222986351792619687) (jendave)
+* [GitHub Repository](https://github.com/jendave/ironsworn-impacts)
+* [Itch.io](https://jendave.itch.io/)
 
 ## Credits
 
