@@ -7,7 +7,7 @@
 
 ## About
 
-A FoundryVTT compendium of homebrew resources for the Ironsworn: Starforged system.
+* The `Ironsworn Impacts` module enables [Ironsworn and Ironsworn: Starforged](https://tomkinpress.com/) impacts and combat positions to be displayed on the character's token.
 
 ## Contact
 
@@ -23,11 +23,11 @@ A FoundryVTT compendium of homebrew resources for the Ironsworn: Starforged syst
 
 ![Screenshot](https://github.com/jendave/ironsworn-impacts/blob/main/docs/impacts-screenshot.jpg?raw=true)
 
-* The `Ironsworn Impacts` module enables [Ironsworn and Ironsworn: Starforged](https://tomkinpress.com/) impacts to be displayed on the character's token.
-* Impacts can be applied automatically via a set of triggers.
+* The `Ironsworn Impacts` module enables [Ironsworn and Ironsworn: Starforged](https://tomkinpress.com/) impacts and combat positions to be displayed on the character's token.
+* Impacts and combat positions can be applied automatically via a set of triggers.
 * Run a macro when they are applied/removed.
-* Create your own status effects and link them to reference entries (Journal, Item, or compendium) with further info.
-* The `Ironsworn Impacts` module is compatible with [Token Action HUD Ironsworn](https://foundryvtt.com/packages/token-action-hud-ironsworn). Impacts will be displayed in the HUD itself.
+* Create your own impacts and link them to Journal entries with further info.
+* The `Ironsworn Impacts` module is compatible with [Token Action HUD Ironsworn](https://foundryvtt.com/packages/token-action-hud-ironsworn). Impacts and combat positions will be displayed in the HUD itself.
 
 ## Support
 

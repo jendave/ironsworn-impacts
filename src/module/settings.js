@@ -66,15 +66,15 @@ export function registerSettings() {
 	// 	default: false
 	// });
 
-	game.settings.register("ironsworn-impacts", "enhancedConditionsMigrationVersion", {
-		name: "CLT.SETTINGS.EnhancedConditions.MigrationVersionN",
-		hint: "CLT.SETTINGS.EnhancedConditions.MigrationVersionH",
-		scope: "world",
-		type: String,
-		config: false,
-		apiOnly: true,
-		default: ""
-	});
+	// game.settings.register("ironsworn-impacts", "enhancedConditionsMigrationVersion", {
+	// 	name: "CLT.SETTINGS.EnhancedConditions.MigrationVersionN",
+	// 	hint: "CLT.SETTINGS.EnhancedConditions.MigrationVersionH",
+	// 	scope: "world",
+	// 	type: String,
+	// 	config: false,
+	// 	apiOnly: true,
+	// 	default: ""
+	// });
 
 	game.settings.register("ironsworn-impacts", "showSortDirectionDialog", {
 		name: "CLT.SETTINGS.EnhancedConditions.ShowSortDirectionDialogN",
@@ -208,11 +208,11 @@ export function registerSettings() {
 		onChange: () => { }
 	});
 
-	game.settings.register("ironsworn-impacts", "hasRunMigration", {
-		scope: "world",
-		type: Boolean,
-		default: false
-	});
+	// game.settings.register("ironsworn-impacts", "hasRunMigration", {
+	// 	scope: "world",
+	// 	type: Boolean,
+	// 	default: false
+	// });
 
 	/* -------------------------------------------- */
 

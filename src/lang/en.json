@@ -164,10 +164,6 @@
 				"name": "Open Impact Triggers"
 			}
 		},
-		"MIGRATION": {
-			"Title": "Ironsworn Impacts: CUB Settings Migration",
-			"Content": "CUB settings have been detected, would you like to import these settings? This choice will overwrite CLT's settings. Your CUB settings won't be affected."
-		},
 		"SETTINGS": {
 			"EnhancedConditions": {
 				"CoreIconsN": "Core Status Icons",
@@ -198,8 +194,6 @@
 				"ActiveConditionMapH": "Stores the active condition map",
 				"SuppressPreventativeSaveReminderN": "Suppress Preventative Save Reminder",
 				"SuppressPreventativeSaveReminderH": "Suppress the reminder to save the Ironsworn Impacts to prevent issues (eg. if user has already done so)",
-				"MigrationVersionN": "Migration Version",
-				"MigrationVersionH": "Version of CUB for which migration was last performed",
 				"ShowSortDirectionDialogN": "Prompt Saving Sort Direction",
 				"ShowSortDirectionDialogH": "Whether or not to show the confirmation dialog for saving the sort direction."
 			},
