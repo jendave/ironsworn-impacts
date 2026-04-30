@@ -144,8 +144,10 @@ a.add-temporary {
 	padding: 0;
 }
 
+
 .triggler-form form,
-.condition-lab-form form {
+.condition-lab-form form,
+.condition-lab-form .condition-lab {
 	height: 100%;
 }
 
@@ -331,12 +333,39 @@ a.add-temporary {
 	font-size: small;
 }
 
+.condition-lab .flexcol.content2 {
+	flex: 0 0 108px;
+	width: 108px;
+	align-self: center;
+}
+
 #cub-condition-lab .related-buttons {
-	justify-content: start;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 2px;
+	flex-wrap: nowrap;
+}
+
+#cub-condition-lab .related-buttons button {
+	flex: 0 0 24px;
+	height: 24px;
+	width: 24px;
+	min-width: unset;
+	padding: 0;
+	line-height: 24px;
+	font-size: 12px;
 }
 
 .triggler-icon {
 	display: inline-flex;
+	align-items: center;
+	height: 16px;
+	line-height: 1;
+}
+
+.triggler-icon i {
+	font-size: 10px;
+	line-height: 1;
 }
 
 #cub-condition-lab .flex-break {

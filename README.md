@@ -17,31 +17,21 @@ A FoundryVTT compendium of homebrew resources for the Ironsworn: Starforged syst
 * [GitHub Repository](https://github.com/jendave/augmented-reality-foundry)
 * [Itch.io](https://jendave.itch.io/)
 
-> Enhance your game's conditions. Make them be applied automatically via a set of triggers, run a macro when they are applied/removed and other goodies.
-
 ## Features
 
-### Ironsworn Impacts
+### Impacts and Triggers
 
-<details>
-  <summary>Click to show</summary>
+* The `Ironsworn Impacts` module enables [Ironsworn and Ironsworn: Starforged](https://tomkinpress.com/) impacts to be displayed on the character's token. 
+* Impacts can be applied automatically via a set of triggers.
+* Run a macro when they are applied/removed.
+* Create your own status effects and link them to reference entries (Journal, Item, or compendium) with further info.
+* The `Ironsworn Impacts` module is compatible with [Token Action HUD Ironsworn](https://foundryvtt.com/packages/token-action-hud-ironsworn). Impacts will be displayed in the HUD itself.
 
-![enhanced-conditions](https://github.com/death-save/media/blob/master/combat-utility-belt/enhanced-conditions.gif)
+## Support
 
-It's not enough to _show_ your players when they're poisoned, you want to really drive it home by linking the condition so they can wallow in misery as they fail their ability checks.
+For questions, feature requests or bug reports, please open an [issue](https://github.com/jendave/ironsworn-impacts/issues).
 
-This feature allows you to create your own status effects and link them to reference entries (Journal, Item, or compendium) with further info on that status effect.
-
-</details>
-
-### Triggler
-
-<details>
-  <summary>Click to show</summary>
-
-Trigger the addition or removal of Conditions, and/or the execution of Macros based on changes to actor/token properties such as HP
-
-</details>
+[Pull requests](https://github.com/jendave/ironsworn-impacts/pulls) are welcome. Please include a reason for the request or create an issue before starting one.
 
 ## Credits
 

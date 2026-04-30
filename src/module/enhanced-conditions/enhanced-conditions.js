@@ -33,13 +33,7 @@ export class EnhancedConditions {
 			effectId
 		}));
 
-		const toOutput = conditions.filter((condition) => (isDefault && game.settings.get("ironsworn-impacts", "defaultConditionsOutputToChat"))
-			|| (game.settings.get("ironsworn-impacts", "conditionsOutputToChat") && condition?.options?.outputChat));
 		const actor = effect.parent;
-
-		if (toOutput.length) {
-			EnhancedConditions.outputChatMessage(actor, toOutput, { type: type === "delete" ? "removed" : "added" });
-		}
 
 		if (isDefault) return;
 		// If not default we only have one condition.
@@ -351,13 +345,11 @@ export class EnhancedConditions {
 			return preparedMap;
 		}
 
-		const outputChatSetting = game.settings.get("ironsworn-impacts", "conditionsOutputToChat");
 		conditionMap = conditionMap.filter((c) => c.name && c.id);
 
 		// Iterate through the map validating/preparing the data
 		for (const condition of conditionMap) {
 			condition.options = condition.options || {};
-			if (condition.options.outputChat === undefined) condition.options.outputChat = outputChatSetting;
 			preparedMap.push(condition);
 		}
 

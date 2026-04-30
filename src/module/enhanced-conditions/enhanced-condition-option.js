@@ -1,27 +1,37 @@
 import { Sidekick } from "../sidekick.js";
 
-/**
- * Enhanced Condition Trigger Config Application
- */
-export default class EnhancedConditionOptionConfig extends FormApplication {
-	constructor(object, options) {
-		super(object, options);
+const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 
+/**
+ * Enhanced Condition Option Config Application
+ */
+export default class EnhancedConditionOptionConfig extends HandlebarsApplicationMixin(ApplicationV2) {
+	constructor(object, options = {}) {
+		super(options);
+		this.object = object ?? {};
 		this.initialObject = foundry.utils.duplicate(this.object);
 	}
 
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			id: "cub-enhanced-condition-option-config",
-			title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.OptionConfig.Title"),
-			template: "modules/ironsworn-impacts/templates/enhanced-condition-option-config.hbs",
-			classes: ["sheet"],
-			closeOnSubmit: false,
-			width: 500
-		});
-	}
+	static DEFAULT_OPTIONS = {
+		id: "cub-enhanced-condition-option-config",
+		window: { title: "CLT.ENHANCED_CONDITIONS.OptionConfig.Title" },
+		position: { width: 500, height: "auto" },
+		classes: ["sheet"],
+		form: {
+			handler: EnhancedConditionOptionConfig.#onSubmit,
+			submitOnChange: false,
+			closeOnSubmit: false
+		},
+		tag: "form"
+	};
 
-	getData() {
+	static PARTS = {
+		form: {
+			template: "modules/ironsworn-impacts/templates/enhanced-condition-option-config.hbs"
+		}
+	};
+
+	_prepareContext(_options) {
 		return {
 			condition: this.object,
 			optionData: this.object.options,
@@ -29,19 +39,12 @@ export default class EnhancedConditionOptionConfig extends FormApplication {
 		};
 	}
 
-	activateListeners(html) {
-		const checkboxes = html.find("input[type='checkbox']");
-
-		// for (const checkbox of checkboxes) {
-		checkboxes.on("change", (event) => this._onCheckboxChange(event));
-		// }
+	_onRender(_context, _options) {
+		this.element.querySelectorAll("input[type='checkbox']").forEach((el) => {
+			el.addEventListener("change", (event) => this._onCheckboxChange(event));
+		});
 	}
 
-	/**
-	 * Checkbox change event handler
-	 * @param {*} event
-	 * @returns {*}
-	 */
 	_onCheckboxChange(event) {
 		if (!event.target?.checked) return;
 		const targetName = event.target?.name;
@@ -62,13 +65,7 @@ export default class EnhancedConditionOptionConfig extends FormApplication {
 		}
 	}
 
-	/**
-	 * Special Status Effect toggle handler
-	 * @param {*} event
-	 * @returns {*}
-	 */
 	static async _onSpecialStatusEffectToggle(event) {
-		// is another condition already using this special status effect?
 		const existingCondition = game.clt.conditions.find((c) => {
 			const optionValue = foundry.utils.getProperty(
 				c,
@@ -78,7 +75,6 @@ export default class EnhancedConditionOptionConfig extends FormApplication {
 		});
 		if (existingCondition) {
 			event.preventDefault();
-			// raise a dialog asking for override
 			const title = game.i18n.localize("CLT.ENHANCED_CONDITIONS.OptionConfig.SpecialStatusEffectOverride.Title");
 			const content = game.i18n.format(
 				"CLT.ENHANCED_CONDITIONS.OptionConfig.SpecialStatusEffectOverride.Content",
@@ -95,21 +91,19 @@ export default class EnhancedConditionOptionConfig extends FormApplication {
 				defaultYes: false
 			});
 		}
-
 		return event;
 	}
 
-	async _updateObject(event, formData) {
+	static async #onSubmit(_event, _form, formData) {
+		const data = formData.object;
 		this.object.options = {};
-		const specialStatusEffectMapping = game.settings.get("ironsworn-impacts",
-			"specialStatusEffectMapping"
-		);
+		const specialStatusEffectMapping = game.settings.get("ironsworn-impacts", "specialStatusEffectMapping");
 		const map = game.clt.conditionLab.map;
 		const newMap = foundry.utils.deepClone(map);
 		let conditionIndex = newMap.findIndex((c) => c.id === this.object.id);
 
-		for (const field in formData) {
-			const value = formData[field];
+		for (const field in data) {
+			const value = data[field];
 			const propertyName = Sidekick.toCamelCase(field, "-");
 			const specialStatusEffect = this.getSpecialStatusEffectByField(field);
 
@@ -140,36 +134,17 @@ export default class EnhancedConditionOptionConfig extends FormApplication {
 		await this.close();
 	}
 
-	/**
-	 * Get the enum for a special status effect based on the field name
-	 * @param {string} field
-	 * @returns {string | undefined} BLIND, INVISIBLE, or DEFEATED
-	 */
 	getSpecialStatusEffectByField(field) {
 		switch (field) {
-			case "blind-token":
-				return "BLIND";
-
-			case "mark-invisible":
-				return "INVISIBLE";
-
-			default:
-				break;
+			case "blind-token": return "BLIND";
+			case "mark-invisible": return "INVISIBLE";
+			default: break;
 		}
 	}
 
-	/**
-	 * Sets the special status effect to the provided condition Id
-	 * @param {string} effect	Either BLIND, INVISIBLE, or DEFEATED
-	 * @param {string} conditionId
-	 */
 	setSpecialStatusEffectMapping(effect, conditionId = null) {
 		if (!Object.prototype.hasOwnProperty.call(CONFIG.specialStatusEffects, effect)) return;
-
 		CONFIG.specialStatusEffects[effect] = conditionId;
-		game.settings.set("ironsworn-impacts",
-			"specialStatusEffectMapping",
-			CONFIG.specialStatusEffects
-		);
+		game.settings.set("ironsworn-impacts", "specialStatusEffectMapping", CONFIG.specialStatusEffects);
 	}
 }

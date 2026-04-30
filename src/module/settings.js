@@ -10,40 +10,40 @@ export function registerSettings() {
 	/*            Setting Configuration             */
 	/* -------------------------------------------- */
 
-	game.settings.register("ironsworn-impacts", "conditionsOutputToChat", {
-		name: "CLT.SETTINGS.EnhancedConditions.OutputChatN",
-		hint: "CLT.SETTINGS.EnhancedConditions.OutputChatH",
-		scope: "world",
-		type: Boolean,
-		config: true,
-		default: false,
-		onChange: (s) => {
-			if (s === true) {
-				foundry.applications.api.DialogV2.confirm({
-					window: { title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.OutputChatConfirm.Title") },
-					content: game.i18n.localize("CLT.ENHANCED_CONDITIONS.OutputChatConfirm.Content"),
-					yes: {
-						callback: () => {
-							const newMap = foundry.utils.deepClone(game.clt.conditions);
-							if (!newMap.length) return;
-							newMap.forEach((c) => (c.options.outputChat = true));
-							game.settings.set("ironsworn-impacts", "activeConditionMap", newMap);
-						}
-					},
-					no: { callback: () => {} }
-				});
-			}
-		}
-	});
+	// game.settings.register("ironsworn-impacts", "conditionsOutputToChat", {
+	// 	name: "CLT.SETTINGS.EnhancedConditions.OutputChatN",
+	// 	hint: "CLT.SETTINGS.EnhancedConditions.OutputChatH",
+	// 	scope: "world",
+	// 	type: Boolean,
+	// 	config: true,
+	// 	default: false,
+	// 	onChange: (s) => {
+	// 		if (s === true) {
+	// 			foundry.applications.api.DialogV2.confirm({
+	// 				window: { title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.OutputChatConfirm.Title") },
+	// 				content: game.i18n.localize("CLT.ENHANCED_CONDITIONS.OutputChatConfirm.Content"),
+	// 				yes: {
+	// 					callback: () => {
+	// 						const newMap = foundry.utils.deepClone(game.clt.conditions);
+	// 						if (!newMap.length) return;
+	// 						newMap.forEach((c) => (c.options.outputChat = true));
+	// 						game.settings.set("ironsworn-impacts", "activeConditionMap", newMap);
+	// 					}
+	// 				},
+	// 				no: { callback: () => {} }
+	// 			});
+	// 		}
+	// 	}
+	// });
 
-	game.settings.register("ironsworn-impacts", "conditionsOutputDuringCombat", {
-		name: "CLT.SETTINGS.EnhancedConditions.OutputCombatN",
-		hint: "CLT.SETTINGS.EnhancedConditions.OutputCombatH",
-		scope: "world",
-		type: Boolean,
-		config: true,
-		default: false
-	});
+	// game.settings.register("ironsworn-impacts", "conditionsOutputDuringCombat", {
+	// 	name: "CLT.SETTINGS.EnhancedConditions.OutputCombatN",
+	// 	hint: "CLT.SETTINGS.EnhancedConditions.OutputCombatH",
+	// 	scope: "world",
+	// 	type: Boolean,
+	// 	config: true,
+	// 	default: false
+	// });
 
 	game.settings.register("ironsworn-impacts", "removeDefaultEffects", {
 		name: "CLT.SETTINGS.EnhancedConditions.RemoveDefaultEffectsN",
@@ -57,14 +57,14 @@ export function registerSettings() {
 		}
 	});
 
-	game.settings.register("ironsworn-impacts", "defaultConditionsOutputToChat", {
-		name: "CLT.SETTINGS.EnhancedConditions.DefaultOutputChatN",
-		hint: "CLT.SETTINGS.EnhancedConditions.DefaultOutputChatH",
-		scope: "world",
-		type: Boolean,
-		config: true,
-		default: false
-	});
+	// game.settings.register("ironsworn-impacts", "defaultConditionsOutputToChat", {
+	// 	name: "CLT.SETTINGS.EnhancedConditions.DefaultOutputChatN",
+	// 	hint: "CLT.SETTINGS.EnhancedConditions.DefaultOutputChatH",
+	// 	scope: "world",
+	// 	type: Boolean,
+	// 	config: true,
+	// 	default: false
+	// });
 
 	game.settings.register("ironsworn-impacts", "enhancedConditionsMigrationVersion", {
 		name: "CLT.SETTINGS.EnhancedConditions.MigrationVersionN",
@@ -216,13 +216,13 @@ export function registerSettings() {
 
 	/* -------------------------------------------- */
 
-	game.settings.register("ironsworn-impacts", "sceneControls", {
-		name: "CLT.SETTINGS.SceneControls.Name",
-		hint: "CLT.SETTINGS.SceneControls.Hint",
-		scope: "world",
-		type: Boolean,
-		default: false,
-		config: true,
-		requiresReload: true
-	});
+	// game.settings.register("ironsworn-impacts", "sceneControls", {
+	// 	name: "CLT.SETTINGS.SceneControls.Name",
+	// 	hint: "CLT.SETTINGS.SceneControls.Hint",
+	// 	scope: "world",
+	// 	type: Boolean,
+	// 	default: false,
+	// 	config: true,
+	// 	requiresReload: true
+	// });
 }

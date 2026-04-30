@@ -230,77 +230,7 @@ Hooks.on("deleteActiveEffect", (effect, options, userId) => {
 
 /* ------------------ Combat ------------------ */
 
-Hooks.on("updateCombat", (combat, update, options, userId) => {
-	const enableOutputCombat = game.settings.get("ironsworn-impacts", "conditionsOutputDuringCombat");
-	const outputChatSetting = game.settings.get("ironsworn-impacts", "conditionsOutputToChat");
-	const combatant = combat.combatant;
-
-	if (
-		!foundry.utils.hasProperty(update, "turn")
-		|| !combatant
-		|| !outputChatSetting
-		|| !enableOutputCombat
-		|| !game.user.isGM
-	) {
-		return;
-	}
-
-	const token = combatant.token;
-
-	if (!token) return;
-
-	const tokenConditions = EnhancedConditions.getConditions(token, { warn: false });
-	let conditions = tokenConditions && tokenConditions.conditions ? tokenConditions.conditions : [];
-	conditions = conditions instanceof Array ? conditions : [conditions];
-
-	if (!conditions.length) return;
-
-	const chatConditions = conditions.filter((c) => c.options?.outputChat);
-
-	if (!chatConditions.length) return;
-
-	EnhancedConditions.outputChatMessage(token, chatConditions, { type: "active" });
-});
-
-/* -------------- Scene Controls -------------- */
-Hooks.on("getSceneControlButtons", function (hudButtons) {
-	if (game.user.isGM && game.settings.get("ironsworn-impacts", "sceneControls")) {
-		const hud = hudButtons.find((val) => val.name === "token");
-		if (hud) {
-			hud.tools.push({
-				name: "CLT.ENHANCED_CONDITIONS.Lab.Title",
-				title: "CLT.ENHANCED_CONDITIONS.Lab.Title",
-				icon: "fas fa-flask",
-				button: true,
-				onClick: async () => new ConditionLab().render(true)
-			});
-			hud.tools.push({
-				name: "Triggler",
-				title: "Triggler",
-				icon: "fas fa-exclamation",
-				button: true,
-				onClick: async () => new TrigglerForm().render(true)
-			});
-		}
-	}
-});
-
-Hooks.on("renderSceneControls", (app, html, data) => {
-	const htmlEl = html instanceof HTMLElement ? html : html[0];
-	const trigglerButton = htmlEl.querySelector('li[data-tool="Triggler"]');
-	if (trigglerButton) {
-		trigglerButton.style.display = "inline-block";
-		const exclamationMark = trigglerButton.children[0];
-		exclamationMark.style.marginRight = "0px";
-		const rightChevron = document.createElement("i");
-		rightChevron.classList.add("fas", "fa-angle-right");
-		rightChevron.style.marginRight = "0px";
-		trigglerButton.insertBefore(rightChevron, exclamationMark);
-		const leftChevron = document.createElement("i");
-		leftChevron.classList.add("fas", "fa-angle-left");
-		exclamationMark.after(leftChevron);
-	}
-});
+Hooks.on("updateCombat", () => {});
 
 /* ------------------- Misc ------------------- */
 
@@ -442,9 +372,3 @@ Hooks.on("renderCombatTracker", (app, html, data) => {
 	});
 });
 
-/* ---------------- Custom Apps --------------- */
-
-Hooks.on("renderConditionLab", (app, html, data) => {
-	const htmlEl = html instanceof HTMLElement ? html : html[0];
-	ConditionLab._onRender(app, htmlEl, data);
-});

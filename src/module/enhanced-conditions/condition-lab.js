@@ -6,14 +6,16 @@ import EnhancedConditionTriggerConfig from "./enhanced-condition-trigger.js";
 import { EnhancedConditions } from "./enhanced-conditions.js";
 import EnhancedEffectConfig from "./enhanced-effect-config.js";
 
+const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
+
 /**
  * Form application for managing mapping of Conditions to Icons and JournalEntries
  */
-export class ConditionLab extends FormApplication {
-	constructor(object, options = {}) {
-		super(object, options);
+export class ConditionLab extends HandlebarsApplicationMixin(ApplicationV2) {
+	constructor(_object, options = {}) {
+		super(options);
 		game.clt.conditionLab = this;
-		this.data = (game.clt.conditionLab ? game.clt.conditionLab.data : object) ?? null;
+		this.data = null;
 		this.system = game.system.id;
 		this.initialMapType = game.settings.get("ironsworn-impacts", "conditionMapType");
 		this.mapType = null;
@@ -25,24 +27,47 @@ export class ConditionLab extends FormApplication {
 		this.sortDirection = "";
 	}
 
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			id: "cub-condition-lab",
-			title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.Title"),
-			template: "modules/ironsworn-impacts/templates/condition-lab.hbs",
-			classes: ["sheet", "condition-lab-form"],
-			width: 780,
-			height: 680,
+	static DEFAULT_OPTIONS = {
+		id: "cub-condition-lab",
+		window: {
+			title: "CLT.ENHANCED_CONDITIONS.Lab.Title",
 			resizable: true,
-			closeOnSubmit: false,
-			scrollY: ["ol.condition-lab"],
-			dragDrop: [{ dropSelector: "div.text-entry.reference" }]
-		});
-	}
+			controls: [
+				{
+					action: "import",
+					icon: "fas fa-file-import",
+					label: "CLT.WORDS.Import"
+				},
+				{
+					action: "export",
+					icon: "fas fa-file-export",
+					label: "CLT.WORDS.Export"
+				}
+			]
+		},
+		position: { width: 780, height: 680 },
+		classes: ["sheet", "condition-lab-form"],
+		actions: {
+			import: ConditionLab.#onImport,
+			export: ConditionLab.#onExport
+		},
+		form: {
+			handler: ConditionLab.#onSubmit,
+			submitOnChange: false,
+			closeOnSubmit: false
+		},
+		tag: "form"
+	};
+
+	static PARTS = {
+		form: {
+			template: "modules/ironsworn-impacts/templates/condition-lab.hbs",
+			scrollable: ["ol.condition-lab"]
+		}
+	};
 
 	/**
 	 * Get updated map by combining existing in-memory map with current formdata
-	 * @returns {object[]}
 	 */
 	get updatedMap() {
 		const submitData = this._buildSubmitData();
@@ -50,11 +75,14 @@ export class ConditionLab extends FormApplication {
 		return EnhancedConditions._prepareMap(mergedMap);
 	}
 
+	get isEditable() {
+		return true;
+	}
+
 	/**
-	 * Gets data for the template render
-	 * @returns {object}
+	 * Prepares context data for the template
 	 */
-	async getData() {
+	async _prepareContext(_options) {
 		const sortDirection = this.sortDirection;
 		const sortTitle = game.i18n.localize(
 			`CLT.ENHANCED_CONDITIONS.ConditionLab.SortAnchorTitle.${sortDirection ? sortDirection : "unsorted"}`
@@ -62,44 +90,32 @@ export class ConditionLab extends FormApplication {
 		const filterTitle = game.i18n.localize("CLT.ENHANCED_CONDITIONS.ConditionLab.FilterInputTitle");
 		const filterValue = this.filterValue;
 
-		const defaultMaps = game.settings.get("ironsworn-impacts", "defaultConditionMaps");
-		// const mappedSystems = Object.keys(defaultMaps) || [];
-		const mappedSystems = [];
-		const mapTypeChoices = game.settings.settings.get("ironsworn-impacts.conditionMapType").choices;
+		const mapTypeChoices = { ...game.settings.settings.get("ironsworn-impacts.conditionMapType").choices };
 
-		// If there's no default map for this system don't provide the "default" choice
-		if (!mappedSystems.includes(game.system.id)) {
-			if (this.initialMap.length) {
-				mapTypeChoices.default = game.i18n.localize("CLT.SETTINGS.EnhancedConditions.MapType.Choices.inferred");
-			} else {
-				delete mapTypeChoices.default;
-			}
+		if (this.initialMap.length) {
+			mapTypeChoices.default = game.i18n.localize("CLT.SETTINGS.EnhancedConditions.MapType.Choices.inferred");
+		} else {
+			delete mapTypeChoices.default;
 		}
 
 		this.mapType ||= this.initialMapType || "other";
 		const conditionMap = (this.map ||= foundry.utils.duplicate(this.initialMap));
-		const triggers = game.settings.get("ironsworn-impacts", "storedTriggers").map((t) => {
-			return [t.id, t.text];
-		});
+		const triggers = game.settings.get("ironsworn-impacts", "storedTriggers").map((t) => [t.id, t.text]);
 
 		const isDefault = this.mapType === "default";
-		const outputChatSetting = game.settings.get("ironsworn-impacts", "conditionsOutputToChat");
-		const disableChatOutput = isDefault || !outputChatSetting;
+		const disableChatOutput = isDefault;
 
 		for (const condition of conditionMap) {
 			condition.name = game.i18n.localize(condition.name ?? condition.label);
 			condition.img ??= condition.icon;
-			// Check if the row exists in the saved map
 			const existingEntry = this.initialMap.find((e) => e.id === condition.id) ?? null;
 			condition.isNew = !existingEntry;
 			condition.isChanged = condition.isNew || this._hasEntryChanged(condition, existingEntry);
 
-			// Set the Output to Chat checkbox
 			condition.options = condition.options ?? {};
 			const uuids = condition.reference ? condition.reference.split(" ").filter(Boolean) : [];
 			condition.enrichedReferences = await Promise.all(
 				uuids.map(async (uuid) => {
-					// UUID format: Compendium.{scope}.{pack}.DocumentType.{id}
 					const parts = uuid.split(".");
 					if (parts[0] === "Compendium" && parts.length >= 4) {
 						const packId = `${parts[1]}.${parts[2]}`;
@@ -113,16 +129,13 @@ export class ConditionLab extends FormApplication {
 				})
 			);
 
-			// Default all entries to show
 			condition.hidden = condition.hidden ?? false;
 		}
 
-		// Pre-apply any filter value
 		this.displayedMap = filterValue
 			? this._filterMapByName(conditionMap, filterValue)
 			: foundry.utils.duplicate(conditionMap);
 
-		// Sort the displayed map based on the sort direction
 		if (sortDirection) {
 			this.displayedMap = this._sortMapByName(this.displayedMap, sortDirection);
 		}
@@ -139,7 +152,6 @@ export class ConditionLab extends FormApplication {
 			unsavedMap = true;
 		}
 
-		// Prepare final data object for template
 		const data = {
 			sortTitle,
 			sortDirection,
@@ -160,24 +172,62 @@ export class ConditionLab extends FormApplication {
 		return data;
 	}
 
+	_onRender(_context, _options) {
+		const html = this.element;
+		ui.clt.conditionLab = this;
+
+		const find = (sel) => html.querySelectorAll(sel);
+		const on = (sel, evt, fn) => find(sel).forEach((el) => el.addEventListener(evt, fn));
+
+		find("input").forEach((el) => el.addEventListener("change", (e) => this._onChangeInputs(e)));
+		on("select.map-type", "change", (e) => this._onChangeMapType(e));
+		on("button.active-effect-config", "click", (e) => this._onClickActiveEffectConfig(e));
+		on("a.trigger", "click", (e) => this._onOpenTrigglerForm(e));
+		on("a[name='add-row']", "click", (e) => this._onAddRow(e));
+		on("a.remove-row", "click", (e) => this._onRemoveRow(e));
+		on(".row-controls a.move-up, .row-controls a.move-down", "click", (e) => this._onChangeSortOrder(e));
+		on("button.restore-defaults", "click", (e) => this._onRestoreDefaults(e));
+		on("button[name='reset']", "click", (e) => this._onResetForm(e));
+		on("input[name='filter-list']", "input", (e) => this._onChangeFilter(e));
+		on("a.sort-list", "click", (e) => this._onClickSortButton(e));
+		on("button.macro-config", "click", (e) => this._onClickMacroConfig(e));
+		on("button.trigger-config", "click", (e) => this._onClickTriggerConfig(e));
+		on("button.option-config", "click", (e) => this._onClickOptionConfig(e));
+		on("a.remove-reference", "click", (e) => this._onRemoveReference(e));
+
+		if (this.isEditable) {
+			find("img[data-edit]").forEach((el) => el.addEventListener("click", this._onEditImage.bind(this)));
+		}
+
+		// drag-drop
+		find("div.text-entry.reference").forEach((el) => {
+			el.addEventListener("dragover", (e) => e.preventDefault());
+			el.addEventListener("drop", (e) => this._onDrop(e));
+		});
+	}
+
 	/**
 	 * Enriches submit data with existing map to ensure continuity
-	 * @returns {object}
 	 */
 	_buildSubmitData() {
 		const map = this.sortDirection ? this._sortMapByName(this.map) : this.map;
-		const data =
-			map?.reduce((acc, entry, index) => {
-				acc[`id-${index}`] = entry.id;
-				return acc;
-			}, {}) ?? {};
-		return this._getSubmitData(data);
+		const baseData = map?.reduce((acc, entry, index) => {
+			acc[`id-${index}`] = entry.id;
+			return acc;
+		}, {}) ?? {};
+
+		// collect current form values
+		const form = this.element?.querySelector ? this.element : null;
+		if (!form) return baseData;
+		const inputs = form.querySelectorAll("input, select, textarea");
+		inputs.forEach((el) => {
+			if (el.name) baseData[el.name] = el.type === "checkbox" ? el.checked : el.value;
+		});
+		return baseData;
 	}
 
 	/**
 	 * Processes the Form Data and builds a usable Condition Map
-	 * @param {object} formData
-	 * @returns {object}
 	 */
 	_processFormData(formData) {
 		let ids = [];
@@ -188,22 +238,17 @@ export class ConditionLab extends FormApplication {
 		const rows = [];
 		const existingMap = this.map ?? game.settings.get("ironsworn-impacts", "activeConditionMap");
 
-		// need to tighten these up to check for the existence of digits after the word
 		const conditionRegex = /condition/i;
 		const idRegex = new RegExp(/^id/, "i");
 		const iconRegex = /icon/i;
 		const referenceRegex = /reference/i;
 		const rowRegex = new RegExp(/\d+$/);
 
-		// write it back to the relevant condition map
-		// @todo: maybe switch to a switch
 		for (let e in formData) {
 			const rowMatch = e.match(rowRegex);
 			const row = rowMatch ? rowMatch[0] : null;
 
-			if (!row) {
-				continue;
-			}
+			if (!row) continue;
 
 			rows.push(row);
 
@@ -232,7 +277,7 @@ export class ConditionLab extends FormApplication {
 				options = {}
 			} = existingCondition || {};
 
-			const condition = {
+			newMap.push({
 				id,
 				name,
 				img: icons[i],
@@ -242,24 +287,7 @@ export class ConditionLab extends FormApplication {
 				activeEffect,
 				macros,
 				options
-			};
-			for (const [oldKey, newKey] of Object.entries({ label: "name", icon: "img" })) {
-				const msg = `StatusEffectConfig#${oldKey} has been deprecated in favor of StatusEffectConfig#${newKey}`;
-				Object.defineProperty(condition, oldKey, {
-					get() {
-						foundry.utils.logCompatibilityWarning(msg, { since: 12, until: 14, once: true });
-						return this[newKey];
-					},
-					set(value) {
-						foundry.utils.logCompatibilityWarning(msg, { since: 12, until: 14, once: true });
-						this[newKey] = value;
-					},
-					enumerable: false,
-					configurable: true
-				});
-			}
-
-			newMap.push(condition);
+			});
 		}
 
 		return newMap;
@@ -267,26 +295,18 @@ export class ConditionLab extends FormApplication {
 
 	/**
 	 * Restore defaults for a mapping
-	 * @param {object} options
-	 * @param {boolean} options.clearCache
 	 */
 	async _restoreDefaults() {
 		const system = this.system;
 		const defaultMaps = await EnhancedConditions._loadDefaultMaps();
 		game.settings.set("ironsworn-impacts", "defaultConditionMaps", defaultMaps);
 		const tempMap = this.mapType !== "other" && defaultMaps && defaultMaps[system] ? defaultMaps[system] : [];
-
-		// If the mapType is other then the map should be empty, otherwise it's the default map for the system
 		this.map = tempMap;
-		this.render(true);
+		this.render();
 	}
 
-	/**
-	 * Take the new map and write it back to settings, overwriting existing
-	 * @param {object} event
-	 * @param {object} formData
-	 */
-	async _updateObject(event, formData) {
+	static async #onSubmit(_event, _form, formData) {
+		const data = foundry.utils.expandObject(formData.object);
 		const showDialogSetting = game.settings.get("ironsworn-impacts", "showSortDirectionDialog");
 
 		if (this.sortDirection && showDialogSetting) {
@@ -299,19 +319,26 @@ export class ConditionLab extends FormApplication {
 						if (checkbox?.checked) {
 							game.settings.set("ironsworn-impacts", "showSortDirectionDialog", false);
 						}
-						this._processFormUpdate(formData);
+						this._processFormUpdate(data);
 					}
 				},
 				no: { callback: () => {} }
 			});
 		} else {
-			this._processFormUpdate(formData);
+			this._processFormUpdate(data);
 		}
+	}
+
+	static async #onImport() {
+		await this._importFromJSONDialog();
+	}
+
+	static #onExport() {
+		this._exportToJSON();
 	}
 
 	/**
 	 * Process Ironsworn Impacts formdata and then save changes
-	 * @param {*} formData
 	 */
 	async _processFormUpdate(formData) {
 		const mapType = formData["map-type"];
@@ -327,8 +354,6 @@ export class ConditionLab extends FormApplication {
 
 	/**
 	 * Saves a given map and option map type to storage
-	 * @param {*} newMap
-	 * @param {*} mapType
 	 */
 	async _saveMapping(newMap, mapType = this.mapType) {
 		this.mapType = this.initialMapType = mapType;
@@ -342,7 +367,6 @@ export class ConditionLab extends FormApplication {
 
 	/**
 	 * Performs final steps after saving mapping
-	 * @param {*} preparedMap
 	 */
 	async _finaliseSave(preparedMap) {
 		this.map = this.initialMap = preparedMap;
@@ -350,7 +374,7 @@ export class ConditionLab extends FormApplication {
 		this.sortDirection = "";
 
 		ui.notifications.info(game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.SaveSuccess"));
-		this.render(true);
+		this.render();
 	}
 
 	/**
@@ -374,7 +398,6 @@ export class ConditionLab extends FormApplication {
 
 	/**
 	 * Initiates an import via a dialog
-	 * Borrowed from foundry.js Entity class
 	 */
 	async _importFromJSONDialog() {
 		foundry.applications.api.DialogV2.wait({
@@ -401,8 +424,6 @@ export class ConditionLab extends FormApplication {
 
 	/**
 	 * Process a Condition Map Import
-	 * @param {*} html
-	 * @returns {*}
 	 */
 	async _processImport(html) {
 		const form = html.querySelector ? html.querySelector("form") : html.find("form")[0];
@@ -416,139 +437,41 @@ export class ConditionLab extends FormApplication {
 		const json = JSON.parse(jsonFile);
 		const map = EnhancedConditions.mapFromJson(json);
 
-		if (!map || !map?.length) {
-			return;
-		}
+		if (!map || !map?.length) return;
 
 		this.mapType = "other";
 		this.map = map;
 		this.render();
 	}
 
-	/** @override */
-	_getHeaderButtons() {
-		let buttons = super._getHeaderButtons();
-
-		buttons.unshift(
-			{
-				label: game.i18n.localize("CLT.WORDS.Import"),
-				class: "import",
-				icon: "fas fa-file-import",
-				onclick: async (ev) => {
-					this._importFromJSONDialog();
-				}
-			},
-			{
-				label: game.i18n.localize("CLT.WORDS.Export"),
-				class: "export",
-				icon: "fas fa-file-export",
-				onclick: async (ev) => {
-					this._exportToJSON();
-				}
-			}
-		);
-
-		return buttons;
-	}
-
 	/* -------------------------------------------- */
 	/*                 Hook Handlers                */
 	/* -------------------------------------------- */
 
-	/**
-	 * Ironsworn Impacts Render handler
-	 * @param {*} app
-	 * @param {*} html
-	 * @param {*} data
-	 */
-	static _onRender(app, html, data) {
-		ui.clt.conditionLab = app;
-	}
-
-	/**
-	 * Render save dialog hook handler
-	 * @param {*} app
-	 * @param {jQuery} html
-	 * @param {*} data
-	 */
 	static _onRenderSaveDialog(app, html, data) {
-		const contentDiv = html[0].querySelector("div.dialog-content");
+		const contentDiv = html[0]?.querySelector("div.dialog-content") ?? html.querySelector?.("div.dialog-content");
 		const checkbox = `<div class="form-group"><label class="dont-show-again-checkbox">${game.i18n.localize(
 			"CLT.ENHANCED_CONDITIONS.ConditionLab.SortDirectionSave.CheckboxText"
 		)}<input type="checkbox" name="dont-show-again"></label></div>`;
-		contentDiv.insertAdjacentHTML("beforeend", checkbox);
-		app.setPosition({ height: app.position.height + 32 });
+		contentDiv?.insertAdjacentHTML("beforeend", checkbox);
+		app.setPosition?.({ height: (app.position?.height ?? 200) + 32 });
 	}
 
-	/**
-	 * Render restore defaults hook handler
-	 * @param {*} app
-	 * @param {*} html
-	 * @param {*} data
-	 */
 	static _onRenderRestoreDefaultsDialog(app, html, data) {
 		if (game.clt.conditionLab.mapType !== "default") return;
-
-		const contentDiv = html[0].querySelector("div.dialog-content");
+		const contentDiv = html[0]?.querySelector("div.dialog-content") ?? html.querySelector?.("div.dialog-content");
 		const checkbox = `<div class="form-group">
 		<label>${game.i18n.localize("CLT.ENHANCED_CONDITIONS.ConditionLab.RestoreDefaultClearCache.CheckboxText")}</label>
 		<input type="checkbox" name="clear-cache">
 		</div>`;
-		contentDiv.insertAdjacentHTML("beforeend", checkbox);
-		app.setPosition({ height: app.position.height + 32 });
+		contentDiv?.insertAdjacentHTML("beforeend", checkbox);
+		app.setPosition?.({ height: (app.position?.height ?? 200) + 32 });
 	}
 
 	/* -------------------------------------------- */
 	/*                Event Handlers                */
 	/* -------------------------------------------- */
 
-	/** @override */
-	activateListeners(html) {
-		const inputs = html.find("input");
-		const mapTypeSelector = html.find("select[class='map-type']");
-		const activeEffectButton = html.find("button.active-effect-config");
-		const triggerAnchor = html.find("a[class='trigger']");
-		const addRowAnchor = html.find("a[name='add-row']");
-		const removeRowAnchor = html.find("a[class='remove-row']");
-		const changeOrderAnchor = html.find(".row-controls a.move-up, .row-controls a.move-down");
-		const restoreDefaultsButton = html.find("button[class='restore-defaults']");
-		const resetFormButton = html.find("button[name='reset']");
-		const filterInput = html.find("input[name='filter-list']");
-		const sortButton = html.find("a.sort-list");
-		const macroConfigButton = html.find("button.macro-config");
-		const triggerConfigButton = html.find("button.trigger-config");
-		const optionConfigButton = html.find("button.option-config");
-
-		inputs.on("change", (event) => this._onChangeInputs(event));
-		mapTypeSelector.on("change", (event) => this._onChangeMapType(event));
-		activeEffectButton.on("click", (event) => this._onClickActiveEffectConfig(event));
-		triggerAnchor.on("click", (event) => this._onOpenTrigglerForm(event));
-		addRowAnchor.on("click", async (event) => this._onAddRow(event));
-		removeRowAnchor.on("click", async (event) => this._onRemoveRow(event));
-		changeOrderAnchor.on("click", (event) => this._onChangeSortOrder(event));
-		restoreDefaultsButton.on("click", async (event) => this._onRestoreDefaults(event));
-		resetFormButton.on("click", (event) => this._onResetForm(event));
-		filterInput.on("input", (event) => this._onChangeFilter(event));
-		sortButton.on("click", (event) => this._onClickSortButton(event));
-		macroConfigButton.on("click", (event) => this._onClickMacroConfig(event));
-		triggerConfigButton.on("click", (event) => this._onClickTriggerConfig(event));
-		optionConfigButton.on("click", (event) => this._onClickOptionConfig(event));
-		html.find("a.remove-reference").on("click", (event) => this._onRemoveReference(event));
-
-		super.activateListeners(html);
-	}
-
-	/** @override */
-	_activateCoreListeners(html) {
-		super._activateCoreListeners(html);
-		if (this.isEditable) html.find("img[data-edit]").on("click", this._onEditImage.bind(this));
-	}
-
-	/**
-	 * Input change handler
-	 * @param {*} event
-	 * @returns {Application.render}
-	 */
 	async _onChangeInputs(event) {
 		const name = event.target.name;
 		if (name.startsWith("filter-list")) return;
@@ -558,19 +481,14 @@ export class ConditionLab extends FormApplication {
 		if (this._hasMapChanged()) return this.render();
 	}
 
-	/**
-	 * Filter input change handler
-	 * @param {*} event
-	 */
 	_onChangeFilter(event) {
 		const input = event.target;
 		const inputValue = input?.value;
 		this.filterValue = inputValue ?? "";
 		this.displayedMap = this._filterMapByName(this.map, this.filterValue);
-
 		this.displayedRowIds = this.displayedMap.filter((r) => !r.hidden).map((r) => r.id);
 
-		const conditionRowEls = this._element[0].querySelectorAll("li.row");
+		const conditionRowEls = this.element.querySelectorAll("li.row");
 		for (const el of conditionRowEls) {
 			const conditionId = el.dataset.conditionId;
 			if (this.displayedRowIds.includes(conditionId)) {
@@ -581,24 +499,14 @@ export class ConditionLab extends FormApplication {
 		}
 	}
 
-	/**
-	 * Filter the given map by the name property using the supplied filter value, marking filtered entries as "hidden"
-	 * @param {Array} map
-	 * @param {string} filter
-	 * @returns {object[]} filteredMap
-	 */
 	_filterMapByName(map, filter) {
 		return map.map((c) => ({ ...c, hidden: !c.name.toLowerCase().includes(filter.toLowerCase()) }));
 	}
 
-	/**
-	 * Change Map Type event handler
-	 * @param {*} event
-	 */
 	async _onChangeMapType(event) {
 		event.preventDefault();
-		const selection = $(event.target).find("option:selected");
-		const newType = (this.mapType = selection.val());
+		const select = event.target;
+		const newType = (this.mapType = select.options[select.selectedIndex].value);
 
 		switch (newType) {
 			case "default":
@@ -607,12 +515,10 @@ export class ConditionLab extends FormApplication {
 				this.map = defaultMap?.length ? EnhancedConditions._prepareMap(defaultMap) : [];
 				break;
 			}
-
 			case "other": {
 				this.map = this.initialMapType === "other" ? this.initialMap : [];
 				break;
 			}
-
 			default:
 				break;
 		}
@@ -621,54 +527,32 @@ export class ConditionLab extends FormApplication {
 		this.render();
 	}
 
-	/**
-	 * Handle click Active Effect Config button
-	 * @param {*} event
-	 */
 	async _onClickActiveEffectConfig(event) {
 		const li = event.currentTarget.closest("li");
 		const conditionId = li ? li.dataset.conditionId : null;
-
 		if (!conditionId) return;
 
 		const conditions = this.map ?? game.settings.get("ironsworn-impacts", "activeConditionMap");
 		const condition = conditions.length ? conditions.find((c) => c.id === conditionId) : null;
-
 		if (!condition) return;
 
 		const conditionEffect = condition.activeEffect ?? EnhancedConditions.getActiveEffects(condition)[0];
-
 		if (!conditionEffect) return;
 
 		if (!foundry.utils.hasProperty(conditionEffect, "flags.ironsworn-impacts.conditionId")) {
-			foundry.utils.setProperty(
-				conditionEffect,
-				"flags.ironsworn-impacts.conditionId",
-				conditionId
-			);
+			foundry.utils.setProperty(conditionEffect, "flags.ironsworn-impacts.conditionId", conditionId);
 		}
 
-		// Build a fake effect object for the ActiveEffectConfig sheet
-		// @todo #544 make Conditions an ActiveEffect extension?
 		delete conditionEffect.id;
-		if (!conditionEffect.name) {
-			conditionEffect.name = condition.name;
-		}
+		if (!conditionEffect.name) conditionEffect.name = condition.name;
 		const effect = new ActiveEffect(conditionEffect, {
-			// Build a dummy parent so dialog can be rendered.
 			parent: new Item({ name: "Global", type: "base" })
 		});
-		effect.testUserPermission = (...args) => {
-			return true;
-		};
+		effect.testUserPermission = () => true;
 
-		new EnhancedEffectConfig(effect).render(true);
+		new EnhancedEffectConfig({ document: effect }).render(true);
 	}
 
-	/**
-	 * Reference Link change handler
-	 * @param {*} event
-	 */
 	async _onChangeReferenceId(event) {
 		event.preventDefault();
 		this.map = this.updatedMap;
@@ -680,36 +564,22 @@ export class ConditionLab extends FormApplication {
 		const anchor = event.currentTarget;
 		const uuid = anchor.dataset.uuid;
 		const row = anchor.dataset.row;
-		const input = this.element.find(`input[name="reference-item-${row}"]`)[0];
+		const input = this.element.querySelector(`input[name="reference-item-${row}"]`);
 		if (!input) return;
 		const existing = input.value.split(" ").filter((u) => u && u !== uuid);
 		input.value = existing.join(" ");
 		input.dispatchEvent(new Event("change"));
 	}
 
-	/**
-	 * Open Triggler form event handler
-	 * @param {*} event
-	 */
 	_onOpenTrigglerForm(event) {
 		event.preventDefault();
 		const anchor = event.currentTarget;
 		const select = anchor.parentElement.nextElementSibling;
 		const id = select.value;
 		const conditionLabRow = select.name.match(/\d+$/)[0];
-
-		const data = {
-			id,
-			conditionLabRow
-		};
-
-		new TrigglerForm(data, { parent: this }).render(true);
+		new TrigglerForm({ id, conditionLabRow }, { parent: this }).render(true);
 	}
 
-	/**
-	 * Add Row event handler
-	 * @param {*} event
-	 */
 	_onAddRow(event) {
 		event.preventDefault();
 
@@ -729,7 +599,6 @@ export class ConditionLab extends FormApplication {
 
 		const newMap = foundry.utils.duplicate(this.map);
 		const exisitingIds = this.map.filter((c) => c.id).map((c) => c.id);
-		const outputChatSetting = game.settings.get("ironsworn-impacts", "conditionsOutputToChat");
 
 		newMap.push({
 			id: Sidekick.createId(exisitingIds),
@@ -738,28 +607,19 @@ export class ConditionLab extends FormApplication {
 			reference: "",
 			trigger: "",
 			options: {
-				outputChat: outputChatSetting
+				outputChat: false
 			}
 		});
 
-		const newMapType = this.mapType === "default" ? "custom" : this.mapType;
-
-		this.mapType = newMapType;
+		this.mapType = this.mapType === "default" ? "custom" : this.mapType;
 		this.map = newMap;
 		this.data = null;
-
 		this.render();
 	}
 
-	/**
-	 * Handler for remove row event
-	 * @param {*} event
-	 */
 	_onRemoveRow(event) {
 		event.preventDefault();
-
 		this.map = this.updatedMap;
-
 		const row = event.currentTarget.name.match(/\d+$/)[0];
 
 		foundry.applications.api.DialogV2.confirm({
@@ -779,13 +639,8 @@ export class ConditionLab extends FormApplication {
 		});
 	}
 
-	/**
-	 * Handle a change sort order click
-	 * @param {*} event
-	 */
 	_onChangeSortOrder(event) {
 		event.preventDefault();
-
 		const anchor = event.currentTarget;
 		const liRow = anchor?.closest("li");
 		const rowNumber = parseInt(liRow?.dataset.mappingRow);
@@ -798,11 +653,9 @@ export class ConditionLab extends FormApplication {
 			case "move-up":
 				newIndex = rowNumber - 1;
 				break;
-
 			case "move-down":
 				newIndex = rowNumber + 1;
 				break;
-
 			default:
 				break;
 		}
@@ -814,40 +667,16 @@ export class ConditionLab extends FormApplication {
 		this.render();
 	}
 
-	/**
-	 * Sort button handler
-	 * @param {*} event
-	 * @returns {Application}                 The rendered Application instance
-	 */
 	_onClickSortButton(event) {
-		const sortDirection = this.sortDirection;
-		// const newSortDirection = sortDirection === "asc" ? "desc" : "asc";
-		switch (sortDirection) {
-			case "":
-				this.sortDirection = "asc";
-				break;
-
-			case "asc":
-				this.sortDirection = "desc";
-				break;
-
-			case "desc":
-				this.sortDirection = "";
-				break;
-
-			default:
-				break;
+		switch (this.sortDirection) {
+			case "": this.sortDirection = "asc"; break;
+			case "asc": this.sortDirection = "desc"; break;
+			case "desc": this.sortDirection = ""; break;
+			default: break;
 		}
-
 		return this.render();
 	}
 
-	/**
-	 * Sorts the given map by the name property
-	 * @param {Array} map
-	 * @param {*} direction
-	 * @returns {Array}
-	 */
 	_sortMapByName(map, direction) {
 		return map.sort((a, b) => {
 			if (direction === "desc") return b.name.localeCompare(a.name);
@@ -855,32 +684,20 @@ export class ConditionLab extends FormApplication {
 		});
 	}
 
-	/**
-	 * Opens dialog to reset to default values.
-	 * @param {*} event
-	 */
 	_onRestoreDefaults(event) {
 		event.preventDefault();
-		const content = game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.RestoreDefaultsContent");
-
 		foundry.applications.api.DialogV2.confirm({
 			window: { title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.RestoreDefaultsTitle") },
-			content,
+			content: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.RestoreDefaultsContent"),
 			yes: {
 				icon: "fas fa-check",
-				callback: () => {
-					this._restoreDefaults();
-				}
+				callback: () => { this._restoreDefaults(); }
 			},
 			no: { icon: "fas fa-times" },
 			defaultYes: false
 		});
 	}
 
-	/**
-	 * Reset form handler
-	 * @param {*} event
-	 */
 	_onResetForm(event) {
 		foundry.applications.api.DialogV2.confirm({
 			window: { title: game.i18n.localize("CLT.ENHANCED_CONDITIONS.Lab.ResetFormTitle") },
@@ -913,67 +730,41 @@ export class ConditionLab extends FormApplication {
 		return ui.notifications.error(game.i18n.localize("CLT.ENHANCED_CONDITIONS.ConditionLab.BadReference"));
 	}
 
-	/**
-	 * Macro Config button click handler
-	 * @param {*} event
-	 */
 	_onClickMacroConfig(event) {
 		const rowLi = event.target.closest("li");
 		const conditionId = rowLi ? rowLi.dataset.conditionId : null;
-
 		if (!conditionId) return;
-
 		const condition = this.map.find((c) => c.id === conditionId);
-
 		new EnhancedConditionMacroConfig(condition).render(true);
 	}
 
-	/**
-	 * Trigger Config button click handler
-	 * @param {*} event
-	 */
 	_onClickTriggerConfig(event) {
 		const rowLi = event.target.closest("li");
 		const conditionId = rowLi ? rowLi.dataset.conditionId : null;
-
 		if (!conditionId) return;
-
 		const condition = this.map.find((c) => c.id === conditionId);
-
 		new EnhancedConditionTriggerConfig(condition).render(true);
 	}
 
-	/**
-	 * Option Config button click handler
-	 * @param {*} event
-	 */
 	_onClickOptionConfig(event) {
 		const rowLi = event.target.closest("li");
 		const conditionId = rowLi ? rowLi.dataset.conditionId : null;
-
 		if (!conditionId) return;
-
 		const condition = this.map.find((c) => c.id === conditionId);
-
 		const config = new EnhancedConditionOptionConfig(condition);
 		config.parent = this;
 		config.render(true);
 	}
 
-	// Checks the updatedMap property against the initial map
 	_hasMapChanged() {
 		let hasChanged = false;
 		const conditionMap = this.updatedMap;
 
-		conditionMap.forEach((entry, index, array) => {
-			// Check if the row exists in the saved map
+		conditionMap.forEach((entry, index) => {
 			const existingEntry = this.initialMap.find((e) => e.id === entry.id) ?? null;
 			entry.isNew = !existingEntry;
-
-			// If row is new or if its index has changed, it is also changed
 			entry.isChanged = entry.isNew || index !== this.initialMap?.indexOf(existingEntry);
 
-			// If it's not changed, check if the compared entries are equal
 			if (!entry.isChanged) {
 				entry.isChanged = !foundry.utils.isEmpty(foundry.utils.diffObject(existingEntry, entry));
 				hasChanged ||= entry.isChanged;
@@ -984,25 +775,10 @@ export class ConditionLab extends FormApplication {
 	}
 
 	_hasEntryChanged(entry, existingEntry) {
-		const propsToCheck = [
-			"name",
-			"img",
-			"options",
-			"reference",
-			"applyTrigger",
-			"removeTrigger",
-			"activeEffect"
-		];
+		const propsToCheck = ["name", "img", "options", "reference", "applyTrigger", "removeTrigger", "activeEffect"];
 		return propsToCheck.some((p) => this._hasPropertyChanged(p, existingEntry, entry));
 	}
 
-	/**
-	 * Checks a given propertyName on an original and comparison object to see if it has changed
-	 * @param {*} propertyName
-	 * @param {*} original
-	 * @param {*} comparison
-	 * @returns {boolean}
-	 */
 	_hasPropertyChanged(propertyName, original, comparison) {
 		const originalValue = original?.[propertyName];
 		const comparisonValue = comparison?.[propertyName];
