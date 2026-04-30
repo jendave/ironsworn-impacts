@@ -2,7 +2,7 @@
 
 ![GitHub all releases](https://img.shields.io/github/downloads/jendave/ironsworn-impacts/total)
 [![Latest Version](https://img.shields.io/github/v/release/jendave/ironsworn-impacts?display_name=tag&sort=semver&label=Latest%20Version)](https://github.com/jendave/ironsworn-impacts/releases/latest)
-![Foundry Version](https://img.shields.io/endpoint?url=https://foundryshields.com/version?url=https%3A%2F%2Fraw.githubusercontent.com%2Fjendave%2Fironsworn-impacts%2Fmain%2Fmodule.json)
+![Foundry Version](https://img.shields.io/endpoint?url=https://foundryshields.com/version?url=https%3A%2F%2Fraw.githubusercontent.com%2Fjendave%2Fironsworn-impacts%2Fmain%2Fsrc%2Fmodule.json)
 [![License](https://img.shields.io/github/license/jendave/ironsworn-impacts)](LICENSE)
 
 ## About
