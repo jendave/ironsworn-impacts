@@ -11,11 +11,11 @@
 			"activeEffect": null,
 			"macros": [
 				{
-					"id": "2GbNeQtkPSToTWh2",
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.2GbNeQtkPSToTWh2",
 					"type": "apply"
 				},
 				{
-					"id": "x5oRi04g6H3uyJnY",
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.x5oRi04g6H3uyJnY",
 					"type": "remove"
 				}
 			],
@@ -42,11 +42,11 @@
 			"activeEffect": null,
 			"macros": [
 				{
-					"id": "rhKkWnZz3pKjM743",
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.rhKkWnZz3pKjM743",
 					"type": "apply"
 				},
 				{
-					"id": "UcYHYjEz3pQujnhM",
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.UcYHYjEz3pQujnhM",
 					"type": "remove"
 				}
 			],
@@ -64,209 +64,11 @@
 			"activeEffect": null,
 			"macros": [
 				{
-					"id": "TAksneFg7yuEVd7d",
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.TAksneFg7yuEVd7d",
 					"type": "apply"
 				},
 				{
-					"id": "cDnUx6cd0zMqqRVf",
-					"type": "remove"
-				}
-			],
-			"options": {
-				"outputChat": false
-			}
-		},
-		{
-			"id": "permanentlyharmed",
-			"name": "Permanently Harmed",
-			"img": "modules/ironsworn-impacts/assets/sight-disabled.svg",
-			"reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.EIuAF5CmyOZyNrcz",
-			"applyTrigger": "spvHgK3Q64appmQD",
-			"removeTrigger": "laUmCScXOonPeIcb",
-			"activeEffect": null,
-			"macros": [
-				{
-					"id": "zmOYLYqJiyGkuKXY",
-					"type": "apply"
-				},
-				{
-					"id": "WOmAkOmqmivPppps",
-					"type": "remove"
-				}
-			],
-			"options": {
-				"outputChat": false
-			}
-		},
-		{
-			"id": "traumatized",
-			"name": "Traumatized",
-			"img": "modules/ironsworn-impacts/assets/despair.svg",
-			"reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.EIuAF5CmyOZyNrcz",
-			"applyTrigger": "4CCSqJNdEQkV8D9M",
-			"removeTrigger": "a2SivDvyqKy2XabY",
-			"activeEffect": null,
-			"macros": [
-				{
-					"id": "JHn22gNeP9zNZ5T8",
-					"type": "apply"
-				},
-				{
-					"id": "epiKIQCMCGWZaxdm",
-					"type": "remove"
-				}
-			],
-			"options": {
-				"outputChat": false
-			}
-		},
-		{
-			"id": "doomed",
-			"name": "Doomed",
-			"img": "modules/ironsworn-impacts/assets/cursed-star.svg",
-			"reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.nODMcdJYLFIE07Zc",
-			"applyTrigger": "6xMjbHVetdRRYE1e",
-			"removeTrigger": "WR7jXkkinVmhN6CF",
-			"activeEffect": null,
-			"macros": [
-				{
-					"id": "sH2U8thMVt1bhMnL",
-					"type": "apply"
-				},
-				{
-					"id": "2q6xLKTrq1pHyhtS",
-					"type": "remove"
-				}
-			],
-			"options": {
-				"outputChat": false
-			}
-		},
-		{
-			"id": "tormented",
-			"name": "Tormented",
-			"img": "modules/ironsworn-impacts/assets/crystal-ball.svg",
-			"reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.nODMcdJYLFIE07Zc",
-			"applyTrigger": "10n0g3iG55y6Fkyt",
-			"removeTrigger": "TjJGAeO6OtRHokOW",
-			"activeEffect": null,
-			"macros": [
-				{
-					"id": "d8nixu9yIh42APiB",
-					"type": "apply"
-				},
-				{
-					"id": "KqtjTjDudH3g7KfO",
-					"type": "remove"
-				}
-			],
-			"options": {
-				"outputChat": false
-			}
-		},
-		{
-			"id": "indebted",
-			"name": "Indebted",
-			"img": "modules/ironsworn-impacts/assets/expense.svg",
-			"reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.nODMcdJYLFIE07Zc",
-			"applyTrigger": "jIGIWS0IsIigVEW7",
-			"removeTrigger": "COMMKeT1hjfgYkYP",
-			"activeEffect": null,
-			"macros": [
-				{
-					"id": "4KfK2KXJ4MMUygIT",
-					"type": "apply"
-				},
-				{
-					"id": "vkMCrsMeBsCBgdl8",
-					"type": "remove"
-				}
-			],
-			"options": {
-				"outputChat": false
-			}
-		},
-		{
-			"id": "battered",
-			"name": "Battered",
-			"img": "modules/ironsworn-impacts/assets/cracked-disc.svg",
-			"reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.dx8S0jsyiqqyYOju",
-			"applyTrigger": "UFfuScwlwdqJ0Jbm",
-			"removeTrigger": "B7odxDjZYNsjjvRc",
-			"activeEffect": null,
-			"macros": [
-				{
-					"id": "NBsGokbB0WHlbD5F",
-					"type": "apply"
-				},
-				{
-					"id": "z6L5RGE6qHMuFFfo",
-					"type": "remove"
-				}
-			],
-			"options": {
-				"outputChat": false
-			}
-		},
-		{
-			"id": "cursed",
-			"name": "Cursed",
-			"img": "modules/ironsworn-impacts/assets/ubisoft-sun.svg",
-			"reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.dx8S0jsyiqqyYOju Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.nODMcdJYLFIE07Zc",
-			"applyTrigger": "pjMv95q7XSsRJbJ6",
-			"removeTrigger": "6MibPWsFRJDSvSdW",
-			"activeEffect": null,
-			"macros": [
-				{
-					"id": "d7PKUh0o1oH7XLav",
-					"type": "apply"
-				},
-				{
-					"id": "Be4sDG59V6gHwYBo",
-					"type": "remove"
-				}
-			],
-			"options": {
-				"outputChat": false
-			}
-		},
-		{
-			"id": "maimed",
-			"name": "Maimed",
-			"img": "modules/ironsworn-impacts/assets/severed-hand.svg",
-			"reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.EIuAF5CmyOZyNrcz",
-			"applyTrigger": "Ahr5uwoB5oVYhkzB",
-			"removeTrigger": "ac7Squz32GiVupDO",
-			"activeEffect": null,
-			"macros": [
-				{
-					"id": "EnaIqgdntDlSuBvG",
-					"type": "apply"
-				},
-				{
-					"id": "EwaceN3eSStWBLNW",
-					"type": "remove"
-				}
-			],
-			"options": {
-				"outputChat": false
-			}
-		},
-		{
-			"id": "corrupted",
-			"name": "Corrupted",
-			"img": "modules/ironsworn-impacts/assets/poison-gas.svg",
-			"reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.EIuAF5CmyOZyNrcz",
-			"applyTrigger": "ZJRSnVMIjunXRuHj",
-			"removeTrigger": "dLd5ka7mKLtcPmji",
-			"activeEffect": null,
-			"macros": [
-				{
-					"id": "GUmQKItP4yx9UHgg",
-					"type": "apply"
-				},
-				{
-					"id": "6fqyi5HEUg4wroGd",
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.cDnUx6cd0zMqqRVf",
 					"type": "remove"
 				}
 			],
@@ -284,11 +86,209 @@
 			"activeEffect": null,
 			"macros": [
 				{
-					"id": "EPGsDmcBW66NPKW2",
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.EPGsDmcBW66NPKW2",
 					"type": "apply"
 				},
 				{
-					"id": "S5F5YPl0i7UDrHiB",
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.S5F5YPl0i7UDrHiB",
+					"type": "remove"
+				}
+			],
+			"options": {
+				"outputChat": false
+			}
+		},
+		{
+			"id": "permanentlyharmed",
+			"name": "Permanently Harmed",
+			"img": "modules/ironsworn-impacts/assets/sight-disabled.svg",
+			"reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.EIuAF5CmyOZyNrcz",
+			"applyTrigger": "spvHgK3Q64appmQD",
+			"removeTrigger": "laUmCScXOonPeIcb",
+			"activeEffect": null,
+			"macros": [
+				{
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.zmOYLYqJiyGkuKXY",
+					"type": "apply"
+				},
+				{
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.WOmAkOmqmivPppps",
+					"type": "remove"
+				}
+			],
+			"options": {
+				"outputChat": false
+			}
+		},
+		{
+			"id": "traumatized",
+			"name": "Traumatized",
+			"img": "modules/ironsworn-impacts/assets/despair.svg",
+			"reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.EIuAF5CmyOZyNrcz",
+			"applyTrigger": "4CCSqJNdEQkV8D9M",
+			"removeTrigger": "a2SivDvyqKy2XabY",
+			"activeEffect": null,
+			"macros": [
+				{
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.JHn22gNeP9zNZ5T8",
+					"type": "apply"
+				},
+				{
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.epiKIQCMCGWZaxdm",
+					"type": "remove"
+				}
+			],
+			"options": {
+				"outputChat": false
+			}
+		},
+		{
+			"id": "maimed",
+			"name": "Maimed",
+			"img": "modules/ironsworn-impacts/assets/severed-hand.svg",
+			"reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.EIuAF5CmyOZyNrcz",
+			"applyTrigger": "Ahr5uwoB5oVYhkzB",
+			"removeTrigger": "ac7Squz32GiVupDO",
+			"activeEffect": null,
+			"macros": [
+				{
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.EnaIqgdntDlSuBvG",
+					"type": "apply"
+				},
+				{
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.EwaceN3eSStWBLNW",
+					"type": "remove"
+				}
+			],
+			"options": {
+				"outputChat": false
+			}
+		},
+		{
+			"id": "corrupted",
+			"name": "Corrupted",
+			"img": "modules/ironsworn-impacts/assets/poison-gas.svg",
+			"reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.EIuAF5CmyOZyNrcz",
+			"applyTrigger": "ZJRSnVMIjunXRuHj",
+			"removeTrigger": "dLd5ka7mKLtcPmji",
+			"activeEffect": null,
+			"macros": [
+				{
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.GUmQKItP4yx9UHgg",
+					"type": "apply"
+				},
+				{
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.6fqyi5HEUg4wroGd",
+					"type": "remove"
+				}
+			],
+			"options": {
+				"outputChat": false
+			}
+		},
+		{
+			"id": "doomed",
+			"name": "Doomed",
+			"img": "modules/ironsworn-impacts/assets/cursed-star.svg",
+			"reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.nODMcdJYLFIE07Zc",
+			"applyTrigger": "6xMjbHVetdRRYE1e",
+			"removeTrigger": "WR7jXkkinVmhN6CF",
+			"activeEffect": null,
+			"macros": [
+				{
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.sH2U8thMVt1bhMnL",
+					"type": "apply"
+				},
+				{
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.2q6xLKTrq1pHyhtS",
+					"type": "remove"
+				}
+			],
+			"options": {
+				"outputChat": false
+			}
+		},
+		{
+			"id": "tormented",
+			"name": "Tormented",
+			"img": "modules/ironsworn-impacts/assets/crystal-ball.svg",
+			"reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.nODMcdJYLFIE07Zc",
+			"applyTrigger": "10n0g3iG55y6Fkyt",
+			"removeTrigger": "TjJGAeO6OtRHokOW",
+			"activeEffect": null,
+			"macros": [
+				{
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.d8nixu9yIh42APiB",
+					"type": "apply"
+				},
+				{
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.KqtjTjDudH3g7KfO",
+					"type": "remove"
+				}
+			],
+			"options": {
+				"outputChat": false
+			}
+		},
+		{
+			"id": "indebted",
+			"name": "Indebted",
+			"img": "modules/ironsworn-impacts/assets/expense.svg",
+			"reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.nODMcdJYLFIE07Zc",
+			"applyTrigger": "jIGIWS0IsIigVEW7",
+			"removeTrigger": "COMMKeT1hjfgYkYP",
+			"activeEffect": null,
+			"macros": [
+				{
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.4KfK2KXJ4MMUygIT",
+					"type": "apply"
+				},
+				{
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.vkMCrsMeBsCBgdl8",
+					"type": "remove"
+				}
+			],
+			"options": {
+				"outputChat": false
+			}
+		},
+		{
+			"id": "battered",
+			"name": "Battered",
+			"img": "modules/ironsworn-impacts/assets/cracked-disc.svg",
+			"reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.dx8S0jsyiqqyYOju",
+			"applyTrigger": "UFfuScwlwdqJ0Jbm",
+			"removeTrigger": "B7odxDjZYNsjjvRc",
+			"activeEffect": null,
+			"macros": [
+				{
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.NBsGokbB0WHlbD5F",
+					"type": "apply"
+				},
+				{
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.z6L5RGE6qHMuFFfo",
+					"type": "remove"
+				}
+			],
+			"options": {
+				"outputChat": false
+			}
+		},
+		{
+			"id": "cursed",
+			"name": "Cursed",
+			"img": "modules/ironsworn-impacts/assets/ubisoft-sun.svg",
+			"reference": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.dx8S0jsyiqqyYOju Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.nODMcdJYLFIE07Zc",
+			"applyTrigger": "pjMv95q7XSsRJbJ6",
+			"removeTrigger": "6MibPWsFRJDSvSdW",
+			"activeEffect": null,
+			"macros": [
+				{
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.d7PKUh0o1oH7XLav",
+					"type": "apply"
+				},
+				{
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.Be4sDG59V6gHwYBo",
 					"type": "remove"
 				}
 			],
@@ -306,11 +306,11 @@
 			"activeEffect": null,
 			"macros": [
 				{
-					"id": "xVpFit5KhrY0pQm9",
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.xVpFit5KhrY0pQm9",
 					"type": "apply"
 				},
 				{
-					"id": "UL8zfzmGXVuQfSpF",
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.UL8zfzmGXVuQfSpF",
 					"type": "remove"
 				}
 			],
@@ -328,11 +328,11 @@
 			"activeEffect": null,
 			"macros": [
 				{
-					"id": "yIybyXEeqYCwy9xe",
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.yIybyXEeqYCwy9xe",
 					"type": "apply"
 				},
 				{
-					"id": "AhiXtb3dAPTwWFXY",
+					"id": "Compendium.ironsworn-impacts.ironswornimpactsmacros.Macro.AhiXtb3dAPTwWFXY",
 					"type": "remove"
 				}
 			],

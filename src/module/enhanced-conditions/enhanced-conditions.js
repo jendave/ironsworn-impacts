@@ -21,7 +21,7 @@ export class EnhancedConditions {
 	 * @param {ActiveEffect} effect  the effect
 	 * @param {string} type  the type of change to process. "create" or "delete"
 	 */
-	static _processActiveEffectChange(effect, type = "create") {
+	static async _processActiveEffectChange(effect, type = "create") {
 		if (!(effect instanceof ActiveEffect)) return;
 
 		const conditionId = effect.getFlag("ironsworn-impacts", "conditionId");
@@ -65,7 +65,7 @@ export class EnhancedConditions {
 
 		const macroIds = macros?.length ? macros.filter((m) => m.id).map((m) => m.id) : null;
 
-		if (macroIds?.length) EnhancedConditions._processMacros(macroIds, actor);
+		if (macroIds?.length) await EnhancedConditions._processMacros(macroIds, actor);
 	}
 
 	/**
@@ -290,7 +290,9 @@ export class EnhancedConditions {
 		}
 
 		for (const macroId of macroIds) {
-			const macro = game.macros.get(macroId);
+			const macro = macroId.startsWith("Compendium.")
+				? await fromUuid(macroId)
+				: game.macros.get(macroId);
 			if (!macro) continue;
 
 			await macro.execute(scope);

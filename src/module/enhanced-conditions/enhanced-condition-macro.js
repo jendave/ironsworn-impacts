@@ -21,16 +21,29 @@ export default class EnhancedConditionMacroConfig extends FormApplication {
 		});
 	}
 
-	getData() {
+	async getData() {
 		const conditionMacros = this.object.macros;
 		const applyMacroId = conditionMacros.find((m) => m.type === "apply")?.id;
 		const removeMacroId = conditionMacros.find((m) => m.type === "remove")?.id;
 
-		const macroChoices = game.macros?.contents
-			?.map((m) => {
-				return { id: m.id, name: m.name };
-			})
+		const worldMacros = (game.macros?.contents ?? [])
+			.map((m) => ({ id: m.id, name: m.name }))
 			.sort((a, b) => a.name.localeCompare(b.name));
+
+		const compendiumMacros = [];
+		for (const pack of game.packs) {
+			if (pack.documentName !== "Macro") continue;
+			if (!pack.indexed) await pack.getIndex();
+			for (const entry of pack.index) {
+				compendiumMacros.push({
+					id: `Compendium.${pack.collection}.Macro.${entry._id}`,
+					name: `[${pack.metadata.label}] ${entry.name}`
+				});
+			}
+		}
+		compendiumMacros.sort((a, b) => a.name.localeCompare(b.name));
+
+		const macroChoices = [...worldMacros, ...compendiumMacros];
 
 		return {
 			condition: this.object,
