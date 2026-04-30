@@ -207,6 +207,15 @@ a.add-temporary {
 	margin: 3px;
 }
 
+.condition-lab .flexrow.reference {
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+
+.condition-lab .flexrow.reference .wrapper-rel {
+	align-items: flex-start;
+}
+
 .condition-lab .reference-type {
 	flex: 0 0 115px;
 	margin: 0px 3px 0px 0px;

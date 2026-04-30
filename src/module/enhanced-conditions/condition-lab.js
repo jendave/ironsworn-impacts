@@ -752,7 +752,7 @@ export class ConditionLab extends HandlebarsApplicationMixin(ApplicationV2) {
 		if (!conditionId) return;
 		const condition = this.map.find((c) => c.id === conditionId);
 		const config = new EnhancedConditionOptionConfig(condition);
-		config.parent = this;
+		config.parentApp = this;
 		config.render(true);
 	}
 

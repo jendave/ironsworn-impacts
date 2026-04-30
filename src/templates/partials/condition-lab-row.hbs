@@ -37,14 +37,14 @@
             </div>
             <div class="flexcol content2">
                 <div class="flexrow related-buttons">
-                    <button type="button" name="option-config" class="option-config"><i class="fas fa-cog"></i></button>
+                    <button type="button" name="option-config" class="option-config" data-tooltip="Options" data-tooltip-direction="UP"><i class="fas fa-cog"></i></button>
                     <button type="button" class="active-effect-config"
-                        data-tooltip="{{#if condition.isNew}}{{localize "CLT.ENHANCED_CONDITIONS.Lab.ActiveEffects.TitleDisabledNew"}}{{else if isDefault}}{{localize "CLT.ENHANCED_CONDITIONS.Lab.ActiveEffects.TitleDisabledDefault"}}{{/if}}"
+                        data-tooltip="{{#if condition.isNew}}{{localize "CLT.ENHANCED_CONDITIONS.Lab.ActiveEffects.TitleDisabledNew"}}{{else if isDefault}}{{localize "CLT.ENHANCED_CONDITIONS.Lab.ActiveEffects.TitleDisabledDefault"}}{{else}}Effect Configuration{{/if}}"
                         {{disabled (or condition.isNew isDefault)}} data-tooltip-direction="UP">
                         <i class="fas fa-hand-sparkles"></i>
                     </button>
-                    <button type="button" class="trigger-config">{{> "modules/ironsworn-impacts/templates/partials/triggler-icon.hbs"}}</button>
-                    <button type="button" name="macro-config" class="macro-config"><i class="fas fa-code"></i></button>
+                    <button type="button" class="trigger-config" data-tooltip="Triggers" data-tooltip-direction="UP">{{> "modules/ironsworn-impacts/templates/partials/triggler-icon.hbs"}}</button>
+                    <button type="button" name="macro-config" class="macro-config" data-tooltip="Macros" data-tooltip-direction="UP"><i class="fas fa-code"></i></button>
                 </div>
             </div>
             <div class="flexcol row-controls">
