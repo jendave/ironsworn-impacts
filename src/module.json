@@ -1,13 +1,8 @@
 {
 	"id": "ironsworn-impacts",
 	"title": "Ironsworn Impacts",
-	"description": "Adds Ironsworn and Starforged Impacts to tokens",
+	"description": "Adds Ironsworn and Starforged Impacts and Combat Positionsto tokens",
 	"authors": [
-		{
-			"name": "Matheus Clemente",
-			"url": "https://github.com/mclemente",
-			"discord": "mclemente"
-		},
 		{
 			"name": "David Y. Hudson",
 			"url": "https://github.com/jendave",
