@@ -21,7 +21,7 @@ A FoundryVTT compendium of homebrew resources for the Ironsworn: Starforged syst
 
 ### Impacts and Triggers
 
-* The `Ironsworn Impacts` module enables [Ironsworn and Ironsworn: Starforged](https://tomkinpress.com/) impacts to be displayed on the character's token. 
+* The `Ironsworn Impacts` module enables [Ironsworn and Ironsworn: Starforged](https://tomkinpress.com/) impacts to be displayed on the character's token.
 * Impacts can be applied automatically via a set of triggers.
 * Run a macro when they are applied/removed.
 * Create your own status effects and link them to reference entries (Journal, Item, or compendium) with further info.
