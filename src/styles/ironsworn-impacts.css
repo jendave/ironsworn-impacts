@@ -99,7 +99,8 @@ a.add-temporary {
 	overflow: hidden auto;
 	margin: 0;
 	padding: 0;
-	background: rgba(0, 0, 0, 0.5);
+	background: var(--color-bg, #1a1a1a);
+	flex: 1;
 }
 
 #cub-condition-lab div.sort {
@@ -142,18 +143,28 @@ a.add-temporary {
 .triggler-form .window-content,
 .condition-lab-form .window-content {
 	padding: 0;
-}
-
-
-.triggler-form form,
-.condition-lab-form form,
-.condition-lab-form .condition-lab {
+	background: var(--color-bg, #1a1a1a);
+	display: flex;
+	flex-direction: column;
 	height: 100%;
 }
 
+.triggler-form form,
+.condition-lab-form form {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.condition-lab-form div.condition-lab {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+}
+
 .condition-lab li.row {
-	/* border-bottom: 2px groove beige; */
-	background: url("/ui/parchment.jpg");
+	background: var(--color-bg-option, #2a2a2a);
 	border-radius: 5px;
 	margin: 5px;
 	padding: 3px;
@@ -348,7 +359,8 @@ a.add-temporary {
 
 #cub-condition-lab .related-buttons button {
 	flex: 0 0 24px;
-	height: 24px;
+	height: 24px !important;
+	min-height: 24px !important;
 	width: 24px;
 	min-width: unset;
 	padding: 0;
