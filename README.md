@@ -22,6 +22,10 @@
 * Create your own impacts and link them to Journal entries with further info.
 * The `Ironsworn Impacts` module is compatible with [Token Action HUD Ironsworn](https://foundryvtt.com/packages/token-action-hud-ironsworn). Impacts and combat positions will be displayed in the HUD itself.
 
+### Dependencies
+
+* [libWrapper](https://foundryvtt.com/packages/lib-wrapper).
+
 ## Support
 
 For questions, feature requests or bug reports, please open an [issue](https://github.com/jendave/ironsworn-impacts/issues).

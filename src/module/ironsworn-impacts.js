@@ -1,7 +1,6 @@
 /* -------------------------------------------- */
 /*                    Imports                   */
 /* -------------------------------------------- */
-import { libWrapper } from "./libWrapper.js";
 import { registerSettings } from "./settings.js";
 import { Sidekick } from "./sidekick.js";
 

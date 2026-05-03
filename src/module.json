@@ -59,6 +59,13 @@
 				"verified": "1.27"
 			  }
 			}
+		  ],
+		"requires": [
+			{
+			  "id": "lib-wrapper",
+			  "type": "module",
+			  "compatibility": {}
+			}
 		  ]
 	},
 	"version": "#{VERSION}#",
