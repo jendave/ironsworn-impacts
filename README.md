@@ -8,6 +8,8 @@
 ## About
 
 * The `Ironsworn Impacts` module enables [Ironsworn and Ironsworn: Starforged](https://tomkinpress.com/) impacts and combat positions to be displayed on the character's token.
+* The `Ironsworn Impacts` module is compatible with [Token Action HUD Ironsworn](https://foundryvtt.com/packages/token-action-hud-ironsworn).
+  * Impacts and combat positions will be displayed in the HUD itself.
 
 ## Features
 
