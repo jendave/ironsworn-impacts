@@ -1,0 +1,104 @@
+{
+  "name": "Lasting Effects and Banes",
+  "_id": "EIuAF5CmyOZyNrcz",
+  "pages": [
+    {
+      "sort": 100000,
+      "name": "Lasting Effects - Starforged",
+      "type": "text",
+      "_id": "8bobElGgqRR41UVb",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<ul><li><p><span class=\"s1\"><strong>Permanently harmed</strong></span> may be marked when you are at 0 health and fail to <em>Endure Harm</em>. You have suffered a wound that you must reckon with, such as the loss of an eye or hand. Or you bear physical scars that are a constant reminder of a harrowing incident.</p></li><li><p class=\"p1\"><span class=\"s1\"><strong>Traumatized</strong></span> may be marked when you are at 0 spirit and fail to <em>Endure Stress</em>. Your experiences have left you emotionally or mentally scarred.</p></li></ul><p class=\"p1\"><span class=\"s1\"><strong>Lasting effects</strong></span> are permanent. They forever impact your character through the momentum adjustment and—more importantly—the narrative impact of being permanently harmed or traumatized. You should factor this impact into how you perform moves and how you interact with the world.</p><p class=\"p1\">Envision the nature of the lasting effect. You may have physical, emotional, or mental factors you must take into account. Your outlook may change. Your goals and methods may change. How others behave toward you may change.</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "MmM06BuCrG9h1GLg": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "foundry-ironsworn",
+        "systemVersion": "1.27.0",
+        "lastModifiedBy": "LDRbxOntywr8qbaZ",
+        "modifiedTime": 1777439433154
+      },
+      "_key": "!journal.pages!EIuAF5CmyOZyNrcz.8bobElGgqRR41UVb"
+    },
+    {
+      "sort": 200000,
+      "name": "Banes - Ironsworn",
+      "type": "text",
+      "_id": "Zd1VLRn97w7qRvL2",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<ul><li><p><strong>Maimed</strong> may be marked when you are at 0 health and fail to <em>Endure Harm</em> (page 91). You have suffered a wound which causes you ongoing physical challenges, such as the loss of an eye or hand. Or, you bear horrific scars which serve as a constant reminder of your failures.</p></li><li><p class=\"p1\"><strong>Corrupted</strong> may be marked when you are at 0 spirit and fail to <em>Endure Stress</em> (page 95). Your experiences have left you emotionally scarred. You are at the threshold of losing yourself to darkness.</p></li></ul><p class=\"p1\">Banes are permanent. They forever impact your character through the momentum penalty and—more importantly—through the narrative impact of being maimed or corrupted. You should factor this debility into how you perform moves and how you interact with the world. You may have physical or emotional limitations you must cope with. Your outlook may change. Your goals and methods may change. How others behave toward you may change.</p><p class=\"p1\">If you are maimed, envision the injury and make note of it. Consider how this impacts your approach when facing physical challenges, and weave it into your roleplaying and the narrative of your moves.</p><p class=\"p1\">When you are corrupted, envision how this impacts your personality and motivations. You might struggle with a new compulsion, quirk, or fear. You might even bear a physical, supernatural sign of the corruption. If so, what is it?</p><blockquote><p><span style=\"color:rgb(239, 230, 216);font-family:Signika, 'Palatino Linotype', sans-serif;font-size:12.25px;font-style:italic;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;background-color:rgba(11, 10, 19, 0.9);text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;display:inline !important;float:none\"><em>When you create your character, all debilities should be unmarked.</em></span></p></blockquote>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "MmM06BuCrG9h1GLg": 3,
+        "LDRbxOntywr8qbaZ": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.eIU6vRrtfxzzgPFV.JournalEntryPage.Zd1VLRn97w7qRvL2",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "foundry-ironsworn",
+        "systemVersion": "1.27.0",
+        "createdTime": 1777437458544,
+        "modifiedTime": 1777439445694,
+        "lastModifiedBy": "LDRbxOntywr8qbaZ"
+      },
+      "_key": "!journal.pages!EIuAF5CmyOZyNrcz.Zd1VLRn97w7qRvL2"
+    }
+  ],
+  "folder": "03zRkUjL21UUTcmD",
+  "categories": [],
+  "sort": 112500,
+  "ownership": {
+    "default": 0,
+    "MmM06BuCrG9h1GLg": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "foundry-ironsworn",
+    "systemVersion": "1.27.0",
+    "createdTime": 1777350044882,
+    "modifiedTime": 1777437454544,
+    "lastModifiedBy": "LDRbxOntywr8qbaZ"
+  },
+  "_key": "!journal!EIuAF5CmyOZyNrcz"
+}

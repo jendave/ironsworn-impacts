@@ -1,0 +1,64 @@
+{
+  "name": "Other Impacts",
+  "_id": "UDhKr30SQgDRUoib",
+  "pages": [
+    {
+      "sort": 100000,
+      "name": "Other Impacts - Starforged",
+      "type": "text",
+      "_id": "ywsv1UDBEYhGCsZh",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Certain assets offer abilities at the cost of counting as an impact for your character. For example, the OATHBREAKER asset strengthens your resolve as you pursue a quest of redemption, but counts as an impact until you fulfill that vow.</p><p class=\"p1\">You can mark these in the “Other Impacts” section of your character sheet. They contribute as normal to your max momentum and momentum reset penalties.</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "MmM06BuCrG9h1GLg": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "foundry-ironsworn",
+        "systemVersion": "1.27.0",
+        "lastModifiedBy": "LDRbxOntywr8qbaZ",
+        "modifiedTime": 1777439535704
+      },
+      "_key": "!journal.pages!UDhKr30SQgDRUoib.ywsv1UDBEYhGCsZh"
+    }
+  ],
+  "folder": "03zRkUjL21UUTcmD",
+  "categories": [],
+  "sort": 103125,
+  "ownership": {
+    "default": 0,
+    "MmM06BuCrG9h1GLg": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "foundry-ironsworn",
+    "systemVersion": "1.27.0",
+    "createdTime": 1777350044882,
+    "modifiedTime": 1777439486070,
+    "lastModifiedBy": "LDRbxOntywr8qbaZ"
+  },
+  "_key": "!journal!UDhKr30SQgDRUoib"
+}

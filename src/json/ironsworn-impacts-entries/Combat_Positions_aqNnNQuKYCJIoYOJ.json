@@ -1,0 +1,65 @@
+{
+  "name": "Combat Positions",
+  "_id": "aqNnNQuKYCJIoYOJ",
+  "pages": [
+    {
+      "sort": 100000,
+      "name": "Combat Positions",
+      "type": "text",
+      "_id": "MBbnTMaajugogfbn",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>In a fight, your <span class=\"s1\"><strong>position</strong></span> is defined as one of two states:</p><ul><li><p class=\"p1\">When you are <span class=\"s1\"><strong>in control</strong></span>, you make proactive moves to gain advantage and inflict forceful damage or destruction.</p></li><li><p class=\"p1\">When you are<span class=\"s1\"> <strong>in a bad spot</strong></span>, you must make reactive moves to get in position, overcome hazards, and thwart attacks.</p></li></ul><p class=\"p1\">Some combat moves are inherently proactive or offensive and can only be made when you are in control. Others are reactive or defensive and are made when you are in a bad spot. The text of each combat move will describe the requirements (phrased as “when you are in control” or \"when you are in a bad spot\"), and the outcome for those moves will set your new position.</p><p class=\"p1\">You may also make moves that aren’t specific to combat, such as when you <em>Endure Harm</em> to resist injury or <em>Repair</em> your vehicle in the midst of a fight. To determine whether a move puts you in control or in a bad spot, follow these guidelines (unless a move tells you otherwise):</p><ul><li><p class=\"p1\">When you score a strong hit, you are in control.</p></li><li><p class=\"p1\">When you score a weak hit or miss, you are in a bad spot.</p></li></ul>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "LDRbxOntywr8qbaZ": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "foundry-ironsworn",
+        "systemVersion": "1.27.0",
+        "createdTime": 1777442260928,
+        "modifiedTime": 1777442367803,
+        "lastModifiedBy": "LDRbxOntywr8qbaZ"
+      },
+      "_key": "!journal.pages!aqNnNQuKYCJIoYOJ.MBbnTMaajugogfbn"
+    }
+  ],
+  "folder": "qfWFXQV4fFFC2dLg",
+  "categories": [],
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "LDRbxOntywr8qbaZ": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "foundry-ironsworn",
+    "systemVersion": "1.27.0",
+    "createdTime": 1777442254139,
+    "modifiedTime": 1777442376148,
+    "lastModifiedBy": "LDRbxOntywr8qbaZ"
+  },
+  "_key": "!journal!aqNnNQuKYCJIoYOJ"
+}

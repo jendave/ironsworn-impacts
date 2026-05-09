@@ -1,0 +1,64 @@
+{
+  "name": "Vehicle Troubles",
+  "_id": "dx8S0jsyiqqyYOju",
+  "pages": [
+    {
+      "sort": 100000,
+      "name": "Vehicle Troubles - Starforged",
+      "type": "text",
+      "_id": "qun7VdZsJZrIdwLd",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<ul><li><p><span class=\"s1\"><strong>Battered</strong></span> may be marked when your vehicle is at 0 integrity and you fail to <em>Withstand Damage</em>. The vehicle is barely holding together.</p></li><li><p class=\"p1\"><span class=\"s1\"><strong>Cursed</strong></span> may be marked when your <span class=\"s1\"><strong>command vehicle</strong></span> (STARSHIP asset) is at 0 integrity and you fail to <em>Withstand Damage</em>. This is a permanent impact. Your ship will never be quite right again.</p></li></ul><p class=\"p1\"><span class=\"s1\"><strong>Vehicle troubles</strong></span> are linked to a specific vehicle, either your command vehicle asset or a support vehicle asset. These impacts are only a factor when you are piloting or aboard that vehicle. Otherwise, they do not count as an impact and do not affect your maximum momentum and momentum reset.</p><p class=\"p1\">Battered can be overcome when you successfully <em>Repair</em> that vehicle and clear the trouble. Until you do so, you cannot raise the vehicle’s integrity.</p><p class=\"p1\">Cursed is a permanent impact and will forever plague your STARSHIP.</p><p class=\"p1\">To learn more about vehicle assets, see page 54. To learn more about vehicles in general in your <em>Starforged</em> campaign, see page 65.</p><blockquote><p class=\"p2\">If playing with allies, a vehicle trouble affects anyone on the vehicle, regardless of who owns or manages the vehicle asset.</p></blockquote>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "MmM06BuCrG9h1GLg": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "foundry-ironsworn",
+        "systemVersion": "1.27.0",
+        "lastModifiedBy": "LDRbxOntywr8qbaZ",
+        "modifiedTime": 1777439673333
+      },
+      "_key": "!journal.pages!dx8S0jsyiqqyYOju.qun7VdZsJZrIdwLd"
+    }
+  ],
+  "folder": "03zRkUjL21UUTcmD",
+  "categories": [],
+  "sort": 101563,
+  "ownership": {
+    "default": 0,
+    "MmM06BuCrG9h1GLg": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "foundry-ironsworn",
+    "systemVersion": "1.27.0",
+    "createdTime": 1777350044882,
+    "modifiedTime": 1777350044882,
+    "lastModifiedBy": "MmM06BuCrG9h1GLg"
+  },
+  "_key": "!journal!dx8S0jsyiqqyYOju"
+}

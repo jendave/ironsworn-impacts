@@ -1,0 +1,104 @@
+{
+  "name": "Misfortunes and Conditions",
+  "_id": "uwt8LKEMiy5psvIZ",
+  "pages": [
+    {
+      "sort": 100000,
+      "name": "Misfortunes - Starforged",
+      "type": "text",
+      "_id": "fPzaiVP38hAgdC1B",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<ul><li><p><span class=\"s1\"><strong>Wounded</strong></span> may be marked when you are at 0 health and fail to <em>Endure Harm</em>. You are severely injured.</p></li><li><p class=\"p1\"><span class=\"s1\"><strong>Shaken</strong></span> may be marked when you are at 0 spirit and fail to <em>Endure Stress</em>. You are despairing or distraught.</p></li><li><p class=\"p1\"><span class=\"s1\"><strong>Unprepared</strong></span> is marked when you <em>Sacrifice Resources</em> and are reduced to 0 supply. You are not properly equipped for the dangers of the Forge. Because you and your allies share the same supply value, you mark unprepared together.</p></li></ul><p class=\"p1\">As with all impacts, <span class=\"s1\"><strong>misfortunes</strong></span> affect your max momentum and momentum reset. In addition, <strong>if you are wounded, shaken, or unprepared, you cannot increase the associated condition meter</strong>.</p><ul><li><p class=\"p1\">If you are wounded, you cannot increase health.</p></li><li><p class=\"p1\">If you are shaken, you cannot increase spirit.</p></li><li><p class=\"p1\">If you are unprepared, you cannot increase supply.</p></li></ul><p class=\"p1\">If a move gives you an opportunity to raise your health, spirit, or supply while the associated misfortune is marked, you can’t take that option. You must clear the impact before improving the related condition meter.</p><p class=\"p1\">Wounded, shaken, and unprepared can be cleared when you succeed on an appropriate recover move. For example, scoring a hit on the <em>Heal</em> move can clear the wounded impact. Once you clear the misfortune, you restore your max momentum and momentum reset, and you can once again increase the associated meter through moves.</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "MmM06BuCrG9h1GLg": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "foundry-ironsworn",
+        "systemVersion": "1.27.0",
+        "lastModifiedBy": "LDRbxOntywr8qbaZ",
+        "modifiedTime": 1777439127697
+      },
+      "_key": "!journal.pages!uwt8LKEMiy5psvIZ.fPzaiVP38hAgdC1B"
+    },
+    {
+      "sort": 200000,
+      "name": "Conditions - Ironsworn",
+      "type": "text",
+      "_id": "uH5AIXWNajrYbvYt",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<ul><li><p><strong>Wounded</strong> may be marked when you are at 0 health and fail to <em>Endure Harm</em> (page 91). You are severely injured and need treatment to recover.</p></li><li><p class=\"p1\"><strong>Shaken</strong> may be marked when you are at 0 spirit and fail to <em>Endure Stress</em> (page 95). You are despairing or distraught, and need comfort to recover.</p></li><li><p class=\"p1\"><strong>Unprepared</strong> is marked when you are at 0 supply and are <em>Out of Supply</em> (page 97). You and your allies share the same supply value, and will mark unprepared together.</p></li><li><p class=\"p1\"><strong>Encumbered</strong> is marked as appropriate to the circumstances when you are carrying excessive or cumbersome weight.</p></li></ul><p class=\"p1\">As with all debilities, conditions impact your max momentum and momentum reset. In addition, if you are wounded, shaken, or unprepared, you cannot increase the associated track.</p><ul><li><p class=\"p1\"><strong>If you are wounded</strong>, you cannot increase health.</p></li><li><p class=\"p1\"><strong>If you are shaken</strong>, you cannot increase spirit.</p></li><li><p class=\"p1\"><strong>If you are unprepared</strong>, you cannot increase supply.</p></li></ul><p class=\"p1\">If a move gives you an opportunity to raise your health, spirit, or supply while the associated condition is marked, you can’t take that option. You must clear the condition before improving the related status track.</p><p class=\"p1\">Wounded, shaken, and unprepared can be cleared when you succeed on appropriate moves. For example, scoring a hit on the <em>Heal</em> move (page 63) can clear the wounded condition. The shaken and unprepared conditions can generally only be cleared as you find fellowship and gather provisions in a community through the <em>Sojourn</em> move (page 71). Once you clear a condition, you restore your max momentum and momentum reset, and you can once again increase the associated track through moves.</p><p class=\"p1\">Unlike other conditions, encumbered is not specifically triggered or resolved by a move. Instead, it should be marked when appropriate to the circumstances. For example, you would mark encumbered if you are carrying an unconscious ally to safety in a perilous situation. Encumbered can also be triggered by the <strong>Ironclad</strong> asset, which allows you to gain an advantage for heavy armor in exchange for marking the condition. Encumbered is cleared when you lighten your load.</p><blockquote><p><span style=\"box-sizing:border-box;user-select:text;scrollbar-width:thin;scrollbar-color:rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.5);--ironsworn-scrollbar-thumb-bg-color:rgba(0,0,0,.5);--ironsworn-scrollbar-thumb-border-color:rgba(255,102,0,.5);--ironsworn-scrollbar-thumb-border-width:1px;--ironsworn-scrollbar-thumb-border-radius:calc(6px/2);--ironsworn-scrollbar-track-color:rgba(0,0,0,.5);--ironsworn-scrollbar-track-border-radius:4px;--ironsworn-scrollbar-track-border-width:1px;--ironsworn-scrollbar-width:6px;scrollbar-gutter:auto;color:rgb(239, 230, 216);font-family:Signika, 'Palatino Linotype', sans-serif;font-size:12.25px;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-indent:0px;text-transform:none;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;white-space:normal;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial\">When you create your character, all debilities should be unmarked.</span></p></blockquote>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "MmM06BuCrG9h1GLg": 3,
+        "LDRbxOntywr8qbaZ": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ironsworn-impacts.ironswornimpactsentries.JournalEntry.at7mGSbonxiNgn2a.JournalEntryPage.uH5AIXWNajrYbvYt",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "foundry-ironsworn",
+        "systemVersion": "1.27.0",
+        "createdTime": 1777436520346,
+        "modifiedTime": 1777439715351,
+        "lastModifiedBy": "LDRbxOntywr8qbaZ"
+      },
+      "_key": "!journal.pages!uwt8LKEMiy5psvIZ.uH5AIXWNajrYbvYt"
+    }
+  ],
+  "folder": "03zRkUjL21UUTcmD",
+  "categories": [],
+  "sort": 106250,
+  "ownership": {
+    "default": 0,
+    "MmM06BuCrG9h1GLg": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "foundry-ironsworn",
+    "systemVersion": "1.27.0",
+    "createdTime": 1777350044882,
+    "modifiedTime": 1777436498246,
+    "lastModifiedBy": "LDRbxOntywr8qbaZ"
+  },
+  "_key": "!journal!uwt8LKEMiy5psvIZ"
+}
