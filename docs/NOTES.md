@@ -1,4 +1,7 @@
-```
+# Notes
+
+``` bash
+
 fvtt package --id ironsworn-impacts --type Module unpack ironsworn-impacts-entries -c --json --in "src/packs" --out "json-packs/ironsworn-impacts-entries"
 fvtt package --id ironsworn-impacts --type Module unpack ironsworn-impacts-macros -c --json --in "src/packs" --out "json-packs/ironsworn-impacts-macros"
 

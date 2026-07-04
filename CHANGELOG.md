@@ -2,6 +2,11 @@
 
 [Ironsworn Impacts](https://foundryvtt.com/packages/ironsworn-impacts)
 
+## [1.1.0](https://github.com/jendave/ironsworn-impacts/blob/main/CHANGELOG.md) (2026-07-04)
+
+* Revamp compendiums and put entries into JSON files
+* Revamp build process to create comnpendiums from source insstead of using packs.
+
 ## [1.0.1](https://github.com/jendave/ironsworn-impacts/blob/main/CHANGELOG.md) (2026-05-02)
 
 * Set [libWrapper](https://foundryvtt.com/packages/lib-wrapper) as a dependency rather than a shim.
