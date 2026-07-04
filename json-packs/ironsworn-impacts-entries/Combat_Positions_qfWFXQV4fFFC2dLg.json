@@ -1,0 +1,23 @@
+{
+  "type": "JournalEntry",
+  "folder": null,
+  "name": "Combat Positions",
+  "color": null,
+  "sorting": "a",
+  "_id": "qfWFXQV4fFFC2dLg",
+  "description": "",
+  "sort": 0,
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "foundry-ironsworn",
+    "systemVersion": "1.27.0",
+    "createdTime": 1777442171532,
+    "modifiedTime": 1777442171532,
+    "lastModifiedBy": "LDRbxOntywr8qbaZ"
+  },
+  "_key": "!folders!qfWFXQV4fFFC2dLg"
+}

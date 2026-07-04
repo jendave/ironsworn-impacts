@@ -1,10 +1,12 @@
 {
 	"scripts": {
-		"build": "gulp clean && gulp build",
+		"build": "gulp clean && gulp build && script/build-packs",
 		"build:watch": "gulp watch",
 		"link-project": "gulp link",
 		"clean": "gulp clean",
 		"clean:link": "gulp link --clean",
+		"pack": "script/build-packs",
+		"unpack": "script/extract-packs",
 		"lint": "eslint --ext .js,.cjs,.mjs .",
 		"lint:fix": "eslint --ext .js,.cjs,.mjs --fix .",
 		"postinstall": "husky install",
@@ -12,6 +14,7 @@
 	},
 	"devDependencies": {
 		"@babel/eslint-parser": "^7.22.9",
+		"@foundryvtt/foundryvtt-cli": "^1.0.4",
 		"@pixi/jsdoc-template": "^2.6.0",
 		"@rollup/plugin-node-resolve": "^15.1.0",
 		"@rollup/stream": "^3.0.0",

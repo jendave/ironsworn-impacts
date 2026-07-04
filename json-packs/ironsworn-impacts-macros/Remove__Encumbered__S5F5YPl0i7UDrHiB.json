@@ -1,0 +1,28 @@
+{
+  "folder": "EahEqRL4FYwBaOIR",
+  "name": "Remove 'Encumbered'",
+  "type": "script",
+  "author": "MmM06BuCrG9h1GLg",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "if (!canvas.tokens.controlled.length) {\n    ui.notifications.warn(\"Please select at least one token.\");\n    return;\n}\n\nconst statusField = \"encumbered\";\nconst statusDesired = false;\n\nfor (let token of canvas.tokens.controlled) {\n    const actor = token.actor;\n    const data = {\n        system: {\n            debility: {\n                [statusField]: statusDesired,\n            },\n        },\n    };\n    await actor.update(data);\n}",
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "MmM06BuCrG9h1GLg": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": "Macro.2q6xLKTrq1pHyhtS",
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "foundry-ironsworn",
+    "systemVersion": "1.27.0",
+    "createdTime": 1777350294001,
+    "modifiedTime": 1777350294001,
+    "lastModifiedBy": "MmM06BuCrG9h1GLg"
+  },
+  "_id": "S5F5YPl0i7UDrHiB",
+  "_key": "!macros!S5F5YPl0i7UDrHiB"
+}

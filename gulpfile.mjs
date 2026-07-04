@@ -22,7 +22,10 @@ const distDirectory = "./dist";
 const stylesDirectory = `${sourceDirectory}/styles`;
 const stylesExtension = "css";
 const sourceFileExtension = "js";
-const staticFiles = ["assets", "config", "lang", "packs", "templates", "module.json"];
+// NOTE: `packs` is intentionally omitted here. Compendium packs are compiled
+// from JSON sources in `json-packs/` into `dist/packs` by `script/build-packs`,
+// rather than copied from `src/packs`.
+const staticFiles = ["assets", "config", "lang", "templates", "module.json"];
 
 /********************/
 /*      BUILD       */

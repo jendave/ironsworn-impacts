@@ -1,0 +1,28 @@
+{
+  "name": "Apply 'In Control'",
+  "type": "script",
+  "_id": "xVpFit5KhrY0pQm9",
+  "author": "MmM06BuCrG9h1GLg",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "if (!canvas.tokens.controlled.length) {\n    ui.notifications.warn(\"Please select at least one token.\");\n    return;\n}\n\nconst statusDesired = \"inControl\";\n\nfor (let token of canvas.tokens.controlled) {\n    const actor = token.actor;\n        const data = {\n            system: {\n                combatPosition: statusDesired,\n            },\n        };\n        await actor.update(data);\n}",
+  "folder": "EahEqRL4FYwBaOIR",
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "MmM06BuCrG9h1GLg": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": "Macro.xVpFit5KhrY0pQm9",
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "foundry-ironsworn",
+    "systemVersion": "1.27.0",
+    "createdTime": 1777350294001,
+    "modifiedTime": 1777350294001,
+    "lastModifiedBy": "MmM06BuCrG9h1GLg"
+  },
+  "_key": "!macros!xVpFit5KhrY0pQm9"
+}

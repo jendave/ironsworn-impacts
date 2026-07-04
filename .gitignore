@@ -123,3 +123,11 @@ dist
 # foundry vtt
 foundry.js
 README.html
+
+# macOS
+.DS_Store
+
+# Compendium packs are compiled from json-packs/ into dist/packs by
+# script/build-packs (dist/ is already ignored above). The old committed
+# LevelDB source under src/packs/ is no longer used.
+src/packs/
