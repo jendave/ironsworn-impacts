@@ -14,7 +14,7 @@
 	},
 	"devDependencies": {
 		"@babel/eslint-parser": "^7.22.9",
-		"@foundryvtt/foundryvtt-cli": "^1.0.4",
+		"@foundryvtt/foundryvtt-cli": "^3.0.4",
 		"@pixi/jsdoc-template": "^2.6.0",
 		"@rollup/plugin-node-resolve": "^15.1.0",
 		"@rollup/stream": "^3.0.0",
