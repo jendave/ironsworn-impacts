@@ -2,9 +2,13 @@
 
 [Ironsworn Impacts](https://foundryvtt.com/packages/ironsworn-impacts)
 
+## [1.1.1](https://github.com/jendave/ironsworn-impacts/blob/main/CHANGELOG.md) (2026-07-04)
+
+* Cleanup build files.
+
 ## [1.1.0](https://github.com/jendave/ironsworn-impacts/blob/main/CHANGELOG.md) (2026-07-04)
 
-* Revamp compendiums and put entries into JSON files
+* Revamp compendiums and put entries into JSON files.
 * Revamp build process to create compendiums from JSON instead of using LevelDB packs.
 
 ## [1.0.1](https://github.com/jendave/ironsworn-impacts/blob/main/CHANGELOG.md) (2026-05-02)
